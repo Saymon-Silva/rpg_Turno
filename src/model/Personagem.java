@@ -7,6 +7,7 @@ public abstract class Personagem {
     private ArrayList<Personagem> listaPersonagens = new ArrayList<Personagem>();
     private Pessoa pessoa;
     private Classe classe;
+    private Arma arma;
 
     private int vida;
     private int dano;

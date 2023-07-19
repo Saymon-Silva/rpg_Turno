@@ -114,7 +114,9 @@ public class Main {
         }
         return new Pessoa(nome,idade,personagem);
     }
+    public static void combateMortal(){//iniciar esse aqui
 
+    }
     //endregion
 }
 
