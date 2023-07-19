@@ -83,23 +83,37 @@ public class Main {
                         criarPersonagem();
                     } else if (opcaoFreshOrBack == 2) {
                         System.out.println("Então adeus... Pô não sei oque fazer aqui...");
-                        for (int p = 0; p <= 5; p++) {
-                            System.out.println("KKKKKKKKKKKKKKKKK");
-                        }
+                        System.out.println("Escreva suas revelações... ");
+                        String nota = sc.next();
+                        System.out.println("\n\n\n\n");
+                        System.out.println("Qual o maior numero que você conhece???");
+                        int numerPegadin = sc.nextInt();
                         System.out.println("Você caiu na maldição do Carlos Henrique...");
-                        for (int j = 0; j <= 5; j++) {
+                        for (int j = 0; j <= numerPegadin; j++) {
                             for (int g = 0; g <= 2; g++) {
                                 System.out.println("VOCÊÊÊÊÊ");
                             }
-                            for (int h = 0; h <= 3; h++) {
+                            for (int h = 0; h <= 2; h++) {
                                 System.out.println("CORRAA!!!!");
                             }
-                            for (int l = 0; l <= 5; l++) {
+                            for (int l = 0; l <= 2; l++) {
                                 System.out.println("NÃO SE ESQUEÇA PEQUENO HUMANO...\n\n\n " +
                                         "A PACIÊNCIA DE TODOS POSSUI UM LIMITE...");
                             }
+                            for (int p = 0; p <= 3; p++) {
+                                System.out.println("KKKKKKKKKK");
+                            }
                         }
+                        System.out.println("Agora deu... Adeus ksksksks. Volte ao menu inicial.");
+                        menu();
                     }
+                    else{
+                        System.out.println("Insira um valor valido!!");
+                    }
+                    break;
+                default:
+                    System.out.println("insira um valor valido!!");
+                    break;
             }
         }
         else {
