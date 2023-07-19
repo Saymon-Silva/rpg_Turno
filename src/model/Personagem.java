@@ -2,13 +2,17 @@ package model;
 
 import java.util.ArrayList;
 
-public class Personagem {
+public abstract class Personagem {
 
     private ArrayList<Personagem> listaPersonagens = new ArrayList<Personagem>();
+    private Pessoa pessoa;
+    private Classe classe;
+
     private int vida;
     private int dano;
     private String nome;
     private int idade;
+    private int codigo;
 
 //region(get/set)
     public int getDano() {
@@ -31,6 +35,18 @@ public class Personagem {
         return listaPersonagens;
     }
 
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public Classe getClasse() {
+        return classe;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
     public void setDano(int dano) {
         this.dano = dano;
     }
@@ -47,25 +63,29 @@ public class Personagem {
         this.nome = nome;
     }
 
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public void setClasse(Classe classe) {
+        this.classe = classe;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+
     public void setListaPersonagens(ArrayList<Personagem> listaPersonagens) {
         this.listaPersonagens = listaPersonagens;
     }
 //endregion
 
-    public Personagem(){
+    public Personagem(Classe classe, String nome) {
+        this.classe = classe;
         this.nome = nome;
-        this.idade = idade;
-        this.vida = vida;
-        this.dano = dano;
+        this.vida = classe.getMaxVida();
+        this.codigo = listaPersonagens.size() + 1;
     }
 
-    @Override
-    public String toString() {
-        return "Personagem{" +
-                " nome='" + nome + '\'' +
-                ", idade=" + idade +
-                ", vida=" + vida +
-                ", dano=" + dano +
-                '}';
-    }
+
 }
