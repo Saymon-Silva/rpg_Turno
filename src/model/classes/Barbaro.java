@@ -4,7 +4,7 @@ import model.Classe;
 
 public class Barbaro extends Classe{
 
-    public Barbaro(int maxVida, int dano) {
-        super(maxVida, dano);
+    public Barbaro(String classeNome, int maxVida, int dano) {
+        super(classeNome ,maxVida, dano);
     }
 }

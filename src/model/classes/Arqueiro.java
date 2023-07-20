@@ -4,7 +4,7 @@ import model.Classe;
 
 public class Arqueiro extends Classe {
 
-    public Arqueiro(int maxVida, int dano) {
-        super(maxVida, dano);
+    public Arqueiro(String classeNome, int maxVida, int dano) {
+        super(classeNome ,maxVida, dano);
     }
 }

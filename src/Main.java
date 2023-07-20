@@ -2,6 +2,7 @@ import model.Personagem;
 
 import java.util.Scanner;
 import model.*;
+import model.classes.Arqueiro;
 
 public class Main {
 
@@ -40,7 +41,8 @@ public class Main {
                 break;
             case 4:
                 System.out.println("BYEE!!!\n" +
-                        "Good luck on your journey... And don't forget to be a good person in that life.");
+                        "Good luck on your journey... \n" +
+                        "And don't forget to be a good person in that life.");
                 break;
             default:
                 System.out.println("Insira uma opção valida...");
@@ -73,19 +75,27 @@ public class Main {
                     menu();
                     break;
                 case 2:
-                    System.out.println("Deseja reiniciar a criação do personagem?\n1 - Sim\n2 - não");
+                    System.out.println("""
+                                        Deseja reiniciar a criação do personagem?
+                                        1 - Sim
+                                        2 - não
+                                        """);
                     int opcaoFreshOrBack = sc.nextInt();
                     if (opcaoFreshOrBack == 1) {
                         criarPersonagem();
                     } else if (opcaoFreshOrBack == 2) {
                         System.out.println("Então adeus... Pô não sei oque fazer aqui...");
+                        //
                         System.out.println("Escreva suas revelações... ");
                         String nota = sc.next();
-                        System.out.println("\n\n\n\n");
-                        System.out.println("Qual o maior numero que você conhece???");
+                        //
+                        System.out.println("\n\n");
+                        //
+                        System.out.println("Qual o maior numero que você conhece??");
                         int numerPegadin = sc.nextInt();
-                        System.out.println("Você caiu na maldição do Carlos Henrique...");
-                        for (int j = 0; j <= numerPegadin; j++) {
+                        //
+                        System.out.println("Você caiu na maldição do GRANDE CARLOS HENRIQUE!...");
+                        for (int j = 0; j <= numerPegadin; j++) {//uso  do numerPegadin pra utilizar como parametro no for.
                             for (int g = 0; g <= 2; g++) {
                                 System.out.println("VOCÊÊÊÊÊ");
                             }
@@ -93,14 +103,20 @@ public class Main {
                                 System.out.println("CORRAA!!!!");
                             }
                             for (int l = 0; l <= 2; l++) {
-                                System.out.println("NÃO SE ESQUEÇA PEQUENO HUMANO...\n " +
-                                        "A PACIÊNCIA DE TODOS POSSUI UM LIMITE...");
+                                System.out.println("""
+                                        NÃO SE ESQUEÇA PEQUENO HUMANO...
+                                        A PACIÊNCIA DE TODOS POSSUI UM LIMITE...
+                                        """);
                             }
                             for (int p = 0; p <= 3; p++) {
-                                System.out.println("KKKKKKKKKK");
+                                System.out.println("KKKKKKKKKK\n");
                             }
                         }
-                        System.out.println("Agora deu... Adeus ksksksks. Volte ao menu inicial.");
+                        System.out.println("""
+                                Agora deu...
+                                Adeus ksksksks.
+                                Volte ao menu inicial.
+                                """);
                         menu();
                     }
                     else{
@@ -123,22 +139,64 @@ public class Main {
         }
         return new Pessoa(nome,idade,personagem);
     }
-    public static void combateMortal(){//iniciar esse aqui
 
+    public static void combateMortal(){//iniciar esse aqui
+//fazer uns sout ai dentro pro usuario escrever, só pra ler a historia
+//region(historia do inicio)
         System.out.println("Vamos começar...");
-        for(int j = 0; j <= 10; j++){
+        System.out.println("Escreva sua ultima palavra");
+        String klo = sc.next();
+        for(int j = 0; j <= 2; j++){
             System.out.println("----------------");
             System.out.println("|----|----|----|");
             System.out.println("----------------");
         }
+        System.out.println("Qual seu nome pequeno humano? \n");
+        String nomePeq = sc.next();
         System.out.println("""
-                E é assim que sua grande jornada se inicia...
-                
-                    A lenda do grande calice de fogo, um item unico neste pequeno mundo.
-                    Um artefato capaz de realizar o maior sonho de todos presentes... A imortalidade.
+                E é assim que sua grande jornada se inicia...""" + nomePeq +
+                """
+                    A lenda do grande calice de fogo, um item unico neste pequeno mundo...
+                    Um artefato capaz de realizar a maior ambição de todos...
                 """);
-        System.out.println("\n\n\n");
+        System.out.println("Preparado? " + nomePeq + "\n");
+        String answer = sc.next();
 
+        for(int h = 0; h <= 3; h++){
+            System.out.println("PAM PAM PAM!");
+            if (h == 3) {
+                System.out.println("A IMORTALIDADE!.");
+            }
+        }
+
+        System.out.println("\n\n");
+//endregion
+//region(escolher classe)
+        System.out.println("""
+                Escolha sua classe
+                1 - Arqueiro
+                2 - Barbaro
+                3 - Cavaleiro
+                4 - Mago
+                """);
+        int classeEscolha = sc.nextInt();
+
+        switch(classeEscolha){
+            case 1:
+                pessoa.getPersonagem().setClasse(Arqueiro, );
+                break;
+
+        }
+
+//endregion
+//region(escolher arma)
+        System.out.println("""
+                Escolha sua arma:
+                1 - Arco
+                2 - Cajado
+                """);
+
+//endregion
 //a
     }
     //endregion

@@ -48,6 +48,10 @@ public abstract class Personagem {
         return pessoa;
     }
 
+    public Arma getArma() {
+        return arma;
+    }
+
     public void setDano(int dano) {
         this.dano = dano;
     }
@@ -69,11 +73,15 @@ public abstract class Personagem {
     }
 
     public void setClasse(Classe classe) {
-        this.classe = classe;
+        this.classe =getClasse();
     }
 
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
+    }
+
+    public void setArma(String arma) {
+        this.arma = getArma();
     }
 
     public void setListaPersonagens(ArrayList<Personagem> listaPersonagens) {
