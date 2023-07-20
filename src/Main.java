@@ -13,9 +13,7 @@ public class Main {
      public static void main(String[]args) {
 
         do{
-
            menu();
-
         }while (optionForDeath != 4) ;
 }
          //region(menu)
@@ -41,7 +39,7 @@ public class Main {
                 combateMortal();
                 break;
             case 4:
-                System.out.println("BYEE!!!" +
+                System.out.println("BYEE!!!\n" +
                         "Good luck on your journey... And don't forget to be a good person in that life.");
                 break;
             default:
@@ -65,10 +63,8 @@ public class Main {
             System.out.println("Como desejar... \n\n\n");
             System.out.println("""
                         Você deseja voltar ao menu principal?
-
                     1 - Sim
                     2 - Não
-
                     """);
             int opcaoMenu = sc.nextInt();
 
@@ -77,7 +73,7 @@ public class Main {
                     menu();
                     break;
                 case 2:
-                    System.out.println("Deseja reiniciar a criação do personagem?\n 1 - Sim\n2 - não");
+                    System.out.println("Deseja reiniciar a criação do personagem?\n1 - Sim\n2 - não");
                     int opcaoFreshOrBack = sc.nextInt();
                     if (opcaoFreshOrBack == 1) {
                         criarPersonagem();
@@ -97,7 +93,7 @@ public class Main {
                                 System.out.println("CORRAA!!!!");
                             }
                             for (int l = 0; l <= 2; l++) {
-                                System.out.println("NÃO SE ESQUEÇA PEQUENO HUMANO...\n\n\n " +
+                                System.out.println("NÃO SE ESQUEÇA PEQUENO HUMANO...\n " +
                                         "A PACIÊNCIA DE TODOS POSSUI UM LIMITE...");
                             }
                             for (int p = 0; p <= 3; p++) {
@@ -123,12 +119,26 @@ public class Main {
                 System.out.println("insira sua idade: ");
                 idade = sc.nextInt();
                 Personagem personagem = criarPersonagem().getPersonagem();
-                return new Pessoa(nome, idade, personagem);
             }
         }
         return new Pessoa(nome,idade,personagem);
     }
     public static void combateMortal(){//iniciar esse aqui
+
+        System.out.println("Vamos começar...");
+        for(int j = 0; j <= 10; j++){
+            System.out.println("----------------");
+            System.out.println("|----|----|----|");
+            System.out.println("----------------");
+        }
+        System.out.println("""
+                E é assim que sua grande jornada se inicia...
+                
+                    A lenda do grande calice de fogo, um item unico neste pequeno mundo.
+                    Um artefato capaz de realizar o maior sonho de todos presentes... A imortalidade.
+                """);
+        System.out.println("\n\n\n");
+
 
     }
     //endregion
