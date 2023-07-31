@@ -2,14 +2,14 @@ package model.armas;
 
 import model.Arma;
 
-public class Arco extends Arma{
+public class Espada extends Arma {
 
-    public Arco() {
+    public Espada(int dano) {
         super(40);
     }
 
     @Override
     public int getDano() {
-        return 30;
+        return 40;
     }
 }

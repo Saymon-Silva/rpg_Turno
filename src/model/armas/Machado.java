@@ -4,13 +4,12 @@ import model.Arma;
 
 public class Machado extends Arma {
 
-    private int dano;
     public Machado(int dano) {
-        super(30);
+        super(50);
     }
 
     @Override
     public int getDano() {
-        return dano;
+        return 50;
     }
 }

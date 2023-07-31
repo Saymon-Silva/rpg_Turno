@@ -1,10 +1,13 @@
 package model.classes;
 
+import model.Arma;
 import model.Classe;
 
 public class Cavaleiro extends Classe {
 
-    public Cavaleiro(String classeNome, int maxVida, int dano) {
-        super(classeNome ,maxVida, dano);
+    private Arma arma;
+
+    public Cavaleiro(Arma arma) {
+        super(35,100);
     }
 }

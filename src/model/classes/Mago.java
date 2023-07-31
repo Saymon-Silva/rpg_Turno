@@ -1,10 +1,13 @@
 package model.classes;
 
+import model.Arma;
 import model.Classe;
 
 public class Mago extends Classe {
 
-    public Mago(String classeNome, int maxVida, int dano) {
-        super(classeNome ,maxVida, dano);
+    private Arma arma;
+
+    public Mago(Arma arma) {
+        super(10,75);
     }
 }
