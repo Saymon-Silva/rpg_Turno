@@ -87,7 +87,7 @@ public class Main {
                Porém encontra uma pequena criatura, horrenda como um pesadelo...
                Ela te ataca...
                 """);
-        String
+        String a
         Inimigo inimigo1 = new Inimigo(10,10);
 
 
