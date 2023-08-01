@@ -10,4 +10,5 @@ public class Arqueiro extends Classe {
     public Arqueiro(Arma arma) {
         super(25,100);
     }
+
 }

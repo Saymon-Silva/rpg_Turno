@@ -97,6 +97,10 @@ public class Pessoa {
                 '}';
     }
 
+    public int atacar(){
+        return getPersonagem().getDano();
+    }
+
     //endregion
 }
 
