@@ -14,8 +14,8 @@ public abstract class Personagem {
     private String nome;
     private int idade;
     private int codigo;
-
 //region(get/set)
+
     public int getDano() {
         return dano;
     }
@@ -89,12 +89,13 @@ public abstract class Personagem {
     }
 //endregion
 
-    public Personagem(Classe classe, String nome) {
+    public Personagem(String nome, int vida, int dano) {
         this.classe = classe;
         this.nome = nome;
         this.vida = classe.getMaxVida();
         this.codigo = listaPersonagens.size() + 1;
     }
+    //CRIAR UM PEROSNAGEM PERSONAGEM, COM VIDA E DANO PRE DEFINIDOS.
 
 
 

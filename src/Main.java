@@ -2,7 +2,6 @@ import model.Personagem;
 
 import java.util.Scanner;
 import model.*;
-impor
 
 public class Main {
 
@@ -31,13 +30,20 @@ public class Main {
 
         switch (optionForDeath) {
             case 1:
-                criarPersonagem().adicionar();
+                int i = 0;
+                do {
+                    criarPersonagem().adicionar();
+                    i++;
+                }while(i != 1);
+                menu();
                 break;
             case 2:
                 System.out.println(pessoa.listarPersonagens());
                 break;
             case 3:
-                escolherPersonagem().combateMortal();
+                combateMortal();
+                //escolherPersonagem() criar essa função para o usuario escolher qual personagem quer usar para o combate
+
                 break;
             case 4:
                 System.out.println("BYEE!!!\n" +
@@ -46,7 +52,7 @@ public class Main {
                 break;
             default:
                 System.out.println("Insira uma opção valida...");
-                menu();
+
                 break;
         }
     }
@@ -56,7 +62,7 @@ public class Main {
     public static Pessoa criarPersonagem() {
 
         String nome = "";
-        int idade = 0, cont = 0;
+        int idade = 0;
 
         System.out.println("Qual o nome do seu personagem? ");
         nome = sc.next();
@@ -127,15 +133,19 @@ public class Main {
                     if (vida <= 0) {
                         System.out.println("""
                                         Seu corpo foi atacado diversas vezes...
-                                            Você acorda com medo e suado, sua cama possui sangue... Mas não é seu, aparentemente.
+                                            Você acorda com medo e suado, sua cama possui sangue... Mas aparentemente não é seu.
                                         """);
                     }
                     if (vidaImigo <= 0) {
                         System.out.println("""
                                 Você derrotou a criatura... Porém quando acordou notou que estava com sangue em suas mãos
+                                e olhando mais atentamente para o chão você encontrou um pequeno rastro de sangue.
                                 """);
                     }
-                } while (vida <= 0 || escMov == 3 || vidaImigo <= 0);
+                } while (vida >= 0 || escMov == 3 || vidaImigo >= 0);
+                Inimigo inimigo2 = new Inimigo(20, 30);
+                int vidaImigo2 = inimigo2.getVida();
+                int danoImigo2 = inimigo2.getDano();
 
                 System.out.println("");
         }
@@ -145,4 +155,5 @@ public class Main {
 
     //endregion
 }
+aaaa
 
