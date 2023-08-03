@@ -7,7 +7,7 @@ public class Cavaleiro extends Classe {
 
     private Arma arma;
 
-    public Cavaleiro(Arma arma) {
+    public Cavaleiro() {
         super(35,100);
     }
 }

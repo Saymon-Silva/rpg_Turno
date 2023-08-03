@@ -2,19 +2,19 @@ package model;
 
 import java.util.ArrayList;
 
-public abstract class Personagem {
+public class Personagem {
 
-    private ArrayList<Personagem> listaPersonagens = new ArrayList<Personagem>();
-    private Pessoa pessoa;
+    public static ArrayList<Personagem> listaPersonagens = new ArrayList<>();
+
     private Classe classe;
     private Arma arma;
 
     private int vida;
     private int dano;
     private String nome;
-    private int idade;
     private int codigo;
 //region(get/set)
+
 
     public int getDano() {
         return dano;
@@ -24,16 +24,8 @@ public abstract class Personagem {
         return vida;
     }
 
-    public int getIdade() {
-        return idade;
-    }
-
     public String getNome() {
         return nome;
-    }
-
-    public ArrayList<Personagem> getListaPersonagens() {
-        return listaPersonagens;
     }
 
     public int getCodigo() {
@@ -42,10 +34,6 @@ public abstract class Personagem {
 
     public Classe getClasse() {
         return classe;
-    }
-
-    public Pessoa getPessoa() {
-        return pessoa;
     }
 
     public Arma getArma() {
@@ -60,43 +48,66 @@ public abstract class Personagem {
         this.vida = vida;
     }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
     public void setClasse(Classe classe) {
-        this.classe =getClasse();
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
+        this.classe = getClasse();
     }
 
     public void setArma(String arma) {
         this.arma = getArma();
     }
-
-    public void setListaPersonagens(ArrayList<Personagem> listaPersonagens) {
-        this.listaPersonagens = listaPersonagens;
-    }
 //endregion
-
+//region(funções)
     public Personagem(String nome, int vida, int dano) {
         this.classe = classe;
         this.nome = nome;
-        this.vida = classe.getMaxVida();
-        this.codigo = listaPersonagens.size() + 1;
+        this.vida = vida + classe.getMaxVida();
+        this.dano = dano + classe.getDano() + arma.getDano();
+        this.codigo = listaPersonagens.size() +1 ;
+        listaPersonagens.add(this);
     }
+
+    public static Personagem buscarPersonagem(int codigo){
+        for(Personagem personagem : listaPersonagens){
+            if(personagem.codigo == codigo){
+                return personagem;
+            }
+        }
+        return null;
+    }
+
+    public String listarPersonagens(){
+        String jogadores = "";
+
+        for ( Personagem personagem : listaPersonagens) {
+            jogadores += personagem.toString() + "\n";
+        }
+        return jogadores;
+    }
+
+    public String remover(){
+        listaPersonagens.remove(this);
+        return("Personagem removido com sucesso");
+    }
+
+    public int atacar(){
+        return this.getDano();
+    }
+//endregion
     //CRIAR UM PEROSNAGEM PERSONAGEM, COM VIDA E DANO PRE DEFINIDOS.
 
 
-
+    @Override
+    public String toString() {
+        return "Personagem : " + codigo + " : "+
+                " classe = " + classe +
+                "; arma = " + arma +
+                "; vida = " + vida +
+                "; dano = "  + dano +
+                "; nome = " + nome +
+                "; codigo = " + codigo +
+                '.';
+    }
 }

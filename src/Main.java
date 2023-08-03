@@ -1,23 +1,28 @@
 import model.Personagem;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import model.*;
+import model.classes.Cavaleiro;
 
 public class Main {
 
     private static Scanner sc = new Scanner(System.in);
-    private static Pessoa pessoa;
     private static Personagem personagem;
     private static int optionForDeath;
-
+    private static Personagem personagemEscolhido;
+    private static Personagem personagem1 = new Personagem("Principal",60,30);
      public static void main(String[]args) {
-
+//         personagem1.setClasse(new Cavaleiro().setDano(););
+//            adicionar();
+            escolherPersonagem();
+         System.out.println(personagemEscolhido);
         do{
            menu();
         }while (optionForDeath != 4) ;
 }
 //region(menu)
-    public static void menu(){
+    public static void menu() {
 
         System.out.println("""
                     MENU
@@ -32,16 +37,18 @@ public class Main {
             case 1:
                 int i = 0;
                 do {
-                    criarPersonagem().adicionar();
+                    criarPersonagem();
                     i++;
-                }while(i != 1);
-                menu();
+                } while (i != 1);
                 break;
             case 2:
-                System.out.println(pessoa.listarPersonagens());
+                for (Personagem personagem : Personagem.listaPersonagens) {
+                    System.out.println(personagem);
+                }
+                System.out.println("");
                 break;
             case 3:
-                combateMortal();
+//                escolherPersonagem().combateMortal();
                 //escolherPersonagem() criar essa função para o usuario escolher qual personagem quer usar para o combate
 
                 break;
@@ -56,25 +63,109 @@ public class Main {
                 break;
         }
     }
-    //endregion
+//endregion
+
+//    public static void adicionar() {
+//        Personagem.listaPersonagens.add(personagem1);
+//
+//        Personagem.listaPersonagens.add(personagem2);
+//    }
+
+//region(escolher personagem)
+//    private static Personagem escolherPersonagem() {
+//         Personagem personagemEscolhido = null;
+//        for ( Personagem personagem : Personagem.listaPersonagens) {
+//            System.out.println(personagem);
+//        }
+//        System.out.println("""
+//                Escolha do personagem ( escolha pelo codigo dele )
+//                """);
+//        int codigo = sc.nextInt();
+//        for ( Personagem personagem : Personagem.listaPersonagens ) {
+//            if( codigo == personagem.getCodigo(codigo)) {
+//                System.out.println("entrei nessa bct");
+//                personagem = Personagem.buscarPersonagem(codigo);
+//            }
+//            else{
+//                System.out.println(" Não há nenhum personagem com o codigo: " + codigo );
+//            }
+//            return personagem;
+//        }
+//
+//        return personagem;
+//    }
+//endregion
+private static Personagem escolherPersonagem() {
+    for (Personagem personagem : Personagem.listaPersonagens) {
+        System.out.println(personagem);
+    }
+    System.out.println("");
+    System.out.print("""
+            Escolha do personagem (escolha pelo codigo dele)
+            """);
+    int codigo = sc.nextInt();
+
+    for (Personagem personagem : Personagem.listaPersonagens) {
+        if (codigo == personagem.getCodigo()) {
+            System.out.println("Personagem escolhido: " + personagem);
+            personagemEscolhido = personagem;
+            return personagemEscolhido;
+        }
+        System.out.println("Não há nenhum personagem com o codigo: " + codigo);
+        return null;
+    }
+
+    return null;
+}
+
 
     //region(funções)
-    public static Pessoa criarPersonagem() {
+    public static Personagem criarPersonagem() {
 
         String nome = "";
-        int idade = 0;
+        int dano = 0, vida = 0;
+        int escolhaVD;
+        boolean setVD = false;
 
         System.out.println("Qual o nome do seu personagem? ");
         nome = sc.next();
-        System.out.println("insira sua idade: ");
-        idade = sc.nextInt();
-        Personagem personagem = criarPersonagem().getPersonagem();
+        do {
+            System.out.println("""
+                    Escolha de vida e dano
+                    1 - Vida = 50; Dano = 30
+                    2 - Vida = 60; dano = 20
+                    3 - Vida = 55; dano = 25
+                    """);
+            escolhaVD = sc.nextInt();
+            switch (escolhaVD) {
+                case 1:
+                    vida = 50;
+                    dano = 30;
+                    setVD = true;
+                    break;
+                case 2:
+                    vida = 60;
+                    dano = 20;
+                    setVD = true;
+                    break;
+                case 3:
+                    vida = 55;
+                    dano = 25;
+                    setVD = true;
+                    break;
+                default:
+                    System.out.print("ESCOLHA UMA OPÇÃO VALIDA");
+                    // Volta pra escolha de vida e dano
+                    break;
+            }
+        }while(!setVD);
 
-        return new Pessoa(nome,idade,personagem);
+
+        return new Personagem(nome,dano, vida);
     }
 
     public static void combateMortal() {//iniciar esse aqui
-         int vida = pessoa.getPersonagem().getVida();
+         int vida = personagem.getVida();
 //region(historia do inicio)
         System.out.println("sempre que travar, aperte no '.' e depois no 'enter'");
         System.out.println("Vamos começar...");
@@ -117,7 +208,7 @@ public class Main {
                     escMov = sc.nextInt();
 
                     if (escMov == 1) {
-                        vidaImigo -= pessoa.atacar();
+                        vidaImigo -= personagem.atacar();
                         System.out.println("Você atacou e o acertou");
                     } else if (escMov == 2) {
                         vida += 5;
@@ -155,5 +246,3 @@ public class Main {
 
     //endregion
 }
-aaaa
-
