@@ -21,6 +21,7 @@ public class Main {
            menu();
         }while (optionForDeath != 4) ;
 }
+a
 //region(menu)
     public static void menu() {
 
