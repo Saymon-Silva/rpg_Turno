@@ -1,5 +1,8 @@
 package model;
 
+import model.armas.Cajado;
+import model.armas.Machado;
+
 import java.util.ArrayList;
 
 public class Personagem {
@@ -12,9 +15,18 @@ public class Personagem {
     private int vida;
     private int dano;
     private String nome;
+    private int idade;
     private int codigo;
 //region(get/set)
 
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
 
     public int getDano() {
         return dano;
@@ -52,19 +64,21 @@ public class Personagem {
         this.nome = nome;
     }
     public void setClasse(Classe classe) {
-        this.classe = getClasse();
+        this.classe = classe;
     }
 
-    public void setArma(String arma) {
-        this.arma = getArma();
+    public void setArma(Arma arma) {
+        this.arma = arma;
     }
 //endregion
 //region(funções)
-    public Personagem(String nome, int vida, int dano) {
-        this.classe = classe;
+    public Personagem(String nome,int idade, int vida, int dano) {
+        this.classe = getClasse();
+        this.arma= getArma();
         this.nome = nome;
-        this.vida = vida + classe.getMaxVida();
-        this.dano = dano + classe.getDano() + arma.getDano();
+        this.vida = vida;
+        this.idade = idade;
+        this.dano = dano;
         this.codigo = listaPersonagens.size() +1 ;
         listaPersonagens.add(this);
     }
@@ -101,13 +115,15 @@ public class Personagem {
 
     @Override
     public String toString() {
-        return "Personagem : " + codigo + " : "+
-                " classe = " + classe +
-                "; arma = " + arma +
-                "; vida = " + vida +
-                "; dano = "  + dano +
-                "; nome = " + nome +
-                "; codigo = " + codigo +
-                '.';
+        return "Personagem : " + codigo + " : " +
+                " Classe = " + classe +
+                "; Arma = " + arma +
+                "; Nome = " + nome +
+                "; Idade = " + idade +
+                "; Dano = " + dano +
+                "; Vida = " + vida +
+                "; Codigo = " + codigo +
+                ".";
     }
+
 }

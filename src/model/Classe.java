@@ -5,7 +5,7 @@ public abstract class Classe {
     private int maxVida;
     private int dano;
 
-    public Classe(int dano, int maxVida){
+    public Classe(String nome){
         this.dano = dano;
         this.maxVida = maxVida;
     }

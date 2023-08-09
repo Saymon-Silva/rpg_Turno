@@ -7,7 +7,12 @@ public class Mago extends Classe {
 
     private Arma arma;
 
-    public Mago(Arma arma) {
-        super(10,75);
+    public Mago(String nome) {
+        super(nome);
+    }
+
+    @Override
+    public String toString() {
+        return "Mago";
     }
 }

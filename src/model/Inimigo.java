@@ -27,4 +27,8 @@ public class Inimigo {
         return vida;
     }
 //endregion
+
+    //region(funcoes)
+    public int atacar;
+
 }

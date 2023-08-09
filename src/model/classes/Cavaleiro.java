@@ -7,7 +7,13 @@ public class Cavaleiro extends Classe {
 
     private Arma arma;
 
-    public Cavaleiro() {
-        super(35,100);
+
+    public Cavaleiro(String nome) {
+        super(nome);
+    }
+
+    @Override
+    public String toString() {
+        return "Cavaleiro";
     }
 }

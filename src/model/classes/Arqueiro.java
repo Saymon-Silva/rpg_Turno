@@ -7,8 +7,12 @@ public class Arqueiro extends Classe {
 
     private Arma arma;
 
-    public Arqueiro(Arma arma) {
-        super(25,100);
+    public Arqueiro(String nome) {
+        super(nome);
     }
 
+    @Override
+    public String toString() {
+        return "Arqueiro";
+    }
 }
