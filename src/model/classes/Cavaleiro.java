@@ -7,7 +7,6 @@ public class Cavaleiro extends Classe {
 
     private Arma arma;
 
-
     public Cavaleiro(String nome) {
         super(nome);
     }

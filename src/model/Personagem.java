@@ -73,12 +73,12 @@ public class Personagem {
 //endregion
 //region(funções)
     public Personagem(String nome,int idade, int vida, int dano) {
-        this.classe = getClasse();
-        this.arma= getArma();
+        this.classe = classe;
+        this.arma= arma;
         this.nome = nome;
-        this.vida = vida;
+        this.vida = vida + this.getClasse().getMaxVida();
         this.idade = idade;
-        this.dano = dano;
+        this.dano = dano + this.getClasse().getDano();
         this.codigo = listaPersonagens.size() +1 ;
         listaPersonagens.add(this);
     }

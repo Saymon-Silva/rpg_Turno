@@ -1,20 +1,20 @@
 package model.armas;
 
-import model.Arma;
+import model.*;
 
-public class Espada extends Arma {
+public class Rolo_de_Cerol extends Arma{
 
-    public Espada(int dano) {
+    public Rolo_de_Cerol(int dano) {
         super(dano);
     }
-
 
     @Override
     public int getDano() {
         return super.getDano();
     }
+
     @Override
     public String toString() {
-        return "Espada";
+        return "Rolo de Cerol";
     }
 }

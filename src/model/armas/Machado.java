@@ -4,13 +4,13 @@ import model.Arma;
 
 public class Machado extends Arma {
 
-    public Machado(String nome) {
-        super(50);
+    public Machado(int dano) {
+        super(dano);
     }
 
     @Override
     public int getDano() {
-        return 50;
+        return super.getDano();
     }
     @Override
     public String toString() {

@@ -8,7 +8,7 @@ public class Barbaro extends Classe{
     private Arma arma;
 
     public Barbaro(String nome) {
-super(nome);
+        super(nome);
     }
     @Override
     public String toString() {

@@ -4,13 +4,13 @@ import model.Arma;
 
 public class Cajado extends Arma {
 
-    public Cajado(String nome) {
-        super(75);
+    public Cajado(int dano) {
+        super(dano);
     }
 
     @Override
     public int getDano() {
-        return 75;
+        return super.getDano();
     }
 
     @Override

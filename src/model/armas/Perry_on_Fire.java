@@ -1,20 +1,20 @@
 package model.armas;
 
-import model.Arma;
+import model.*;
 
-public class Espada extends Arma {
+public class Perry_on_Fire extends Arma {
 
-    public Espada(int dano) {
+    public Perry_on_Fire(int dano) {
         super(dano);
     }
-
 
     @Override
     public int getDano() {
         return super.getDano();
     }
+
     @Override
     public String toString() {
-        return "Espada";
+        return "Perry on Flames";
     }
 }
