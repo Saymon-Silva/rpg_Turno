@@ -194,28 +194,36 @@ public class Main {
         do {
             System.out.println("""
                     Escolha da classe
-                    1 - Arqueiro
-                    2 - Barbaro
-                    3 - Cavaleiro
-                    4 - Mago
+                    1 - Arqueiro - 100 St - 220 Hp
+                    2 - Barbaro - 100 St - 280 Hp
+                    3 - Cavaleiro - 110 St - 260 Hp
+                    4 - Mago - 130 St - 200 Hp
                     """);
             int escC = sc.nextInt();
             switch (escC) {
                 case 1:
                     personagemEscolhido.setClasse(new Arqueiro("Arqueiro"));
+                    personagemEscolhido.getClasse().setDano(100);
+                    personagemEscolhido.getClasse().setMaxVida(220);
                     System.out.println(personagemEscolhido);
                     escClass = true;
                     break;
                 case 2:
                     personagemEscolhido.setClasse(new Barbaro("Barbaro"));
+                    personagemEscolhido.getClasse().setDano(110);
+                    personagemEscolhido.getClasse().setMaxVida(280);
                     escClass = true;
                     break;
                 case 3:
                     personagemEscolhido.setClasse(new Cavaleiro("Cavaleiro"));
+                    personagemEscolhido.getClasse().setDano(110);
+                    personagemEscolhido.getClasse().setMaxVida(260);
                     escClass = true;
                     break;
                 case 4:
                     personagemEscolhido.setClasse(new Mago("Mago"));
+                    personagemEscolhido.getClasse().setDano(130);
+                    personagemEscolhido.getClasse().setMaxVida(200);
                     escClass = true;
                     break;
                 default:

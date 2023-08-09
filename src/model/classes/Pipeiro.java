@@ -9,8 +9,6 @@ public class Pipeiro extends Classe{
     public Pipeiro(String nome) {
         super(nome);
     }
-
-    @Override
     public String toString() {
         return "Pipeiro";
     }

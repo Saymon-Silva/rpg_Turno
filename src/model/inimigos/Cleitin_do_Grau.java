@@ -3,6 +3,7 @@ package model.inimigos;
 import model.*;
 import model.armas.Rolo_de_Cerol;
 import model.classes.Assassino;
+import model.classes.Pipeiro;
 
 public class Cleitin_do_Grau extends Inimigo {
 
@@ -16,8 +17,8 @@ public class Cleitin_do_Grau extends Inimigo {
 
     public Cleitin_do_Grau(int vida, int dano) {
         super(vida, dano);
-        this.arma = new Rolo_de_Cerol("Rolo de cerol");
-        this.classe = new Assassino("Pagão");
+        this.arma = new Rolo_de_Cerol(30);
+        this.classe = new Pipeiro("Pipeiro");
 
     }
 
