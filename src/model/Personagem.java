@@ -76,9 +76,9 @@ public class Personagem {
         this.classe = classe;
         this.arma= arma;
         this.nome = nome;
-        this.vida = vida + this.getClasse().getMaxVida();
+        this.vida = vida;
         this.idade = idade;
-        this.dano = dano + this.getClasse().getDano();
+        this.dano = dano;
         this.codigo = listaPersonagens.size() +1 ;
         listaPersonagens.add(this);
     }
@@ -115,14 +115,13 @@ public class Personagem {
 
     @Override
     public String toString() {
-        return "Personagem : " + codigo + " : " +
+        return "Personagem : " + nome +
+                " : " + codigo + " : " +
                 " Classe = " + classe +
                 "; Arma = " + arma +
-                "; Nome = " + nome +
                 "; Idade = " + idade +
                 "; Dano = " + dano +
                 "; Vida = " + vida +
-                "; Codigo = " + codigo +
                 ".";
     }
 

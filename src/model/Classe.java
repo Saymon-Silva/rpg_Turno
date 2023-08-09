@@ -5,11 +5,12 @@ public abstract class Classe {
     private int maxVida;
     private int dano;
 
-    public Classe(String nome){
+    public Classe(int dano, int maxVida){
         this.dano = dano;
         this.maxVida = maxVida;
     }
-//region (get/set)
+
+    //region (get/set)
     public int getDano() {
         return dano;
     }

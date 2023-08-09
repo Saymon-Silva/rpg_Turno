@@ -6,8 +6,8 @@ public class Assassino extends Classe {
 
     private Arma arma;
 
-    public Assassino(String nome) {
-        super(nome);
+    public Assassino(int dano, int maxVida) {
+        super(dano, maxVida);
     }
 
     @Override

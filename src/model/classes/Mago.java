@@ -7,8 +7,8 @@ public class Mago extends Classe {
 
     private Arma arma;
 
-    public Mago(String nome) {
-        super(nome);
+    public Mago(int dano, int maxVida) {
+        super(dano, maxVida);
     }
 
     @Override

@@ -7,8 +7,9 @@ public class Arqueiro extends Classe {
 
     private Arma arma;
 
-    public Arqueiro(String nome) {
-        super(nome);
+
+    public Arqueiro(int dano, int maxVida) {
+    super(dano, maxVida);
     }
 
     @Override

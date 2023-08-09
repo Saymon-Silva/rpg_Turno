@@ -6,11 +6,9 @@ public class Pipeiro extends Classe{
 
     private Arma arma;
 
-    public Pipeiro(String nome) {
-        super(nome);
+    public Pipeiro(int dano, int maxVida) {
+        super(dano,maxVida);
     }
-
-    @Override
     public String toString() {
         return "Pipeiro";
     }

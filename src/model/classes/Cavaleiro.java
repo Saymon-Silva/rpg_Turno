@@ -7,8 +7,8 @@ public class Cavaleiro extends Classe {
 
     private Arma arma;
 
-    public Cavaleiro(String nome) {
-        super(nome);
+    public Cavaleiro(int dano, int maxVida) {
+        super(dano,maxVida);
     }
 
     @Override

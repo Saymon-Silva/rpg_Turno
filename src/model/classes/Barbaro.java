@@ -7,12 +7,11 @@ public class Barbaro extends Classe{
 
     private Arma arma;
 
-    public Barbaro(String nome) {
-        super(nome);
+    public Barbaro(int dano, int maxVida) {
+        super(dano, maxVida);
     }
     @Override
     public String toString() {
         return "Barbaro";
     }
-
 }
