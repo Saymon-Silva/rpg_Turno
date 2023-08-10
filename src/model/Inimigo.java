@@ -68,9 +68,9 @@ public class Inimigo {
 
         //region(medio
         //region(criação cleitin do grau)
-        Inimigo cleitin = new Inimigo("Cleitin do Grau", 30,25);
-        cleitin.setClasse(new Pipeiro(100,110));
-        cleitin.setArma(new Rolo_de_Cerol(20));
+        Inimigo cleitin = new Inimigo("Cleitin do Grau", 700,100);
+        cleitin.setClasse(new Pipeiro(140,150));
+        cleitin.setArma(new Rolo_de_Cerol(40));
 
         int vidaInimigoCleitin = cleitin.getVida();
         int vidaClasseCleitin = cleitin.getClasse().getMaxVida();
@@ -84,9 +84,9 @@ public class Inimigo {
         //endregion
 
         //region(criação mikey da craco)
-        Inimigo cracoMikey = new Inimigo("Mickey da Craco", 10,70);
-        cracoMikey.setClasse(new Mago(140,55));
-        cracoMikey.setArma(new Varinha_de_Condao(45));
+        Inimigo cracoMikey = new Inimigo("Mickey da Craco", 800,120);
+        cracoMikey.setClasse(new Mago(200,160));
+        cracoMikey.setArma(new Varinha_de_Condao(150));
 
         int vidaInimigoMikey = cracoMikey.getVida();
         int vidaClasseMikey = cracoMikey.getClasse().getMaxVida();
@@ -100,9 +100,9 @@ public class Inimigo {
         //endregion
 
         //region(criação pagão da viela)
-        Inimigo pagao = new Inimigo("Pagão da viela", 150,50);
-        pagao.setClasse(new Assassino(115,140));
-        pagao.setArma(new Adaga_do_Pagao(60));
+        Inimigo pagao = new Inimigo("Pagão da viela", 700,100);
+        pagao.setClasse(new Assassino(145,200));
+        pagao.setArma(new Adaga_do_Pagao(150));
 
         int vidaInimigoPagao = pagao.getVida();
         int vidaClassePagao = pagao.getClasse().getMaxVida();
@@ -115,10 +115,10 @@ public class Inimigo {
         pagao.setVida((vidaInimigoPagao * 0) +  vidaInimigoPagao + vidaClassePagao);
         //endregion
 
-        //region(criação cleitin do grau)
-        Inimigo perry = new Inimigo("Perry o Ornitorrinco", 100,60);
-        perry.setClasse(new Agente_P(130,100));
-        perry.setArma(new Perry_on_Fire(60));
+        //region(criação perry el ornitorrinco)
+        Inimigo perry = new Inimigo("Perry o Ornitorrinco", 800,120);
+        perry.setClasse(new Agente_P(150,200));
+        perry.setArma(new Perry_on_Fire(150));
 
         int vidaInimigoPerry = perry.getVida();
         int vidaClassePerry = perry.getClasse().getMaxVida();
@@ -131,10 +131,10 @@ public class Inimigo {
         perry.setVida((vidaInimigoPerry * 0) +  vidaInimigoPerry + vidaClassePerry);
         //endregion
 
-        //region(criação cleitin do grau)
-        Inimigo vasilinha = new Inimigo("Vasilhian Man", 200,30);
-        vasilinha.setClasse(new Medico(0,200));
-        vasilinha.setArma(new Vacin_of_Cloroquina(60));
+        //region(criação vasilhian man)
+        Inimigo vasilinha = new Inimigo("Vasilhian Man", 1000,30);
+        vasilinha.setClasse(new Medico(0,250));
+        vasilinha.setArma(new Vacin_of_Cloroquina(75));
 
         int vidaInimigoVasilinha = vasilinha.getVida();
         int vidaClasseVasilinha = vasilinha.getClasse().getMaxVida();

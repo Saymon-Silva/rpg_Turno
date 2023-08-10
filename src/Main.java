@@ -5,8 +5,7 @@ import java.util.Scanner;
 import model.*;
 import model.armas.*;
 import model.classes.*;
-import model.inimigos.Cleitin_do_Grau;
-import model.inimigos.Pagao;
+
 
 public class Main {
 
@@ -16,12 +15,14 @@ public class Main {
     private static int optionForDeath;
     private static Personagem personagemEscolhido;
     private static Personagem personagem1 = new Personagem("Principal Unico", 60, 60, 60);
-    private static Cleitin_do_Grau cleitin_do_grau = new Cleitin_do_Grau(150, 50);
+
 
     public static void main(String[] args) {
 
-        System.out.println(cleitin_do_grau);
-
+        Inimigo.criarInimigos();
+        for (Inimigo inimigo1 : Inimigo.listaDeInimigos) {
+            System.out.println(inimigo1);
+        }
         do {
 
             menu();
@@ -153,25 +154,25 @@ public class Main {
         do {
             System.out.println("""
                     Escolha de vida e dano
-                    1 - Vida = 50; Dano = 30
-                    2 - Vida = 60; dano = 20
-                    3 - Vida = 55; dano = 25
+                    1 - Vida = 890; Dano = 120
+                    2 - Vida = 740; dano = 170
+                    3 - Vida = 800; dano = 150
                     """);
             escolhaVD = sc.nextInt();
             switch (escolhaVD) {
                 case 1:
-                    vida = 50;
-                    dano = 30;
+                    vida = 890;
+                    dano = 120;
                     setVD = true;
                     break;
                 case 2:
-                    vida = 60;
-                    dano = 20;
+                    vida = 740;
+                    dano = 120;
                     setVD = true;
                     break;
                 case 3:
-                    vida = 55;
-                    dano = 25;
+                    vida = 800;
+                    dano = 150;
                     setVD = true;
                     break;
                 default:
@@ -190,38 +191,67 @@ public class Main {
     public static void escolherClasse() {
 
         boolean escClass = false;
-        System.out.println("AQUIE SERA FEITA A DENOMINAÇÃO DA CLASSE");
+        System.out.println("AQUI SERA FEITA A ESCOLHA DA SUA CLASSE");
         do {
-            System.out.println("""
-                    Escolha da classe
-                    1 - Arqueiro
-                    2 - Barbaro
-                    3 - Cavaleiro
-                    4 - Mago
+            System.out.print("""
+                    
+                    1 - Agente_P
+                    2 - Arqueiro
+                    3 - Assassino
+                    4 - Barbaro
+                    5 - Cavaleiro
+                    6 - Mago
+                    7 - Medico
+                    8 - Pipeiro
+                    
+                    Insira o codigo da classe :
                     """);
             int escC = sc.nextInt();
             switch (escC) {
                 case 1:
-                    personagemEscolhido.setClasse(new Arqueiro("Arqueiro"));
-                    System.out.println(personagemEscolhido);
+                    personagemEscolhido.setClasse(new Agente_P(150, 200));
+
                     escClass = true;
                     break;
                 case 2:
-                    personagemEscolhido.setClasse(new Barbaro("Barbaro"));
+                    personagemEscolhido.setClasse(new Arqueiro(155,210));
                     escClass = true;
                     break;
                 case 3:
-                    personagemEscolhido.setClasse(new Cavaleiro("Cavaleiro"));
+                    personagemEscolhido.setClasse(new Assassino(160,215));
                     escClass = true;
                     break;
                 case 4:
-                    personagemEscolhido.setClasse(new Mago("Mago"));
+                    personagemEscolhido.setClasse(new Barbaro(200,230));
+                    escClass = true;
+                    break;
+                case 5:
+                    personagemEscolhido.setClasse(new Cavaleiro(190,210));
+                    escClass = true;
+                    break;
+                case 6:
+                    personagemEscolhido.setClasse(new Mago(210,160));
+                    escClass = true;
+                    break;
+                case 7:
+                    personagemEscolhido.setClasse(new Medico(50,250));
+                    escClass = true;
+                    break;
+                case 8:
+                    personagemEscolhido.setClasse(new Pipeiro(140,150));
                     escClass = true;
                     break;
                 default:
                     System.out.println("pô cara, tu ja tens as opções e ainda me marca uma que sequer existe.");
                     break;
             }
+            int vidaPersonagem = personagemEscolhido.getVida();
+            int vidaPersonagemClasse = personagemEscolhido.getClasse().getMaxVida();
+            int danoPersonagem = personagemEscolhido.getDano();
+            int danoPersonagemClasse = personagemEscolhido.getClasse().getDano();
+
+            personagemEscolhido.setVida((vidaPersonagem * 0) + vidaPersonagem + vidaPersonagemClasse);
+            personagemEscolhido.setDano((danoPersonagem * 0) + danoPersonagem + danoPersonagemClasse);
         } while (!escClass);
     }
 //endregion
@@ -229,37 +259,69 @@ public class Main {
     //region(escolher arma)
     public static void escolherArma() {
         boolean escArma = false;
-        System.out.println("AQUIE SERA FEITA A DENOMINAÇÃO DA ARMA");
+        System.out.println("AQUI SERA FEITA A ESCOLHA DA ARMA");
         do {
-            System.out.println("""
-                    Escolha da classe
-                    1 - Arco - 40 dano
-                    2 - Cajado - 70 dano
-                    3 - Espada - 45 dano
-                    4 - Machado - 60
+            System.out.print("""
+                    
+                    1 - Adaga do Pagão - 130 St
+                    2 - Arco - 90 St 
+                    3 - Cajado - 150 St
+                    4 - Espada - 120 St
+                    5 - Machado - 130 St
+                    6 - Perry on Fire - 150 St
+                    7 - Rolo de Cerol - 60 St
+                    8 - Vacin of Cloroquina - 75 St 
+                    9 - Varinha de Condão - 150 St
+                    
+                    Insira o codigo da arma :
                     """);
             int escC = sc.nextInt();
             switch (escC) {
                 case 1:
-                    personagemEscolhido.setArma(new Arco(40));
+                    personagemEscolhido.setArma(new Adaga_do_Pagao(130));
                     escArma = true;
                     break;
                 case 2:
-                    personagemEscolhido.setArma(new Cajado(70));
+                    personagemEscolhido.setArma(new Arco(90));
                     escArma = true;
                     break;
                 case 3:
-                    personagemEscolhido.setArma(new Espada(45));
+                    personagemEscolhido.setArma(new Cajado(150));
                     escArma = true;
                     break;
                 case 4:
-                    personagemEscolhido.setArma(new Machado(60));
+                    personagemEscolhido.setArma(new Espada(120));
+                    escArma = true;
+                    break;
+                case 5:
+                    personagemEscolhido.setArma(new Machado(130));
+                    escArma = true;
+                    break;
+                case 6:
+                    personagemEscolhido.setArma(new Perry_on_Fire(150));
+                    escArma = true;
+                    break;
+                case 7:
+                    personagemEscolhido.setArma(new Rolo_de_Cerol(60));
+                    escArma = true;
+                    break;
+                case 8:
+                    personagemEscolhido.setArma(new Vacin_of_Cloroquina(75));
+                    escArma = true;
+                    break;
+                case 9:
+                    personagemEscolhido.setArma(new Varinha_de_Condao(150));
                     escArma = true;
                     break;
                 default:
                     System.out.println("pô cara, tu ja tens as opções e ainda me marca uma que sequer existe vtfd.");
                     break;
             }
+            int danoPersonagem = personagemEscolhido.getDano();
+            int danoPersonagemClasse = personagemEscolhido.getClasse().getDano();
+            int danoPersonagemArma = personagemEscolhido.getArma().getDano();
+
+            personagemEscolhido.setDano((danoPersonagem * 0) + danoPersonagem + danoPersonagemClasse + danoPersonagemArma);
         } while (!escArma);
     }
 //endregion
@@ -272,8 +334,9 @@ public class Main {
         for (Personagem personagem : Personagem.listaPersonagens) {
             System.out.println(personagem);
         }
-        System.out.println("");
+
         System.out.print("""
+                
                 Escolha do personagem (escolha pelo codigo dele)
                 """);
         int codigo = sc.nextInt();
@@ -284,16 +347,20 @@ public class Main {
                 personagemEscolhido = personagem;
             }
         }
-        System.out.println(" Correto : " + personagemEscolhido);
 
         do {
-            System.out.println("""
+            System.out.println("Ele esta assim atualmente :\n" + personagemEscolhido);
+            System.out.print("""
+                    
                     MENU EDIÇÃO
+                    
                     1 - Nome
                     2 - Idade
                     3 - Classe
                     4 - Arma
                     5 - Sair
+                    
+                    Insira o codigo :
                     """);
             int escolhaEdição = sc.nextInt();
 
@@ -318,7 +385,6 @@ public class Main {
                     System.out.println("VALORES VALIDOS PRINCESS!!!!!!");
                     break;
             }
-            System.out.println("Ele está assim : " + personagemEscolhido);
         } while (!edicacaoCabo);
     }
 //endregion
@@ -328,7 +394,7 @@ public class Main {
     //region(nome)
     public static void editarNome() {
         System.out.print("Insira o nome que deseja possuir : ");
-        String nomeNovo = sc.nextLine();
+        String nomeNovo = scfs.nextLine();
         personagemEscolhido.setNome(nomeNovo);
     }
 
@@ -344,90 +410,6 @@ public class Main {
 //endregion
 
 //endregion
-
-//region(codigo combate mortal - 1)
-//    public static void combateMortal() {//iniciar esse aqui
-//         int vida = personagemEscolhido.getVida();
-////region(historia do inicio)
-//        System.out.println("sempre que travar, aperte no '.' e depois no 'enter'");
-//        System.out.println("Vamos começar...");
-//        System.out.println("""
-//                E é assim que sua jornada se inicia...
-//
-//                Um dia você simplesmente dormiu em sua casa e acordau numa vila cheia de estranhos e distante de todo
-//                o restante do mundo. Você se vê preocupado e assustado em meio a essa situação.
-//                    Perceba que a população dessa vila é rude com você, porém não há motivos.
-//                """);
-//        String x = sc.next();
-////region(inicio do combate)
-//        System.out.println("""
-//                O dia passa num piscar de olhos.
-//                E você se deita para descansar... E começa a sonhar... Dentro desse sonho, há um corredor branco, totalmente branco
-//                e você o segue até o que parece ser o final dele.
-//                Porém encontra uma pequena criatura, horrenda como um pesadelo...
-//                Ela te ataca...
-//                 """);
-//        String a = sc.next();
-//        Inimigo inimigo1 = new Inimigo(10, 10);
-//        int vidaImigo = inimigo1.getVida();
-//        int danoImigo = inimigo1.getDano();
-//        System.out.println("""
-//                1 - Revidar
-//                2 - Ignorar e correr
-//                """);
-//        int opcao = sc.nextInt();
-//
-//        switch (opcao) {
-//            case 1:
-//                System.out.println("Você revidou o ataque dela e agora um duelo esta por vir.");
-//                int escMov;
-//                do {
-//                    System.out.println("""
-//                            1 - Atacar
-//                            2 - regenerar
-//                            3 - desisitir
-//                            """);
-//                    escMov = sc.nextInt();
-//
-//                    if (escMov == 1) {
-//                        vidaImigo -= personagemEscolhido.atacar();
-//                        System.out.println("Você atacou e o acertou");
-//                    } else if (escMov == 2) {
-//                        vida += 5;
-//                    } else if (escMov == 3 ){
-//                        System.out.println("você desistiu!! ");
-//                        System.out.println("""
-//                                        Você corre deseperadamente para longe dessa coisa.
-//                                            Você acorda com medo e suado, sua cama tem sangue... Mas não é seu, aparentemente.
-//                                        """);
-//                    }
-//                    vida -= danoImigo;
-//
-//                    if (vida <= 0) {
-//                        System.out.println("""
-//                                        Seu corpo foi atacado diversas vezes...
-//                                            Você acorda com medo e suado, sua cama possui sangue... Mas aparentemente não é seu.
-//                                        """);
-//                    }
-//                    if (vidaImigo <= 0) {
-//                        System.out.println("""
-//                                Você derrotou a criatura... Porém quando acordou notou que estava com sangue em suas mãos
-//                                e olhando mais atentamente para o chão você encontrou um pequeno rastro de sangue.
-//                                """);
-//                    }
-//                } while (vida > 0 || escMov == 3 || vidaImigo > 0);
-//                Inimigo inimigo2 = new Inimigo(20, 30);
-//                int vidaImigo2 = inimigo2.getVida();
-//                int danoImigo2 = inimigo2.getDano();
-//
-//                System.out.println("");
-//        }
-////endregion
-//
-//    }
-
-    //endregion
-    //endregion
 
     //region( codigo combate mortal - 2 )
     public static void combateMortal() {//fazer um combate de torre, tp mk
@@ -466,53 +448,9 @@ public class Main {
     public static void batalhaTorre() {
 
     }
+    //endregion
 
 
 //endregion
-//region(escolha do inimigo)
 
-//    public static Inimigo criarInimigo() {
-//
-//        String nome = "";
-//        int dano = 0, vida = 0;
-//        int escolhaVD, idade = 0;
-//        boolean setVD = false;
-//
-//        System.out.print("Qual o nome do seu personagem? ");
-//        nome = scfs.nextLine();
-//        System.out.print("Qual a idade do sue personagem? ");
-//        idade = sc.nextInt();
-//
-//        do {
-//            System.out.println("""
-//                    Escolha de vida e dano
-//                    1 - Vida = 50; Dano = 30
-//                    2 - Vida = 60; dano = 20
-//                    3 - Vida = 55; dano = 25
-//                    """);
-//            escolhaVD = sc.nextInt();
-//            switch (escolhaVD) {
-//                case 1:
-//                    vida = 50;
-//                    dano = 30;
-//                    setVD = true;
-//                    break;
-//                case 2:
-//                    vida = 60;
-//                    dano = 20;
-//                    setVD = true;
-//                    break;
-//                case 3:
-//                    vida = 55;
-//                    dano = 25;
-//                    setVD = true;
-//                    break;
-//                default:
-//                    System.out.print("ESCOLHA UMA OPÇÃO VALIDA");
-//                    // Volta pra escolha de vida e dano
-//                    break;
-//            }
-//        } while (!setVD);
-//
-//    }
 }

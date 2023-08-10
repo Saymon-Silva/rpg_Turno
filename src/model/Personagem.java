@@ -124,5 +124,6 @@ public class Personagem {
                 "; Vida = " + vida +
                 ".";
     }
+    //pputa merda meu bom tudo dando errado tmnc cartakhi fikha da oyra
 
 }
