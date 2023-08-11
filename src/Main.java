@@ -488,6 +488,8 @@ public class Main {
     //region(dificil
     public static void modoDificil(){
 
+        System.out.println("so pra comitar");
+
     }
     //endregion
 //endregion
