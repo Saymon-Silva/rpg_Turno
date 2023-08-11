@@ -489,6 +489,7 @@ public class Main {
     public static void modoDificil(){
 
         System.out.println("so pra comitar");
+        System.out.println("cadela não comita");
 
     }
     //endregion
