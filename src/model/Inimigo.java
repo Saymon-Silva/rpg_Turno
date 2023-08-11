@@ -66,7 +66,9 @@ public class Inimigo {
 //region(criar personagens)
     public static void criarInimigos(){
 
-        //region(medio
+        //region(facil)
+        //endregion
+        //region(medio)
         //region(criação cleitin do grau)
         Inimigo cleitin = new Inimigo("Cleitin do Grau", 700,100);
         cleitin.setClasse(new Pipeiro(140,150));
@@ -146,6 +148,8 @@ public class Inimigo {
         vasilinha.setDano((danoInimigoVasilinha * 0) + danoInimigoVasilinha + danoArmaVasilinha + danoClasseVasilinha);
         vasilinha.setVida((vidaInimigoVasilinha * 0) +  vidaInimigoVasilinha + vidaClasseVasilinha);
         //endregion
+        //endregion
+        //region(dificel)
         //endregion
     }
 //endregion

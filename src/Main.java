@@ -447,9 +447,50 @@ public class Main {
     //region(torre)
     public static void batalhaTorre() {
 
+        System.out.println("Bem vindo!!");
+
+        System.out.println("""
+                
+                1 - Fácil
+                2 - Médio
+                3 - Dificil
+                
+                Escolha o modo : """);
+        int escolhaModo = sc.nextInt();
+
+        switch(escolhaModo){
+
+            case 1:
+                modoFacil();
+                break;
+            case 2:
+                modoMedio();
+                break;
+            case 3:
+                modoDificil();
+                break;
+        }
+
     }
     //endregion
+//region(modos torre)
 
+    //region(facil
+    public static void modoFacil(){
+
+    }
+    //endregio
+    //region(medio
+    public static void modoMedio(){
+
+    }
+    //endregion
+    //region(dificil
+    public static void modoDificil(){
+
+    }
+    //endregion
+//endregion
 
 //endregion
 
