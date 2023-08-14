@@ -15,6 +15,6 @@ public class Adaga_do_Pagao extends Arma {
 
     @Override
     public String toString() {
-        return "Adaga do Pagão";
+        return "Worm fall";
     }
 }

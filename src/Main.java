@@ -1,6 +1,7 @@
 import model.Personagem;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 import model.*;
 import model.armas.*;
@@ -15,14 +16,11 @@ public class Main {
     private static int optionForDeath;
     private static Personagem personagemEscolhido;
     private static Personagem personagem1 = new Personagem("Principal Unico", 60, 60, 60);
+    private static Inimigo inimigoDaBola;
 
 
     public static void main(String[] args) {
 
-        Inimigo.criarInimigos();
-        for (Inimigo inimigo1 : Inimigo.listaDeInimigos) {
-            System.out.println(inimigo1);
-        }
         do {
 
             menu();
@@ -60,12 +58,7 @@ public class Main {
                 break;
             case 3:
                 //escolha do personagem pra usar
-                escolherPersonagem();
-                //escolha da classe
-                escolherClasse();
-                //escolha da arma
-                escolherArma();
-                System.out.println(personagemEscolhido);
+
                 combateMortal();
                 //escolherPersonagem() criar essa função para o usuario escolher qual personagem quer usar para o combate
 
@@ -130,8 +123,9 @@ public class Main {
                 personagemEscolhido = personagem;
                 return personagemEscolhido;
             }
-            System.out.println("Não há nenhum personagem com o codigo: " + codigo);
-            return null;
+                System.out.println("Não há nenhum personagem com o codigo: " + codigo);
+                return null;
+
         }
 
         return null;
@@ -154,25 +148,25 @@ public class Main {
         do {
             System.out.println("""
                     Escolha de vida e dano
-                    1 - Vida = 890; Dano = 120
-                    2 - Vida = 740; dano = 170
-                    3 - Vida = 800; dano = 150
+                    1 - Vida = 1600; Dano = 180
+                    2 - Vida = 1550; dano = 220
+                    3 - Vida = 1650; dano = 200
                     """);
             escolhaVD = sc.nextInt();
             switch (escolhaVD) {
                 case 1:
-                    vida = 890;
-                    dano = 120;
+                    vida = 1600;
+                    dano = 180;
                     setVD = true;
                     break;
                 case 2:
-                    vida = 740;
-                    dano = 120;
+                    vida = 1550;
+                    dano = 220;
                     setVD = true;
                     break;
                 case 3:
-                    vida = 800;
-                    dano = 150;
+                    vida = 1650;
+                    dano = 200;
                     setVD = true;
                     break;
                 default:
@@ -183,7 +177,7 @@ public class Main {
         } while (!setVD);
 
 
-        return new Personagem(nome, idade, dano, vida);
+        return new Personagem(nome, idade, vida, dano);
     }
 //endregion
 
@@ -414,9 +408,7 @@ public class Main {
     //region( codigo combate mortal - 2 )
     public static void combateMortal() {//fazer um combate de torre, tp mk
 
-        int vida = personagemEscolhido.getVida();
-
-        int dano = personagemEscolhido.getDano();
+        escolherPersonagem();
 
         System.out.println("""
                 MODO DE BATALHA
@@ -477,11 +469,260 @@ public class Main {
 
     //region(facil
     public static void modoFacil(){
+        Inimigo.criarInimigos();
+
+        boolean rodoJaZero = false;
+        boolean rodoJaDois = false;
+        boolean rodoJaTres = false;
+        boolean rodoJaQuatro = false;
+        boolean rodoJaUm = false;
+        boolean decisaoUnica = false; //faz com que o monstro só efetue um dos ifs.
+
+        int nivelMasmorra = 1;
+        int escolhaNoTurno = 0;
+
+        Random random = new Random();
+        do {
+            int numeroInimigoDaVez = random.nextInt(4);
+
+            if ( numeroInimigoDaVez == 0 && rodoJaZero){
+                numeroInimigoDaVez = random.nextInt(4);
+            }
+            if ( numeroInimigoDaVez == 1 && rodoJaUm){
+                numeroInimigoDaVez = random.nextInt(4);
+            }
+            if ( numeroInimigoDaVez == 2 && rodoJaDois){
+                numeroInimigoDaVez = random.nextInt(4);
+            }
+            if ( numeroInimigoDaVez == 3 && rodoJaTres){
+                numeroInimigoDaVez = random.nextInt(4);
+            }
+            if ( numeroInimigoDaVez == 4 && rodoJaQuatro){
+                numeroInimigoDaVez = random.nextInt(4);
+            }
+            else {
+                int cont = 0;
+                for (Inimigo inimigo1 : Inimigo.listaDeInimigosFacil) {
+                    if (cont == numeroInimigoDaVez) {
+                        inimigoDaBola = inimigo1;
+                    }
+                    cont++;
+                }
+
+                int vidaInimigo = inimigoDaBola.getVida();
+                int danoInimigo = inimigoDaBola.getVida();
+
+                int vidaTotalInimigo = 0;
+
+                for(int c=0; c<= vidaInimigo; c++){
+                    vidaTotalInimigo++;
+                }
+
+                int vidaTotalPersonagem = 0;
+
+                for(int c=0; c<= vidaInimigo; c++){
+                    vidaTotalPersonagem++;
+                }
+
+                int vidaPersonagem = personagemEscolhido.getVida();
+                int danoPersonagem = personagemEscolhido.getDano();
+
+                System.out.println("""
+                            Bem vindo à Masmorra Fácil
+                            
+                            Prepare suas coisas e vamos!!
+                            """);
+                String pqp = scfs.nextLine();
+                System.out.println(""" 
+                        O inimigo : """ + inimigoDaBola +
+                        """ 
+                        Venho ao seu encontro."""
+                );
+                do {
+
+                    System.out.println("""
+                            1 - Atacar 
+                            2 - Recuperar-se
+                            3 - Fugir
+                            """);
+                    escolhaNoTurno = sc.nextInt();
+                    switch(escolhaNoTurno){
+
+                        case 1:
+                            vidaInimigo = vidaInimigo - danoPersonagem;
+                            break;
+                        case 2:
+                            vidaPersonagem += (vidaTotalPersonagem/5);
+                            break;
+                        case 3:
+                            break;
+                        default:
+                            System.out.println("Perdeu o turno. Insira apenas valores validos...");
+                    }
+                    if( vidaInimigo >= (vidaTotalInimigo / 4)){
+                        vidaInimigo += (vidaTotalInimigo / 6);
+                        decisaoUnica = true;
+                    }
+                    if(!decisaoUnica){
+                        vidaPersonagem = vidaPersonagem - danoInimigo;
+                    }
+                    decisaoUnica = false;
+                } while (vidaInimigo > 0 || vidaPersonagem > 0 || escolhaNoTurno != 3);
+                nivelMasmorra++;
+                if (vidaPersonagem == 0) {
+                    nivelMasmorra = 0;
+                }
+            }
+        }while(!rodoJaUm || !rodoJaDois || !rodoJaTres || !rodoJaQuatro || !rodoJaZero);
 
     }
     //endregio
     //region(medio
     public static void modoMedio(){
+        Inimigo.criarInimigos();
+
+        boolean rodoJaZero = false;
+        boolean rodoJaDois = false;
+        boolean rodoJaTres = false;
+        boolean rodoJaQuatro = false;
+        boolean rodoJaUm = false;
+        boolean decisaoUnica = false; //faz com que o monstro só efetue um dos ifs.
+
+        int nivelMasmorra = 1;
+        int escolhaNoTurno = 0;
+
+        Random random = new Random();
+        do {
+            int numeroInimigoDaVez = random.nextInt(4);
+
+            if ( numeroInimigoDaVez == 0 && rodoJaZero){
+                numeroInimigoDaVez = random.nextInt(4);
+            }
+            if ( numeroInimigoDaVez == 1 && rodoJaUm){
+                numeroInimigoDaVez = random.nextInt(4);
+            }
+            if ( numeroInimigoDaVez == 2 && rodoJaDois){
+                numeroInimigoDaVez = random.nextInt(4);
+            }
+            if ( numeroInimigoDaVez == 3 && rodoJaTres){
+                numeroInimigoDaVez = random.nextInt(4);
+            }
+            if ( numeroInimigoDaVez == 4 && rodoJaQuatro){
+                numeroInimigoDaVez = random.nextInt(4);
+            }
+            else {
+                int cont = 0;
+                for (Inimigo inimigo1 : Inimigo.listaDeInimigosMedio) {
+                    if (cont == numeroInimigoDaVez) {
+                        inimigoDaBola = inimigo1;
+                    }
+                    cont++;
+                }
+
+                int vidaInimigo = inimigoDaBola.getVida();
+                int danoInimigo = inimigoDaBola.getVida();
+
+                int vidaTotalInimigo = 0;
+
+                for(int c=0; c<= vidaInimigo; c++){
+                    vidaTotalInimigo++;
+                }
+
+                int vidaTotalPersonagem = 0;
+
+                for(int c=0; c<= vidaInimigo; c++){
+                    vidaTotalPersonagem++;
+                }
+
+                int vidaPersonagem = personagemEscolhido.getVida();
+                int danoPersonagem = personagemEscolhido.getDano();
+
+                System.out.println("""
+                            Bem vindo à Masmorra Média
+                            
+                            Prepare suas coisas e vamos!!
+                            """);
+                String pqp = scfs.nextLine();
+                System.out.println(""" 
+                        O inimigo : """ + inimigoDaBola +
+                        """ 
+                        Venho ao seu encontro."""
+                );
+                do {
+
+                    System.out.println("""
+                            Inimigo : """ + inimigoDaBola+ """ 
+                            Personagem : """ + personagemEscolhido + """
+                            1 - Atacar 
+                            2 - Recuperar-se
+                            3 - Fugir
+                            """);
+                    escolhaNoTurno = sc.nextInt();
+                    switch(escolhaNoTurno){
+
+                        case 1:
+                            vidaInimigo = vidaInimigo - danoPersonagem;
+                            System.out.println("você causou : "+danoPersonagem+" de dano");
+                            break;
+                        case 2:
+                            int cura = vidaPersonagem/5;
+                            vidaPersonagem += cura;
+                            System.out.println("Você recuperou : "+ cura);
+                            break;
+                        case 3:
+                            break;
+                        default:
+                            System.out.println("Perdeu o turno. Insira apenas valores validos...");
+                    }
+                    if( vidaInimigo >= (vidaTotalInimigo / 4)){
+                        vidaInimigo += (vidaTotalInimigo / 6);
+                        decisaoUnica = true;
+                    }
+                    if(!decisaoUnica){
+                        vidaPersonagem = vidaPersonagem - danoInimigo;
+                    }
+                    decisaoUnica = false;
+
+                    int chancePoderUm = random.nextInt(9);
+                    int chancePoderDois = random.nextInt(9);
+
+                    if(inimigoDaBola.getNome().equals("Cleitin do Grau") && chancePoderUm == chancePoderDois){
+                        System.out.println("Cleitin ta lançõu um ataque ispeciall...");
+                        System.out.println("Receba meu Cerol" + inimigoDaBola.getArma().toString());
+                        System.out.println("Você recebeu : " + inimigoDaBola.getArma().getDano());
+                        vidaPersonagem -= inimigoDaBola.getArma().getDano();
+                    }
+                    else if(inimigoDaBola.getNome().equals("Mickey da Craco") && chancePoderUm == chancePoderDois){
+                        System.out.println("mickey te da um ataque especial...");
+                        System.out.println("Receba meu Poderzinho hehe" + inimigoDaBola.getArma().toString());
+                        System.out.println("Você recebeu : " + inimigoDaBola.getArma().getDano());
+                        vidaPersonagem -= inimigoDaBola.getArma().getDano();
+                        System.out.println("Você se sente meio tonto após o ataque");
+                    }
+                    else if(inimigoDaBola.getNome().equals("Pagão da vilinha") && chancePoderUm == chancePoderDois){
+                        System.out.println("Pagão lhe acerta de raspão...");
+                        System.out.println("Jante o sangue dele ò " + inimigoDaBola.getArma().toString());
+                    }
+                    else if(inimigoDaBola.getNome().equals("Agent Perry") && chancePoderUm == chancePoderDois){
+                        System.out.println("Perry atira em você com sua pistola de escalar. Fique preso por um turno...");
+                        int dPe = 80;
+                        System.out.println("Você recebeu : " + (danoInimigo + 80) + " de dano.");
+                    }
+                    else if(inimigoDaBola.getNome().equals("Vasilhian Man") && chancePoderUm == chancePoderDois){
+                        System.out.println("Vasilhiam lhe acerta uma seringada... ");
+                        System.out.println("Você fica fraco e tonto");
+                        System.out.println("Mas ele não descansa e te acerta um critico.");
+                        System.out.println("Você recebeu : 400 de dano");
+                        vidaPersonagem -= 400;
+                    }
+
+                } while (vidaInimigo > 0 || vidaPersonagem > 0 || escolhaNoTurno != 3);
+                nivelMasmorra++;
+                if (vidaPersonagem == 0) {
+                    nivelMasmorra = 0;
+                }
+            }
+        }while(!rodoJaUm || !rodoJaDois || !rodoJaTres || !rodoJaQuatro || !rodoJaZero);
 
     }
     //endregion
