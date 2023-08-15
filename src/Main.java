@@ -17,6 +17,7 @@ public class Main {
     private static Personagem personagemEscolhido;
     private static Personagem personagem1 = new Personagem("Principal Unico", 60, 60, 60);
     private static Inimigo inimigoDaBola;
+    private static Random random = new Random();
 
 
     public static void main(String[] args) {
@@ -130,6 +131,34 @@ public class Main {
 
         return null;
     }
+//endregion
+    //region( escolher inimigo)
+private static Inimigo escolherInimigo() {
+
+    System.out.print("Aqui você irá escolher o personagem para batalhar usando ele");
+    for (Inimigo inimigo : Inimigo.listaDeInimigos) {
+        System.out.println(inimigo);
+    }
+    System.out.println("");
+    System.out.print("""
+                Escolha do inimigo (escolha pelo codigo dele)
+                """);
+    int codigo = sc.nextInt();
+
+    for (Inimigo inimigo : Inimigo.listaDeInimigos) {
+        if (codigo == inimigo.getCodigo()) {
+            System.out.println("Personagem escolhido: " + inimigo);
+            inimigoDaBola = inimigo;
+            return inimigoDaBola;
+        }
+        else {
+            System.out.println("Não há nenhum personagem com o codigo: " + codigo);
+            return null;
+        }
+    }
+
+    return null;
+}
 //endregion
 
     //region(Criar Personagem)
@@ -413,9 +442,7 @@ public class Main {
         System.out.println("""
                 MODO DE BATALHA
                 1 - TORRE
-                2 - HISTORIA
-                3 - DESAFIO
-                ?? - CONTRA SI
+                2 - (NO FUTURO EXISTIRA)
                 """);
         int escMdBtl = sc.nextInt();
 
@@ -425,6 +452,8 @@ public class Main {
                 batalhaTorre();
                 break;
             case 2:
+                System.out.println("Apenas espere");
+                System.out.println("estamos nos esforçando para cria-lo");
                 break;
             case 3:
                 break;
@@ -465,7 +494,7 @@ public class Main {
 
     }
     //endregion
-//region(modos torre)
+//region(modos torre)1
 
     //region(facil
     public static void modoFacil(){
@@ -481,7 +510,6 @@ public class Main {
         int nivelMasmorra = 1;
         int escolhaNoTurno = 0;
 
-        Random random = new Random();
         do {
             int numeroInimigoDaVez = random.nextInt(4);
 
@@ -539,41 +567,49 @@ public class Main {
                         Venho ao seu encontro."""
                 );
                 do {
-
                     System.out.println("""
-                            1 - Atacar 
+                            \nInimigo : """ + inimigoDaBola + """ 
+                            \nPersonagem : """ + personagemEscolhido + """
+                            \n1 - Atacar 
                             2 - Recuperar-se
                             3 - Fugir
                             """);
                     escolhaNoTurno = sc.nextInt();
                     switch(escolhaNoTurno){
+                            case 1:
+                                System.out.println("Você atacou");
+                                inimigoDaBola.setVida(vidaInimigo - danoPersonagem);
+                                break;
+                            case 2:
+                                vidaPersonagem = vidaPersonagem + (vidaTotalPersonagem / 5);
+                                System.out.println("Você se recuperou");
+                                break;
+                            case 3:
+                                System.out.println("cagao");
+                                break;
+                            default:
+                                System.out.println("Perdeu o turno. Insira apenas valores válidos...");
+                        }
+                        if (vidaInimigo <= (vidaTotalInimigo / 4)) {
+                            inimigoDaBola.setVida(vidaInimigo + (vidaTotalInimigo / 6));
+                            System.out.println("Seu inimigo se curou");
+                            decisaoUnica = true;
+                        }
+                        if (!decisaoUnica) {
+                            vidaPersonagem = vidaPersonagem - danoInimigo;
+                            System.out.println("Voce foi atacado e recebeu : " + danoInimigo);
+                        }
+                        decisaoUnica = false;
+                    } while (inimigoDaBola.getVida() > 0 && vidaPersonagem > 0 && escolhaNoTurno != 3);
 
-                        case 1:
-                            vidaInimigo = vidaInimigo - danoPersonagem;
-                            break;
-                        case 2:
-                            vidaPersonagem += (vidaTotalPersonagem/5);
-                            break;
-                        case 3:
-                            break;
-                        default:
-                            System.out.println("Perdeu o turno. Insira apenas valores validos...");
+                    nivelMasmorra++;
+                    if (vidaPersonagem <= 0 || escolhaNoTurno == 3) {
+                        nivelMasmorra = 0;
+                        vidaPersonagem = vidaTotalPersonagem;
                     }
-                    if( vidaInimigo >= (vidaTotalInimigo / 4)){
-                        vidaInimigo += (vidaTotalInimigo / 6);
-                        decisaoUnica = true;
-                    }
-                    if(!decisaoUnica){
-                        vidaPersonagem = vidaPersonagem - danoInimigo;
-                    }
-                    decisaoUnica = false;
-                } while (vidaInimigo > 0 || vidaPersonagem > 0 || escolhaNoTurno != 3);
-                nivelMasmorra++;
-                if (vidaPersonagem == 0) {
-                    nivelMasmorra = 0;
+//
                 }
-            }
-        }while(!rodoJaUm || !rodoJaDois || !rodoJaTres || !rodoJaQuatro || !rodoJaZero);
+            }while(!rodoJaUm || !rodoJaDois || !rodoJaTres || !rodoJaQuatro || !rodoJaZero);
 
     }
     //endregio
@@ -589,9 +625,8 @@ public class Main {
         boolean decisaoUnica = false; //faz com que o monstro só efetue um dos ifs.
 
         int nivelMasmorra = 1;
-        int escolhaNoTurno = 0;
+        int escolhaNoTurno;
 
-        Random random = new Random();
         do {
             int numeroInimigoDaVez = random.nextInt(4);
 
@@ -651,35 +686,36 @@ public class Main {
                 do {
 
                     System.out.println("""
-                            Inimigo : """ + inimigoDaBola+ """ 
-                            Personagem : """ + personagemEscolhido + """
-                            1 - Atacar 
+                            \nInimigo : """ + inimigoDaBola + """ 
+                            \nPersonagem : """ + personagemEscolhido + """
+                            \n1 - Atacar 
                             2 - Recuperar-se
                             3 - Fugir
                             """);
                     escolhaNoTurno = sc.nextInt();
                     switch(escolhaNoTurno){
-
                         case 1:
-                            vidaInimigo = vidaInimigo - danoPersonagem;
-                            System.out.println("você causou : "+danoPersonagem+" de dano");
+                            System.out.println("Você atacou");
+                            inimigoDaBola.setVida(vidaInimigo - danoPersonagem);
                             break;
                         case 2:
-                            int cura = vidaPersonagem/5;
-                            vidaPersonagem += cura;
-                            System.out.println("Você recuperou : "+ cura);
+                            vidaPersonagem = vidaPersonagem + (vidaTotalPersonagem / 5);
+                            System.out.println("Você se recuperou");
                             break;
                         case 3:
+                            System.out.println("cagao");
                             break;
                         default:
-                            System.out.println("Perdeu o turno. Insira apenas valores validos...");
+                            System.out.println("Perdeu o turno. Insira apenas valores válidos...");
                     }
-                    if( vidaInimigo >= (vidaTotalInimigo / 4)){
-                        vidaInimigo += (vidaTotalInimigo / 6);
+                    if (vidaInimigo <= (vidaTotalInimigo / 4)) {
+                        inimigoDaBola.setVida(vidaInimigo + (vidaTotalInimigo / 6));
+                        System.out.println("Seu inimigo se curou");
                         decisaoUnica = true;
                     }
-                    if(!decisaoUnica){
+                    if (!decisaoUnica) {
                         vidaPersonagem = vidaPersonagem - danoInimigo;
+                        System.out.println("Voce foi atacado e recebeu : " + danoInimigo);
                     }
                     decisaoUnica = false;
 
@@ -690,7 +726,9 @@ public class Main {
                         System.out.println("Cleitin ta lançõu um ataque ispeciall...");
                         System.out.println("Receba meu Cerol" + inimigoDaBola.getArma().toString());
                         System.out.println("Você recebeu : " + inimigoDaBola.getArma().getDano());
-                        vidaPersonagem -= inimigoDaBola.getArma().getDano();
+                        vidaPersonagem = vidaPersonagem - inimigoDaBola.getArma().getDano();
+                        System.out.println("");
+                        String k = scfs.nextLine();
                     }
                     else if(inimigoDaBola.getNome().equals("Mickey da Craco") && chancePoderUm == chancePoderDois){
                         System.out.println("mickey te da um ataque especial...");
@@ -698,15 +736,21 @@ public class Main {
                         System.out.println("Você recebeu : " + inimigoDaBola.getArma().getDano());
                         vidaPersonagem -= inimigoDaBola.getArma().getDano();
                         System.out.println("Você se sente meio tonto após o ataque");
+                        System.out.println("");
+                        String k = scfs.nextLine();
                     }
                     else if(inimigoDaBola.getNome().equals("Pagão da vilinha") && chancePoderUm == chancePoderDois){
                         System.out.println("Pagão lhe acerta de raspão...");
                         System.out.println("Jante o sangue dele ò " + inimigoDaBola.getArma().toString());
+                        System.out.println("");
+                        String k = scfs.nextLine();
                     }
                     else if(inimigoDaBola.getNome().equals("Agent Perry") && chancePoderUm == chancePoderDois){
                         System.out.println("Perry atira em você com sua pistola de escalar. Fique preso por um turno...");
-                        int dPe = 80;
-                        System.out.println("Você recebeu : " + (danoInimigo + 80) + " de dano.");
+                        System.out.println("Você recebeu : " + danoInimigo + " de dano.");
+                        vidaPersonagem = vidaPersonagem - danoInimigo;
+                        System.out.println("");
+                        String k = scfs.nextLine();
                     }
                     else if(inimigoDaBola.getNome().equals("Vasilhian Man") && chancePoderUm == chancePoderDois){
                         System.out.println("Vasilhiam lhe acerta uma seringada... ");
@@ -714,11 +758,13 @@ public class Main {
                         System.out.println("Mas ele não descansa e te acerta um critico.");
                         System.out.println("Você recebeu : 400 de dano");
                         vidaPersonagem -= 400;
+                        System.out.println("");
+                        String k = scfs.nextLine();
                     }
 
                 } while (vidaInimigo > 0 || vidaPersonagem > 0 || escolhaNoTurno != 3);
                 nivelMasmorra++;
-                if (vidaPersonagem == 0) {
+                if (vidaPersonagem == 0 || escolhaNoTurno == 3) {
                     nivelMasmorra = 0;
                 }
             }
@@ -728,14 +774,245 @@ public class Main {
     //endregion
     //region(dificil
     public static void modoDificil(){
+        Inimigo.criarInimigos();
 
-        System.out.println("so pra comitar");
-        System.out.println("cadela não comita");
+        boolean rodoJaZero = false;
+        boolean rodoJaDois = false;
+        boolean rodoJaTres = false;
+        boolean rodoJaQuatro = false;
+        boolean rodoJaUm = false;
+        boolean decisaoUnica = false; //faz com que o monstro só efetue um dos ifs.
+
+        int nivelMasmorra = 1;
+        int escolhaNoTurno = 0;
+
+        do {
+            int numeroInimigoDaVez = random.nextInt(4);
+
+            if ( numeroInimigoDaVez == 0 && rodoJaZero){
+                numeroInimigoDaVez = random.nextInt(4);
+            }
+            if ( numeroInimigoDaVez == 1 && rodoJaUm){
+                numeroInimigoDaVez = random.nextInt(4);
+            }
+            if ( numeroInimigoDaVez == 2 && rodoJaDois){
+                numeroInimigoDaVez = random.nextInt(4);
+            }
+            if ( numeroInimigoDaVez == 3 && rodoJaTres){
+                numeroInimigoDaVez = random.nextInt(4);
+            }
+            if ( numeroInimigoDaVez == 4 && rodoJaQuatro){
+                numeroInimigoDaVez = random.nextInt(4);
+            }
+            else {
+                int cont = 0;
+                for (Inimigo inimigo1 : Inimigo.listaDeInimigosDificil) {
+                    if (cont == numeroInimigoDaVez) {
+                        inimigoDaBola = inimigo1;
+                    }
+                    cont++;
+                }
+
+                int vidaInimigo = inimigoDaBola.getVida();
+                int danoInimigo = inimigoDaBola.getVida();
+
+                int vidaTotalInimigo = 0;
+
+                for(int c=0; c<= vidaInimigo; c++){
+                    vidaTotalInimigo++;
+                }
+
+                int vidaTotalPersonagem = 0;
+
+                for(int c=0; c<= vidaInimigo; c++){
+                    vidaTotalPersonagem++;
+                }
+
+                int vidaPersonagem = personagemEscolhido.getVida();
+                int danoPersonagem = personagemEscolhido.getDano();
+
+                int danoTotalPersonagem = 0;
+
+                for(int c=0; c<= danoPersonagem; c++){
+                    danoTotalPersonagem++;
+                }
+
+                System.out.println("""
+                            Bem vindo à Masmorra Média
+                            
+                            Prepare suas coisas e vamos!!
+                            """);
+                String pqp = scfs.nextLine();
+                System.out.println(""" 
+                        O inimigo : """ + inimigoDaBola +
+                        """ 
+                        Venho ao seu encontro."""
+                );
+                do {
+
+                    System.out.println("""
+                            \nInimigo : """ + inimigoDaBola + """ 
+                            \nPersonagem : """ + personagemEscolhido + """
+                            \n1 - Atacar 
+                            2 - Recuperar-se
+                            3 - Fugir
+                            """);
+                    escolhaNoTurno = sc.nextInt();
+                    switch(escolhaNoTurno){
+                        case 1:
+                            System.out.println("Você atacou");
+                            inimigoDaBola.setVida(vidaInimigo - danoPersonagem);
+                            break;
+                        case 2:
+                            vidaPersonagem = vidaPersonagem + (vidaTotalPersonagem / 5);
+                            System.out.println("Você se recuperou");
+                            break;
+                        case 3:
+                            System.out.println("cagao");
+                            break;
+                        default:
+                            System.out.println("Perdeu o turno. Insira apenas valores válidos...");
+                    }
+                    if (vidaInimigo <= (vidaTotalInimigo / 4)) {
+                        inimigoDaBola.setVida(vidaInimigo + (vidaTotalInimigo / 6));
+                        System.out.println("Seu inimigo se curou");
+                        decisaoUnica = true;
+                    }
+                    if (!decisaoUnica) {
+                        vidaPersonagem = vidaPersonagem - danoInimigo;
+                        System.out.println("Voce foi atacado e recebeu : " + danoInimigo);
+                    }
+                    decisaoUnica = false;
+
+
+                    int numeroPoder = random.nextInt(5);
+                    int chancePoderUm = random.nextInt(10);
+
+                    if(inimigoDaBola.getNome().equals("Cleitin da Viela Ensolarada") && chancePoderUm == numeroPoder){
+                        System.out.println("Você recebeu uma cerolzada");
+                        System.out.println("Você ativou a habilidade do Cleitin...");
+                        System.out.println("Tome o cerol de vidro branco");
+                        System.out.println("Você está ficando louco, eletricamente eletrizado");
+                        System.out.println("Seus pontos de vida aumentam e caem ao mesmo tempo....");
+                        System.out.println("Você desmaia.");
+                        vidaPersonagem = 1;
+                        System.out.println("Eu lhe mato hoje.");
+                        System.out.println("Cleitin fica muito loco e te mata com o cerol branco");
+                        vidaPersonagem = 0;
+                        System.out.println("");
+                        String k = scfs.nextLine();
+                    }
+
+                    else if(inimigoDaBola.getNome().equals("EXA Mikey Magic") && chancePoderUm == numeroPoder){
+                        System.out.println("mickey te da um tapinha especial...");
+                        System.out.println("Receba um pouco do meu mundo");
+                        System.out.println("Você se sente meio tonto após o tapinha");
+                        danoPersonagem = 1;
+                        System.out.println("Você se sente fraco");
+                        System.out.println(personagemEscolhido);
+                        System.out.println("Após algum tempo fora do mundo do Mickey, suas forças voltaram totalmente.");
+                        System.out.println("");
+                        String k = scfs.nextLine();
+                    }
+
+                    else if(inimigoDaBola.getNome().equals("La Pagon del viela") && chancePoderUm == numeroPoder){
+                        System.out.println("Pagão lhe acerta em cheio...");
+                        System.out.println("Seu sangue jorra em meio a batalha");
+                        System.out.println("O pagão se ve em uma situação engraçada, e começa a rir sem parar.");
+                        System.out.println("Uma risada sadica.");
+                        System.out.println("E solta a seguinte frase...");
+                        String nfd = scfs.nextLine();
+                        System.out.println("Desperte Jashin");
+                        System.out.println("Sua vida é roubada pelo seu sangue, e Jashin renova as forças do pagão");//jashin rouba 1/5 da sua vida
+                        vidaPersonagem = vidaPersonagem - (vidaTotalPersonagem/5);
+                        vidaInimigo = vidaInimigo + (vidaTotalPersonagem/5);
+                        System.out.println("");
+                        String k = scfs.nextLine();
+                    }
+                    else if(inimigoDaBola.getNome().equals("Agent Perry") && chancePoderUm == numeroPoder){
+                        System.out.println("Perry se cansou de brincar com você.");
+                        System.out.println("Ele equipa o modo apelão do seu : " + inimigoDaBola.getArma().toString());
+                        System.out.println("Você é queimado em questão de segundos, sem sequer ter alguma chance de revidar ou escapar.");
+                        System.out.println("Você Morreu...");
+                        System.out.println("");
+                        String k = scfs.nextLine();
+                        vidaPersonagem = 0;
+                    }
+                    else if(inimigoDaBola.getNome().equals("Vasilhian Man") && chancePoderUm == numeroPoder){
+                        int numeroDeSeringadas = 3;
+                        System.out.println("Vasilhiam lhe acerta uma seringada... ");
+                        System.out.println("Você fica fraco e tonto");
+                        System.out.println("Mas ele não descansa e te acerta um critico.");
+                        System.out.println("Você recebeu : 400 de dano");
+                        vidaPersonagem -= 400;
+                        System.out.println("Seu contador de seringadas : " + numeroDeSeringadas);
+                        numeroDeSeringadas--;
+                        if(numeroDeSeringadas == 0){
+                            System.out.println("Você levou minha ultima seringadaaaaaa");
+                            System.out.println("Você morreu de ataque cardiaco");
+                            vidaPersonagem = 0;
+                        }
+
+                    }
+
+                } while (vidaInimigo > 0 || vidaPersonagem > 0 || escolhaNoTurno != 3);
+                nivelMasmorra++;
+                if (vidaPersonagem == 0 || escolhaNoTurno == 3) {
+                    nivelMasmorra = 0;
+                    vidaPersonagem = vidaTotalPersonagem;
+                }
+            }
+        }while(!rodoJaUm || !rodoJaDois || !rodoJaTres || !rodoJaQuatro || !rodoJaZero);
+
 
     }
     //endregion
 //endregion
 
 //endregion
+    //endregion
+
+//region(versus)
+//    public static void versus(){
+//
+//        escolherPersonagem();
+//        escolherInimigo();
+//
+//        int vidaInimigo = inimigoDaBola.getVida();
+//        int danoInimigo = inimigoDaBola.getVida();
+//
+//        int vidaTotalInimigo = 0;
+//
+//        for(int c=0; c<= vidaInimigo; c++){
+//            vidaTotalInimigo++;
+//        }
+//
+//        int vidaTotalPersonagem = 0;
+//
+//        for(int c=0; c<= vidaInimigo; c++){
+//            vidaTotalPersonagem++;
+//        }
+//
+//        int vidaPersonagem = personagemEscolhido.getVida();
+//        int danoPersonagem = personagemEscolhido.getDano();
+//
+//        System.out.println("Que a batalha comece!");
+//        for (int c = 1; c <= 5; c++){
+//            System.out.println(c);
+//        }
+//
+//        System.out.println("Você começa!!!!");
+//        int opcaoDeEscolha;
+//        do{
+//            System.out.println("""
+//                        MENU
+//                    1 - Atacar
+//                    2 - Recupera-se
+//                    3 - Desistir""");
+//
+//        }while
+//    }
+//endregion//não ro
+//n roda ainda
 
 }

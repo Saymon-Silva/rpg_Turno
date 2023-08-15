@@ -70,6 +70,11 @@ public class Inimigo {
     public void setArma(Arma arma) {
         this.arma = arma;
     }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
     //endregion
 //region(criar personagens)
     public static void criarInimigos(){
