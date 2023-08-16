@@ -610,6 +610,29 @@ private static Inimigo escolherInimigo() {
 //
                 }
             }while(!rodoJaUm || !rodoJaDois || !rodoJaTres || !rodoJaQuatro || !rodoJaZero);
+        if(rodoJaUm && rodoJaDois && rodoJaTres && rodoJaQuatro && rodoJaZero){
+            System.out.println("Parabens!!!");
+            System.out.println("Você concluiu o modo facil");
+            System.out.print("""
+                    Deseja ir para o modo médio?
+                    1 - Sim
+                    2 - Não
+                    Codigo : """);
+            int opcao = sc.nextInt();
+
+            switch(opcao){
+                case 1:
+                    modoMedio();
+                    break;
+                case 2:
+                    menu();
+                    break;
+                default:
+                    System.out.println("Inserindo valores invalidos... Vá para o menu principal");
+                    String tmncKr = scfs.nextLine();
+                    menu();
+            }
+        }
 
     }
     //endregio
@@ -769,6 +792,29 @@ private static Inimigo escolherInimigo() {
                 }
             }
         }while(!rodoJaUm || !rodoJaDois || !rodoJaTres || !rodoJaQuatro || !rodoJaZero);
+        if(rodoJaUm && rodoJaDois && rodoJaTres && rodoJaQuatro && rodoJaZero){
+            System.out.println("Parabens!!!");
+            System.out.println("Você concluiu o modo medio");
+            System.out.print("""
+                    Deseja ir para o modo dificil?
+                    1 - Sim
+                    2 - Não
+                    Codigo : """);
+            int opcao = sc.nextInt();
+
+            switch(opcao){
+                case 1:
+                    modoDificil();
+                    break;
+                case 2:
+                    menu();
+                    break;
+                default:
+                    System.out.println("Inserindo valores invalidos... Vá para o menu principal");
+                    String tmncKr = scfs.nextLine();
+                    menu();
+            }
+        }
 
     }
     //endregion
@@ -838,7 +884,7 @@ private static Inimigo escolherInimigo() {
                 }
 
                 System.out.println("""
-                            Bem vindo à Masmorra Média
+                            Bem vindo à Masmorra Dificil
                             
                             Prepare suas coisas e vamos!!
                             """);
@@ -963,9 +1009,15 @@ private static Inimigo escolherInimigo() {
                 }
             }
         }while(!rodoJaUm || !rodoJaDois || !rodoJaTres || !rodoJaQuatro || !rodoJaZero);
+        if(rodoJaUm && rodoJaDois && rodoJaTres && rodoJaQuatro && rodoJaZero){
+            System.out.println("Parabens!!!");
+            System.out.println("Você concluiu o modo dificil");
+            System.out.println("Muito obrigado por ter jogado, isso me deixa deveras feliz!!");
+            menu();
+            }
+        }
 
 
-    }
     //endregion
 //endregion
 
