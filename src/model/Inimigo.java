@@ -7,7 +7,7 @@ import model.classes.*;
 
 import java.util.ArrayList;
 
-public class Inimigo {
+public class Inimigo extends Personagem {
 
     private static Inimigo inimigo;
     public static ArrayList<Inimigo> listaDeInimigos = new ArrayList<>();

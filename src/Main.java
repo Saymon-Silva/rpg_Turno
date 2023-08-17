@@ -14,24 +14,93 @@ public class Main {
     private static Scanner scfs = new Scanner(System.in);//scanner pra strings
     private static Personagem personagem;
     private static int optionForDeath;
+    private static Pessoa logado;
     private static Personagem personagemEscolhido;
-    private static Personagem personagem1 = new Personagem("Principal Unico", 60, 60, 60);
+    private static Personagem personagem1 = new Personagem("Principal Unico", 1000, 9999, 9999);
     private static Inimigo inimigoDaBola;
     private static Random random = new Random();
+    public static boolean loginEfetuado = false;
 
 
     public static void main(String[] args) {
 
         do {
-
             menu();
-
         } while (optionForDeath != 5);
+    }
+
+    public static Pessoa cadastro(){
+       String nome = "";
+       String senha = "";
+
+        System.out.print("Insira seu nome : ");
+        nome = scfs.nextLine();
+        System.out.print("Insira sua senha : ");
+        senha = scfs.nextLine();
+
+        return new Pessoa(nome, senha);
+    }
+
+
+    public static void login(){
+
+        int codigoLogin;
+
+        do {
+            System.out.print("Insira o seu codigo de login : ");
+            codigoLogin = sc.nextInt();
+
+            for (Pessoa pessoa : Pessoa.listaDePessoas) {
+                if (pessoa.getCodigo() == codigoLogin) {
+                    logado = pessoa;
+                } else {
+                    System.out.println("Não há nenhum cadastro com esse codigo!");
+                }
+            }
+        }while(logado == null);
+
+        String senhaLogin;
+        do {
+            System.out.print("Insira sua senha : ");
+            senhaLogin = scfs.nextLine();
+
+            if (senhaLogin != logado.getSenha()) {
+                System.out.println("Senha incorreta.");
+            }
+            else{
+                System.out.println("Bem vindo! " + logado);
+            }
+        }while(senhaLogin != logado.getSenha());
+        loginEfetuado = true;
 
     }
 
-    //region(menu)
+
+//region(menu)
     public static void menu() {
+
+        do {
+            System.out.println("""
+                    Bem Vindo!
+                    Você possui cadastro?
+                    1 - Sim, desejo fazer login.
+                    2 - Não, desejo criar meu cadastro agora.
+                    : """);
+            int opcao = sc.nextInt();
+            switch (opcao) {
+                case 1:
+                    login();
+                    loginEfetuado = true;
+                    break;
+                case 2:
+                    cadastro();
+                    break;
+                default:
+                    System.out.println("Insira valores validos!");
+                    break;
+            }
+        }while(!loginEfetuado);
+
 
         System.out.println("""
                     MENU
@@ -80,31 +149,6 @@ public class Main {
     }
 //endregion
 
-
-    //region(escolher personagem)
-//    private static Personagem escolherPersonagem() {
-//         Personagem personagemEscolhido = null;
-//        for ( Personagem personagem : Personagem.listaPersonagens) {
-//            System.out.println(personagem);
-//        }
-//        System.out.println("""
-//                Escolha do personagem ( escolha pelo codigo dele )
-//                """);
-//        int codigo = sc.nextInt();
-//        for ( Personagem personagem : Personagem.listaPersonagens ) {
-//            if( codigo == personagem.getCodigo(codigo)) {
-//                System.out.println("entrei nessa bct");
-//                personagem = Personagem.buscarPersonagem(codigo);
-//            }
-//            else{
-//                System.out.println(" Não há nenhum personagem com o codigo: " + codigo );
-//            }
-//            return personagem;
-//        }
-//
-//        return personagem;
-//    }
-//endregion
 //region(escolher personagem - 2)
     private static Personagem escolherPersonagem() {
 
@@ -132,36 +176,37 @@ public class Main {
         return null;
     }
 //endregion
-    //region( escolher inimigo)
-private static Inimigo escolherInimigo() {
 
-    System.out.print("Aqui você irá escolher o personagem para batalhar usando ele");
-    for (Inimigo inimigo : Inimigo.listaDeInimigos) {
-        System.out.println(inimigo);
-    }
-    System.out.println("");
-    System.out.print("""
-                Escolha do inimigo (escolha pelo codigo dele)
-                """);
-    int codigo = sc.nextInt();
-
-    for (Inimigo inimigo : Inimigo.listaDeInimigos) {
-        if (codigo == inimigo.getCodigo()) {
-            System.out.println("Personagem escolhido: " + inimigo);
-            inimigoDaBola = inimigo;
-            return inimigoDaBola;
-        }
-        else {
-            System.out.println("Não há nenhum personagem com o codigo: " + codigo);
-            return null;
-        }
-    }
-
-    return null;
-}
+//region( escolher inimigo)
+//private static Inimigo escolherInimigo() {
+//
+//    System.out.print("Aqui você irá escolher o personagem para batalhar usando ele");
+//    for (Inimigo inimigo : Inimigo.listaDeInimigos) {
+//        System.out.println(inimigo);
+//    }
+//    System.out.println("");
+//    System.out.print("""
+//                Escolha do inimigo (escolha pelo codigo dele)
+//                """);
+//    int codigo = sc.nextInt();
+//
+//    for (Inimigo inimigo : Inimigo.listaDeInimigos) {
+//        if (codigo == inimigo.getCodigo()) {
+//            System.out.println("Personagem escolhido: " + inimigo);
+//            inimigoDaBola = inimigo;
+//            return inimigoDaBola;
+//        }
+//        else {
+//            System.out.println("Não há nenhum personagem com o codigo: " + codigo);
+//            return null;
+//        }
+//    }
+//
+//    return null;
+//}
 //endregion
 
-    //region(Criar Personagem)
+//region(Criar Personagem)
     public static Personagem criarPersonagem() {
 
         String nome = "";
@@ -177,20 +222,20 @@ private static Inimigo escolherInimigo() {
         do {
             System.out.println("""
                     Escolha de vida e dano
-                    1 - Vida = 1600; Dano = 180
-                    2 - Vida = 1550; dano = 220
+                    1 - Vida = 1600; Dano = 250
+                    2 - Vida = 1550; dano = 280
                     3 - Vida = 1650; dano = 200
                     """);
             escolhaVD = sc.nextInt();
             switch (escolhaVD) {
                 case 1:
                     vida = 1600;
-                    dano = 180;
+                    dano = 250;
                     setVD = true;
                     break;
                 case 2:
                     vida = 1550;
-                    dano = 220;
+                    dano = 280;
                     setVD = true;
                     break;
                 case 3:
@@ -210,7 +255,7 @@ private static Inimigo escolherInimigo() {
     }
 //endregion
 
-    //region(escolher classe)
+//region(escolher classe)
     public static void escolherClasse() {
 
         boolean escClass = false;
@@ -279,7 +324,7 @@ private static Inimigo escolherInimigo() {
     }
 //endregion
 
-    //region(escolher arma)
+//region(escolher arma)
     public static void escolherArma() {
         boolean escArma = false;
         System.out.println("AQUI SERA FEITA A ESCOLHA DA ARMA");
@@ -349,7 +394,7 @@ private static Inimigo escolherInimigo() {
     }
 //endregion
 
-    //region(edição dos personagens)
+//region(edição dos personagens)
     public static void editarPersonagens() {
 
         boolean edicacaoCabo = false;
@@ -428,13 +473,11 @@ private static Inimigo escolherInimigo() {
         int idadeNova = sc.nextInt();
         personagemEscolhido.setIdade(idadeNova);
     }
-
-
 //endregion
 
 //endregion
 
-    //region( codigo combate mortal - 2 )
+//region( codigo combate mortal - 2 )
     public static void combateMortal() {//fazer um combate de torre, tp mk
 
         escolherPersonagem();
@@ -465,7 +508,7 @@ private static Inimigo escolherInimigo() {
 
 //region(modos de batalha)
 
-    //region(torre)
+//region(torre)
     public static void batalhaTorre() {
 
         System.out.println("Bem vindo!!");
@@ -493,9 +536,8 @@ private static Inimigo escolherInimigo() {
         }
 
     }
-    //endregion
-//region(modos torre)1
-
+//endregion
+//region(modos torre)
     //region(facil
     public static void modoFacil(){
         Inimigo.criarInimigos();
@@ -566,6 +608,7 @@ private static Inimigo escolherInimigo() {
                         """ 
                         Venho ao seu encontro."""
                 );
+                System.out.println("Nivel masmorra : " + nivelMasmorra);
                 do {
                     System.out.println("""
                             \nInimigo : """ + inimigoDaBola + """ 
@@ -635,7 +678,7 @@ private static Inimigo escolherInimigo() {
         }
 
     }
-    //endregio
+    //endregion
     //region(medio
     public static void modoMedio(){
         Inimigo.criarInimigos();
@@ -706,6 +749,7 @@ private static Inimigo escolherInimigo() {
                         """ 
                         Venho ao seu encontro."""
                 );
+                System.out.println("Nivel masmorra : " + nivelMasmorra);
                 do {
 
                     System.out.println("""
@@ -894,6 +938,7 @@ private static Inimigo escolherInimigo() {
                         """ 
                         Venho ao seu encontro."""
                 );
+                System.out.println("Nivel masmorra : " + nivelMasmorra);
                 do {
 
                     System.out.println("""
@@ -1016,55 +1061,9 @@ private static Inimigo escolherInimigo() {
             menu();
             }
         }
-
-
     //endregion
 //endregion
 
 //endregion
-    //endregion
-
-//region(versus)
-//    public static void versus(){
-//
-//        escolherPersonagem();
-//        escolherInimigo();
-//
-//        int vidaInimigo = inimigoDaBola.getVida();
-//        int danoInimigo = inimigoDaBola.getVida();
-//
-//        int vidaTotalInimigo = 0;
-//
-//        for(int c=0; c<= vidaInimigo; c++){
-//            vidaTotalInimigo++;
-//        }
-//
-//        int vidaTotalPersonagem = 0;
-//
-//        for(int c=0; c<= vidaInimigo; c++){
-//            vidaTotalPersonagem++;
-//        }
-//
-//        int vidaPersonagem = personagemEscolhido.getVida();
-//        int danoPersonagem = personagemEscolhido.getDano();
-//
-//        System.out.println("Que a batalha comece!");
-//        for (int c = 1; c <= 5; c++){
-//            System.out.println(c);
-//        }
-//
-//        System.out.println("Você começa!!!!");
-//        int opcaoDeEscolha;
-//        do{
-//            System.out.println("""
-//                        MENU
-//                    1 - Atacar
-//                    2 - Recupera-se
-//                    3 - Desistir""");
-//
-//        }while
-//    }
-//endregion//não ro
-//n roda ainda
 
 }
