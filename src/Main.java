@@ -28,7 +28,7 @@ public class Main {
         int b = 10;
         int c = a-b;
         System.out.println(c);
-        System.out.println("salva caliquinha");
+        System.out.println("salva caliquinha 2");
 
         pessoaLogada = null;
         bemVindo();
