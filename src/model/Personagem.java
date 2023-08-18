@@ -15,18 +15,18 @@ public class Personagem {
     private int vida;
     private int dano;
     private String nome;
-    private int idade;
+//    private int idade;
     private int codigo;
 //region(get/set)
 
 
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
-
-    public int getIdade() {
-        return idade;
-    }
+//    public void setIdade(int idade) {
+//        this.idade = idade;
+//    }
+//
+//    public int getIdade() {
+//        return idade;
+//    }
 
     public int getDano() {
         return dano;
@@ -72,15 +72,16 @@ public class Personagem {
     }
 //endregion
 //region(funções)
-    public Personagem(String nome,int idade, int vida, int dano) {
+    public Personagem(String nome, int vida, int dano) {
         this.classe = classe;
         this.arma= arma;
         this.nome = nome;
         this.vida = vida;
-        this.idade = idade;
+//        this.idade = idade;
         this.dano = dano;
         this.codigo = listaPersonagens.size() +1 ;
         listaPersonagens.add(this);
+        Pessoa.pessoa.listaDePersonagens.add(this);
     }
 
     public static Personagem buscarPersonagem(int codigo){
@@ -119,7 +120,6 @@ public class Personagem {
                 " : " + codigo + " : " +
                 " Classe = " + classe +
                 "; Arma = " + arma +
-                "; Idade = " + idade +
                 "; Dano = " + dano +
                 "; Vida = " + vida +
                 ".";

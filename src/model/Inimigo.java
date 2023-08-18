@@ -23,6 +23,7 @@ public class Inimigo extends Personagem {
 
 
     public Inimigo(String nome, int vida, int dano) {
+        super(nome,dano,vida);
         this.nome = nome;
         this.vida = vida;
         this.dano = dano;

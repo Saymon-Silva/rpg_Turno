@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class Pessoa {
     public static ArrayList<Pessoa> listaDePessoas = new ArrayList<>();
-    private ArrayList <Personagem> listaDePersonagens = new ArrayList<>();
+    public static ArrayList <Personagem> listaDePersonagens = new ArrayList<>();
+    public static Pessoa pessoa;
     private String nome;
     private int idade, codigo;
     private String senha;
@@ -52,14 +53,14 @@ public class Pessoa {
         return listaDePersonagens;
     }
 
-    public Personagem getPersonagem() {
-        return personagem;
-    }
-
-    public void setPersonagem(Personagem personagem) {
-        this.personagem = personagem;
-    }
-
+//    public Personagem getPersonagem() {
+//        return personagem;
+//    }
+//
+//    public void setPersonagem(Personagem personagem) {
+//        this.personagem = personagem;
+//    }
+//o get e set para o personagem
     public static ArrayList<Pessoa> getlistaDePessoas() {
         return listaDePessoas;
     }
@@ -99,17 +100,12 @@ public class Pessoa {
 
     @Override
     public String toString() {
-        return "Pessoa{" +
-                "personagem=" + personagem +
-                ", nome='" + nome + '\'' +
-                ", idade=" + idade +
-                ", codigo=" + codigo +
-                '}';
+        return  nome + " : codigo = " + codigo;
     }
 
-    public int atacar(){
-        return getPersonagem().getDano();
-    }
+//    public int atacar(){
+//        return getPersonagem().getDano();
+//    }
 
     //endregion
 }
