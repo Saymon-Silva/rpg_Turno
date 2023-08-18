@@ -6,6 +6,7 @@ import java.util.Scanner;
 import model.*;
 import model.armas.*;
 import model.classes.*;
+import org.w3c.dom.ls.LSOutput;
 
 
 public class Main {
@@ -27,6 +28,7 @@ public class Main {
         int b = 10;
         int c = a-b;
         System.out.println(c);
+        System.out.println("salva caliquinha");
 
         pessoaLogada = null;
         bemVindo();
@@ -471,6 +473,7 @@ public class Main {
 //endregion
 
 //endregion
+
 
 //region( codigo combate mortal - 2 )
     public static void combateMortal() {//fazer um combate de torre, tp mk
@@ -1158,8 +1161,6 @@ public class Main {
                     break;
             }
         }while(!loginEfetuado);
-
         menu();
     }
-
 }
