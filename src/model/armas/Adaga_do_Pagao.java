@@ -14,7 +14,12 @@ public class Adaga_do_Pagao extends Arma {
     }
 
     @Override
+    public void habilidade() {
+
+    }
+
+    @Override
     public String toString() {
-        return "Fallen Worm";
+        return "Adaga do Pagão";
     }
 }

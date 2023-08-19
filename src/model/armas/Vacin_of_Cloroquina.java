@@ -16,6 +16,10 @@ public class Vacin_of_Cloroquina extends Arma{
         return super.getDano();
     }
 
+    public void habilidade() {
+
+    }
+
     @Override
     public String toString() {
         return "Vacin of Cloroquina";

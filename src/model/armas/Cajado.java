@@ -13,6 +13,10 @@ public class Cajado extends Arma {
         return super.getDano();
     }
 
+    public void habilidade() {
+
+    }
+
     @Override
     public String toString() {
         return "Cajado";

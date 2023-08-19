@@ -12,6 +12,8 @@ public abstract class Arma {
         this.dano = dano;
     }
 
+    public abstract void habilidade();
+
     public Arma(int dano){
         this.dano = dano;
     }

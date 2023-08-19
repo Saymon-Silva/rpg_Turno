@@ -15,6 +15,10 @@ public class Varinha_de_Condao extends Arma {
         return super.getDano();
     }
 
+    public void habilidade() {
+
+    }
+
     @Override
     public String toString() {
         return "Varinha de Condão";

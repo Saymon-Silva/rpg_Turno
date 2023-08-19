@@ -13,6 +13,10 @@ public class Rolo_de_Cerol extends Arma{
         return super.getDano();
     }
 
+    public void habilidade() {
+
+    }
+
     @Override
     public String toString() {
         return "Rolo de Cerol";

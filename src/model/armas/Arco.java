@@ -12,6 +12,10 @@ public class Arco extends Arma{
     public int getDano() {
         return super.getDano();
     }
+
+    public void habilidade() {
+
+    }
     @Override
     public String toString() {
         return "Arco";

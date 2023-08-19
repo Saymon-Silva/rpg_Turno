@@ -13,6 +13,10 @@ public class Perry_on_Fire extends Arma {
         return super.getDano();
     }
 
+    public void habilidade() {
+
+    }
+
     @Override
     public String toString() {
         return "Perry on Flames";
