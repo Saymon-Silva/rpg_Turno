@@ -16,7 +16,7 @@ public class Main {
     private static Personagem personagem;
     private static int optionForDeath;
     public static Pessoa pessoaLogada = Pessoa.pessoa;//usuario que esta logado no sistema.
-    private static Personagem personagemEscolhido;//personagem que a pessoa logada estara usando.
+    public static Personagem personagemEscolhido;//personagem que a pessoa logada estara usando.
 //    private static Personagem personagem1 = new Personagem("Principal Unico", 1000, 9999);
     private static Inimigo inimigoDaBola;
     private static Random random = new Random();
@@ -24,13 +24,7 @@ public class Main {
 
 
     public static void main(String[] args) {
-        int a = 9;
-        int b = 10;
-        int c = a-b;
-        System.out.println(c);
-        System.out.println("salva caliquinha 2");
 
-        pessoaLogada = null;
         bemVindo();
         do {
             menu();
@@ -97,6 +91,7 @@ public class Main {
                 3 - BATALHAR
                 4 - EDITAR
                 5 - SAIR
+                6 -
                 """);
         optionForDeath = sc.nextInt();
 
@@ -140,6 +135,10 @@ public class Main {
 
                 fecharSistema = false;
                 voltarLogin = false;
+                break;
+            case 6:
+                personagemEscolhido.getArma().habilidade(personagemEscolhido);
+                System.out.println(personagemEscolhido);
                 break;
             default:
                 System.out.println("Insira uma opção valida...");
@@ -395,23 +394,25 @@ public class Main {
     public static void editarPersonagens() {
 
         boolean edicacaoCabo = false;
+        personagemEscolhido = null;
+do {
+    for (Personagem personagem : Personagem.listaPersonagens) {
+        System.out.println(personagem);
+    }
 
-        for (Personagem personagem : Personagem.listaPersonagens) {
-            System.out.println(personagem);
+    System.out.print("""
+                            
+            Escolha do personagem (escolha pelo codigo dele)
+            """);
+    int codigo = sc.nextInt();
+
+    for (Personagem personagem : Personagem.listaPersonagens) {
+        if (codigo == personagem.getCodigo()) {
+            System.out.println("Personagem escolhido: " + personagem);
+            personagemEscolhido = personagem;
         }
-
-        System.out.print("""
-                
-                Escolha do personagem (escolha pelo codigo dele)
-                """);
-        int codigo = sc.nextInt();
-
-        for (Personagem personagem : Personagem.listaPersonagens) {
-            if (codigo == personagem.getCodigo()) {
-                System.out.println("Personagem escolhido: " + personagem);
-                personagemEscolhido = personagem;
-            }
-        }
+    }
+}while(personagemEscolhido == null);
 
         do {
             System.out.println("Ele esta assim atualmente :\n" + personagemEscolhido);
@@ -445,6 +446,7 @@ public class Main {
                     break;
                 case 4:
                     edicacaoCabo = true;
+                    personagemEscolhido = null;
                     break;
                 default:
                     System.out.println("Insira opções validas!");
@@ -636,10 +638,10 @@ public class Main {
                     switch(escolhaNoTurno){
                             case 1:
                                 System.out.println("Você atacou");
-                                inimigoDaBola.setVida(vidaInimigo - danoPersonagem);
+                                inimigoDaBola.setVida(inimigoDaBola.getVida() - danoPersonagem);
                                 break;
                             case 2:
-                                personagemEscolhido.setVida(vidaPersonagem + (vidaTotalPersonagem / 5));
+                                personagemEscolhido.setVida(personagemEscolhido.getVida() + (vidaTotalPersonagem / 5));
                                 System.out.println("Você se recuperou");
                                 break;
                             case 3:
@@ -651,12 +653,12 @@ public class Main {
                                 break;
                         }
                         if (vidaInimigo <= (vidaTotalInimigo / 4)) {
-                            inimigoDaBola.setVida(vidaInimigo + (vidaTotalInimigo / 6));
+                            inimigoDaBola.setVida(inimigoDaBola.getVida() + (vidaTotalInimigo / 6));
                             System.out.println("Seu inimigo se curou");
                             decisaoUnica = true;
                         }
                         if (!decisaoUnica && vidaInimigo > 0) {
-                           personagemEscolhido.setVida(vidaPersonagem - danoInimigo);
+                           personagemEscolhido.setVida(personagemEscolhido.getVida() - danoInimigo);
                             System.out.println("Voce foi atacado e recebeu : " + danoInimigo);
                         }
                         decisaoUnica = false;
@@ -797,10 +799,10 @@ public class Main {
                     switch(escolhaNoTurno){
                         case 1:
                             System.out.println("Você atacou");
-                            inimigoDaBola.setVida(vidaInimigo - danoPersonagem);
+                            inimigoDaBola.setVida(inimigoDaBola.getVida() - danoPersonagem);
                             break;
                         case 2:
-                            vidaPersonagem = vidaPersonagem + (vidaTotalPersonagem / 5);
+                            personagemEscolhido.setVida(personagemEscolhido.getVida() + (vidaTotalPersonagem / 5));
                             System.out.println("Você se recuperou");
                             break;
                         case 3:
@@ -811,12 +813,12 @@ public class Main {
                             System.out.println("Perdeu o turno. Insira apenas valores válidos...");
                     }
                     if (inimigoDaBola.getVida() <= (vidaTotalInimigo / 4)) {
-                        inimigoDaBola.setVida(vidaInimigo + (vidaTotalInimigo / 6));
+                        inimigoDaBola.setVida(inimigoDaBola.getVida() + (vidaTotalInimigo / 6));
                         System.out.println("Seu inimigo se curou");
                         decisaoUnica = true;
                     }
                     if (!decisaoUnica && inimigoDaBola.getVida() > 0) {
-                        personagemEscolhido.setVida(vidaPersonagem - danoInimigo);
+                        personagemEscolhido.setVida(personagemEscolhido.getVida() - danoInimigo);
                         System.out.println("Voce foi atacado e recebeu : " + danoInimigo);
                     }
                     decisaoUnica = false;
@@ -1005,10 +1007,10 @@ public class Main {
                         case 1:
                             System.out.println("Você atacou");
                             System.out.println("Dano : " + danoPersonagem);
-                            inimigoDaBola.setVida(vidaInimigo - danoPersonagem);
+                            inimigoDaBola.setVida(inimigoDaBola.getVida() - danoPersonagem);
                             break;
                         case 2:
-                            vidaPersonagem = vidaPersonagem + (vidaTotalPersonagem / 5);
+                            personagemEscolhido.setVida(personagemEscolhido.getVida() + (vidaTotalPersonagem / 5));
                             System.out.println("Você se recuperou");
                             break;
                         case 3:
@@ -1020,12 +1022,12 @@ public class Main {
                             break;
                     }
                     if (inimigoDaBola.getVida() <= (vidaTotalInimigo / 4)) {
-                        inimigoDaBola.setVida(vidaInimigo + (vidaTotalInimigo / 6));
+                        inimigoDaBola.setVida(inimigoDaBola.getVida() + (vidaTotalInimigo / 6));
                         System.out.println("Seu inimigo se curou");
                         decisaoUnica = true;
                     }
                     if (!decisaoUnica && vidaInimigo > 0) {
-                        vidaPersonagem = vidaPersonagem - danoInimigo;
+                        personagemEscolhido.setVida(personagemEscolhido.getVida() - danoInimigo);
                         System.out.println("Voce foi atacado e recebeu : " + danoInimigo);
                     }
                     decisaoUnica = false;
@@ -1134,6 +1136,7 @@ public class Main {
 //função que eu to usando para dar looping no codigo, ele não acaba
 //é finalizado somente após o usuario concluir o percurso para dar dalo fim.
     public static void bemVindo(){
+
         pessoaLogada = null;
         loginEfetuado = false;
         System.out.println("Bem Vindo ao meu RPG");
@@ -1163,4 +1166,6 @@ public class Main {
         }while(!loginEfetuado);
         menu();
     }
+
+
 }

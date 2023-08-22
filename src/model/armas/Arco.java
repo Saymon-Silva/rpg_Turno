@@ -1,6 +1,7 @@
 package model.armas;
 
 import model.Arma;
+import model.Personagem;
 
 public class Arco extends Arma{
 
@@ -11,6 +12,11 @@ public class Arco extends Arma{
     @Override
     public int getDano() {
         return super.getDano();
+    }
+
+    @Override
+    public void habilidade(Personagem personagem) {
+
     }
 
     public void habilidade() {

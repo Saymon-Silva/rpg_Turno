@@ -16,6 +16,11 @@ public class Vacin_of_Cloroquina extends Arma{
         return super.getDano();
     }
 
+    @Override
+    public void habilidade(Personagem personagem) {
+
+    }
+
     public void habilidade() {
 
     }

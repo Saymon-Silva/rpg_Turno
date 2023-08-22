@@ -1,5 +1,7 @@
 package model;
 
+import com.sun.tools.javac.Main;
+import model.*;
 import model.armas.Cajado;
 import model.armas.Machado;
 
@@ -8,7 +10,6 @@ import java.util.ArrayList;
 public class Personagem {
 
     public static ArrayList<Personagem> listaPersonagens = new ArrayList<>();
-
     private Classe classe;
     private Arma arma;
 
