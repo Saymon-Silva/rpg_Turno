@@ -570,6 +570,9 @@ do {
         int contHabillidadeDoCerol = 3;
         boolean habilidadeVacinOfCloroquiha = false;
         boolean habilidadeVarinhaDeCondao = false;
+
+        boolean habilidadeAtivada = false; //usa para proibir o usuario de spamar habilidade.
+        int contHabilidadeAtivada = 4;
         //criando e setnado como falas, por que algumas das habilidades podem interferir no curamento dos ininimigos
         //por isso do uso dessas variaveis, por que pode travar a cura, ataque, seja o que for. Somente usando ifs e essas variaveis.
 
@@ -584,6 +587,8 @@ do {
         boolean ganhouRodada = false;
         int escolhaNoTurno = 0;
         boolean escolhaValida = false;//usado dentro do "do" como parametro para continuar ou não sendo rodado
+
+        int nivelMasmorra = 0;
 
         do {
             int numeroInimigoDaVez = random.nextInt(4);
@@ -656,8 +661,7 @@ do {
                                 \n  1 - Atacar 
                                     2 - Recuperar-se
                                     3 - Habilidade Arma
-                                    4 - Habilidade Classe
-                                    5 - sair
+                                    4 - sair
                                     """);
                         escolhaNoTurno = sc.nextInt();
                         switch (escolhaNoTurno) {
@@ -675,36 +679,36 @@ do {
                                 escolhaValida = true;
                                 break;
                             case 3:
-                                int habilidadeArma = personagemEscolhido.getArma().habilidade();
-                                inimigoDaBola.setVida(inimigoDaBola.getVida() - habilidadeArma);
-                                escolhaValida = true;
-                                if (personagemEscolhido.getArma() instanceof Adaga_do_Pagao) {
-                                    habilidadeAdagaDoPagao = true;
-                                    //ativa a habilidade dele que, enquanto o cont da habilidade for maior q 0, o inimigo n pode curar
-                                } else if (personagemEscolhido.getArma() instanceof Arco) {
-                                    habilidadeArco = true;
-                                } else if (personagemEscolhido.getArma() instanceof Cajado) {
-                                    habilidadeCajado = true;
-                                } else if (personagemEscolhido.getArma() instanceof Espada) {
-                                    habilidadeEspada = true;
-                                } else if (personagemEscolhido.getArma() instanceof Machado) {
-                                    habilidadeMachado = true;
-                                } else if (personagemEscolhido.getArma() instanceof Perry_on_Fire) {
-                                    habilidadePerryOnFire = true;
-                                } else if (personagemEscolhido.getArma() instanceof Rolo_de_Cerol) {
-                                    habilidadeRoloDeCerol = true;
-                                } else if (personagemEscolhido.getArma() instanceof Vacin_of_Cloroquina) {
-                                    habilidadeVacinOfCloroquiha = true;
-                                } else if (personagemEscolhido.getArma() instanceof Varinha_de_Condao) {
-                                    habilidadeVarinhaDeCondao = true;
+                                if(!habilidadeAtivada) {
+                                    int habilidadeArma = personagemEscolhido.getArma().habilidade();
+                                    inimigoDaBola.setVida(inimigoDaBola.getVida() - habilidadeArma);
+                                    escolhaValida = true;
+                                    if (personagemEscolhido.getArma() instanceof Adaga_do_Pagao) {
+                                        habilidadeAdagaDoPagao = true;
+                                        //ativa a habilidade dele que, enquanto o cont da habilidade for maior q 0, o inimigo n pode curar
+                                    } else if (personagemEscolhido.getArma() instanceof Arco) {
+                                        habilidadeArco = true;
+                                    } else if (personagemEscolhido.getArma() instanceof Cajado) {
+                                        habilidadeCajado = true;
+                                    } else if (personagemEscolhido.getArma() instanceof Espada) {
+                                        habilidadeEspada = true;
+                                    } else if (personagemEscolhido.getArma() instanceof Machado) {
+                                        habilidadeMachado = true;
+                                    } else if (personagemEscolhido.getArma() instanceof Perry_on_Fire) {
+                                        habilidadePerryOnFire = true;
+                                    } else if (personagemEscolhido.getArma() instanceof Rolo_de_Cerol) {
+                                        habilidadeRoloDeCerol = true;
+                                    } else if (personagemEscolhido.getArma() instanceof Vacin_of_Cloroquina) {
+                                        habilidadeVacinOfCloroquiha = true;
+                                    } else if (personagemEscolhido.getArma() instanceof Varinha_de_Condao) {
+                                        habilidadeVarinhaDeCondao = true;
+                                    }
+                                }
+                                else {
+                                    System.out.println("Espere :"+ contHabilidadeAtivada + " turnos.");
                                 }
                                 break;
                             case 4:
-//                            int habilidadeClasse = personagemEscolhido.getClasse().habilidade();
-//                            inimigoDaBola.setVida(inimigoDaBola.getVida() - habilidadeClasse);
-//                            escolhaValida = true;
-                                break;
-                            case 5:
                                 System.out.println("");
                                 batalhaTorre();
                                 escolhaValida = true;
@@ -714,50 +718,52 @@ do {
                                 break;
                         }
                     } while (!escolhaValida);
+//contador para poder ativar a habilidade novamente.
+                    //region(cont da habilidade total)
+                    if(habilidadeAtivada) {
+                        contHabilidadeAtivada--;
+                    }
+                    else {
+                        contHabilidadeAtivada = 4;
+                    }
+                    //endregion
 //habilidade da adaga do pagao, vai ser um if que trava o cont da habilidade, fazendo chegar até 3, numero de vezes que vai ser usada.
-                //region(habilidade pagao)
-                    if(habilidadeAdagaDoPagao){
-                        if (contHabilidadedoPagao == 3){
+                    //region(habilidade pagao)
+                    if (habilidadeAdagaDoPagao) {
+                        if (contHabilidadedoPagao == 3) {
                             System.out.println("Sua habilidade é efetiva por mais :" + contHabilidadedoPagao + " rounds");
-                        }
-                        else if (contHabilidadedoPagao == 2){
+                        } else if (contHabilidadedoPagao == 2) {
                             System.out.println("Sua habilidade é efetiva por mais :" + contHabilidadedoPagao + " rounds");
-                        }
-                        else if (contHabilidadedoPagao == 1){
+                        } else if (contHabilidadedoPagao == 1) {
                             System.out.println("Sua habilidade é efetiva por mais :" + contHabilidadedoPagao + " rounds");
-                        }
-                        else if(contHabilidadedoPagao == 0){
+                        } else if (contHabilidadedoPagao == 0) {
                             System.out.println("Sua habilidade chegou no limite!");
                             habilidadeAdagaDoPagao = false;
                         }
                         contHabilidadedoPagao--;
-                    }else{
+                    } else {
                         contHabilidadedoPagao = 3;
                     }
-                //endregion
+                    //endregion
 //habilidade do rolo de cerol, é praticamente a  mesma pegada de travar a cura do inimigo
-                //region(habilidade rolo de cerol)
-                    if(habilidadeRoloDeCerol){
-                        if (contHabillidadeDoCerol == 3){
+                    //region(habilidade rolo de cerol)
+                    if (habilidadeRoloDeCerol) {
+                        if (contHabillidadeDoCerol == 3) {
                             System.out.println("Sua habilidade é efetiva por mais :" + contHabillidadeDoCerol + " rounds");
-                        }
-                        else if (contHabillidadeDoCerol == 2){
+                        } else if (contHabillidadeDoCerol == 2) {
                             System.out.println("Sua habilidade é efetiva por mais :" + contHabillidadeDoCerol + " rounds");
-                        }
-                        else if (contHabillidadeDoCerol == 1){
+                        } else if (contHabillidadeDoCerol == 1) {
                             System.out.println("Sua habilidade é efetiva por mais :" + contHabillidadeDoCerol + " rounds");
-                        }
-                        else if(contHabillidadeDoCerol == 0){
+                        } else if (contHabillidadeDoCerol == 0) {
                             System.out.println("Sua habilidade chegou no limite!");
                             habilidadeRoloDeCerol = false;
 
                         }
-                         contHabillidadeDoCerol--;
-                    }
-                    else{
+                        contHabillidadeDoCerol--;
+                    } else {
                         contHabillidadeDoCerol = 3;
                     }
-                //endregion
+                    //endregion
 //cura do inimigo
                     if (!habilidadeAdagaDoPagao || !habilidadeRoloDeCerol) {
                         if (inimigoDaBola.getVida() <= (vidaTotalInimigo / 4)) {
@@ -769,79 +775,85 @@ do {
                         System.out.println("O inimigo não pode se curar");
                     }
 //habilidade do cajado, gera uma barreira que não te deixa receber dano, bloqueando o ataque do inimigo
-                //region(habilidade cajado)
-                    if(habilidadeCajado){
-                        if (contHabilidadeDoCajado == 3){
+                    //region(habilidade cajado)
+                    if (habilidadeCajado) {
+                        if (contHabilidadeDoCajado == 3) {
                             System.out.println("Sua habilidade é efetiva por mais :" + contHabilidadeDoCajado + " rounds");
-                        }
-                        else if (contHabilidadeDoCajado == 2){
+                        } else if (contHabilidadeDoCajado == 2) {
                             System.out.println("Sua habilidade é efetiva por mais :" + contHabilidadeDoCajado + " rounds");
-                        }
-                        else if (contHabilidadeDoCajado == 1){
+                        } else if (contHabilidadeDoCajado == 1) {
                             System.out.println("Sua habilidade é efetiva por mais :" + contHabilidadeDoCajado + " rounds");
-                        }
-                        else if(contHabilidadeDoCajado == 0){
+                        } else if (contHabilidadeDoCajado == 0) {
                             System.out.println("Sua habilidade chegou no limite!");
                             habilidadeCajado = false;
                         }
                         contHabilidadeDoCajado--;
-                    }else{
-                        contHabilidadeDoCajado = 3;
-                //endregion
-//dano do inimigo
-                    if (!habilidadeCajado) {
-                        if (!decisaoUnica && inimigoDaBola.getVida() > 0) {
-                            personagemEscolhido.setVida(personagemEscolhido.getVida() - danoInimigo);
-                            System.out.println("Voce foi atacado e recebeu : " + danoInimigo);
-                        }
                     } else {
-                        System.out.println("O inimigo não pode te atacar!");
+                        contHabilidadeDoCajado = 3;
                     }
+                        //endregion
+//dano do inimigo
+                        if (!habilidadeCajado) {
+                            if (!decisaoUnica && inimigoDaBola.getVida() > 0) {
+                                personagemEscolhido.setVida(personagemEscolhido.getVida() - danoInimigo);
+                                System.out.println("Voce foi atacado e recebeu : " + danoInimigo);
+                            }
+                        } else {
+                            System.out.println("O inimigo não pode te atacar!");
+                        }
 
-                    decisaoUnica = false;
+                        decisaoUnica = false;
 //se o personagem morreu
-                    if (personagemEscolhido.getVida() <= 0) {
-                        morreu = true;
-                        System.out.println("Você foi derrotado!");
-                        System.out.println("Volte ao menu de escolha de level!");
-                        batalhaTorre();
-                    }
+                        if (personagemEscolhido.getVida() <= 0) {
+                            morreu = true;
+                            System.out.println("Você foi derrotado!");
+                            System.out.println("Volte ao menu de escolha de level!");
+                            batalhaTorre();
+                            nivelMasmorra = 0;
+                        }
 //se o inimigo morreu
-                    if (inimigoDaBola.getVida() <= 0) {
-                        System.out.println("Você derrotou o Inimigo : " + inimigoDaBola.getNome());
-                        ganhouRodada = true;
+                        if (inimigoDaBola.getVida() <= 0) {
+                            System.out.println("Você derrotou o Inimigo : " + inimigoDaBola.getNome());
+                            ganhouRodada = true;
+                        }
+//acaba aqui
+                    }while (!morreu || !ganhouRodada) ;
+//recomeça aqui, quando morreu ou ganhou for verdadeiro, ele para e passa pro if
+                    if(!morreu){
+                        nivelMasmorra++;
+                        System.out.println("Você passou do nivel " + nivelMasmorra);
                     }
+//daqui ele sortea outro numero e recomeça, até que você saia ou
+                }//esse é a chave do "else" que faz o combate acontecer...
+            } while (!rodoJaUm && !rodoJaDois && !rodoJaTres && !rodoJaQuatro && !rodoJaZero || !morreu) ;
+            ganhouRodada = false;
+            if (rodoJaUm && rodoJaDois && rodoJaTres && rodoJaQuatro && rodoJaZero && !morreu) {
+                int opcao;
+                System.out.println("Parabens!!!");
+                System.out.println("Você concluiu o modo facil");
+                do {
+                    System.out.print("""
+                            Deseja ir para o modo médio?
+                            1 - Sim
+                            2 - Não
+                            Codigo : """);
+                    opcao = sc.nextInt();
 
-                } while (!morreu || !ganhouRodada);
+                    switch (opcao) {
+                        case 1:
+                            modoMedio();
+                            break;
+                        case 2:
+                            menu();
+                            break;
+                        default:
+                            System.out.println("Insira um valor valido!");
+                            break;
+                    }
+                } while (opcao != 1 || opcao != 2);
             }
-        } while (!rodoJaUm && !rodoJaDois && !rodoJaTres && !rodoJaQuatro && !rodoJaZero || !morreu);
-        ganhouRodada = false;
-        if (rodoJaUm && rodoJaDois && rodoJaTres && rodoJaQuatro && rodoJaZero && !morreu) {
-            int opcao;
-            System.out.println("Parabens!!!");
-            System.out.println("Você concluiu o modo facil");
-            do {
-                System.out.print("""
-                        Deseja ir para o modo médio?
-                        1 - Sim
-                        2 - Não
-                        Codigo : """);
-                opcao = sc.nextInt();
-
-                switch (opcao) {
-                    case 1:
-                        modoMedio();
-                        break;
-                    case 2:
-                        menu();
-                        break;
-                    default:
-                        System.out.println("Insira um valor valido!");
-                        break;
-                }
-            }while(opcao != 1 || opcao != 2);
+//acaba tudo aqui
         }
-    }
 
     //endregion
     //region(
@@ -1437,7 +1449,7 @@ do {
             }
         }
     //endregion
-//endregion
+//endregio
 
 //endregion
 //função que eu to usando para dar looping no codigo, ele não acaba
