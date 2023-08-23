@@ -551,6 +551,234 @@ do {
     }
 //endregion
 //region(modos torre)
+    //region(modo facil refazendo)
+    public static void modoFacilRefatorizado() {
+
+        Inimigo.criarInimigos();
+
+        //criando uma variavel booleana para cada habillidade;
+
+        boolean habilidadeAdagaDoPagao = false;
+        int contHabilidadedoPagao = 0; //usa pra parar a cura do inimigo;
+        boolean habilidadeArco = false;
+        boolean habilidadeCajado = false;
+        boolean habilidadeEspada = false;
+        boolean habilidadeMachado = false;
+        boolean habilidadePerryOnFire = false;
+        boolean habilidadeRoloDeCerol = false;
+        boolean habilidadeVacinOfCloroquiha = false;
+        boolean habilidadeVarinhaDeCondao = false;
+        //criando e setnado como falas, por que algumas das habilidades podem interferir no curamento dos ininimigos
+        //por isso do uso dessas variaveis, por que pode travar a cura, ataque, seja o que for. Somente usando ifs e essas variaveis.
+
+
+        boolean rodoJaZero = false;
+        boolean rodoJaDois = false;
+        boolean rodoJaTres = false;
+        boolean rodoJaQuatro = false;
+        boolean rodoJaUm = false;
+        boolean decisaoUnica = false; //faz com que o monstro só efetue um dos ifs.
+        boolean morreu = false;
+        boolean ganhouRodada = false;
+        int escolhaNoTurno = 0;
+        boolean escolhaValida = false;//usado dentro do "do" como parametro para continuar ou não sendo rodado
+
+        do {
+            int numeroInimigoDaVez = random.nextInt(4);
+
+            if (numeroInimigoDaVez == 0 && rodoJaZero) {
+                numeroInimigoDaVez = random.nextInt(4);
+            }
+            if (numeroInimigoDaVez == 1 && rodoJaUm) {
+                numeroInimigoDaVez = random.nextInt(4);
+            }
+            if (numeroInimigoDaVez == 2 && rodoJaDois) {
+                numeroInimigoDaVez = random.nextInt(4);
+            }
+            if (numeroInimigoDaVez == 3 && rodoJaTres) {
+                numeroInimigoDaVez = random.nextInt(4);
+            }
+            if (numeroInimigoDaVez == 4 && rodoJaQuatro) {
+                numeroInimigoDaVez = random.nextInt(4);
+            } else {
+                int cont = 0;
+                for (Inimigo inimigo1 : Inimigo.listaDeInimigosFacil) {
+                    if (cont == numeroInimigoDaVez) {
+                        inimigoDaBola = inimigo1;
+                        if (numeroInimigoDaVez == 0) {
+                            rodoJaZero = true;
+                        } else if (numeroInimigoDaVez == 1) {
+                            rodoJaUm = true;
+                        } else if (numeroInimigoDaVez == 2) {
+                            rodoJaDois = true;
+                        } else if (numeroInimigoDaVez == 3) {
+                            rodoJaTres = true;
+                        } else if (numeroInimigoDaVez == 4) {
+                            rodoJaQuatro = true;
+                        }
+                    }
+                    cont++;
+                }
+                cont = 0;
+
+                int vidaInimigo = inimigoDaBola.getVida();
+                int danoInimigo = inimigoDaBola.getDano();
+                int vidaTotalInimigo = 0;
+                for (int c = 0; c <= vidaInimigo; c++) {//ta aqui pra usar como base da cura
+                    vidaTotalInimigo++;
+                }
+
+                int vidaPersonagem = personagemEscolhido.getVida();
+                int danoPersonagem = personagemEscolhido.getDano();
+                int vidaTotalPersonagem = 0;
+
+                for (int c = 0; c <= vidaPersonagem; c++) {
+                    vidaTotalPersonagem++;
+                }
+
+                System.out.println("""
+                        Bem vindo à Masmorra Fácil
+                        """);
+                String pronto = scfs.nextLine();
+                System.out.print(""" 
+                        O inimigo : """ + inimigoDaBola +
+                        """ 
+                                \nVenho ao seu encontro.\n\n"""
+                );
+                do {
+                    do {
+                        escolhaValida = false;//setando falsa para sempre ter um looping;
+                        System.out.println("""
+                                \n  Inimigo : """ + inimigoDaBola + """ 
+                                \n  Personagem : """ + personagemEscolhido + """
+                                \n  1 - Atacar 
+                                    2 - Recuperar-se
+                                    3 - Habilidade Arma
+                                    4 - Habilidade Classe
+                                    5 - sair
+                                    """);
+                        escolhaNoTurno = sc.nextInt();
+                        switch (escolhaNoTurno) {
+                            case 1:
+                                System.out.println("Você atacou!");
+                                inimigoDaBola.setVida(inimigoDaBola.getVida() - danoPersonagem);
+                                System.out.println("Você causou :" + danoPersonagem + " de  dano.");
+                                escolhaValida = true;
+                                break;
+                            case 2:
+                                int cura = (vidaTotalPersonagem / 7);
+                                personagemEscolhido.setVida(personagemEscolhido.getVida() + cura);
+                                System.out.println("Você se curou!");
+                                System.out.println("Você recuperou : " + cura);
+                                escolhaValida = true;
+                                break;
+                            case 3:
+                                int habilidadeArma = personagemEscolhido.getArma().habilidade();
+                                inimigoDaBola.setVida(inimigoDaBola.getVida() - habilidadeArma);
+                                escolhaValida = true;
+                                if (personagemEscolhido.getArma() instanceof Adaga_do_Pagao) {
+                                    habilidadeAdagaDoPagao = true;
+                                    //ativa a habilidade dele que, enquanto o cont da habilidade for maior q 0, o inimigo n pode curar
+                                } else if (personagemEscolhido.getArma() instanceof Arco) {
+                                    habilidadeArco = true;
+                                } else if (personagemEscolhido.getArma() instanceof Cajado) {
+                                    habilidadeCajado = true;
+                                } else if (personagemEscolhido.getArma() instanceof Espada) {
+                                    habilidadeEspada = true;
+                                } else if (personagemEscolhido.getArma() instanceof Machado) {
+                                    habilidadeMachado = true;
+                                } else if (personagemEscolhido.getArma() instanceof Perry_on_Fire) {
+                                    habilidadePerryOnFire = true;
+                                } else if (personagemEscolhido.getArma() instanceof Rolo_de_Cerol) {
+                                    habilidadeRoloDeCerol = true;
+                                } else if (personagemEscolhido.getArma() instanceof Vacin_of_Cloroquina) {
+                                    habilidadeVacinOfCloroquiha = true;
+                                } else if (personagemEscolhido.getArma() instanceof Varinha_de_Condao) {
+                                    habilidadeVarinhaDeCondao = true;
+                                }
+                                break;
+                            case 4:
+//                            int habilidadeClasse = personagemEscolhido.getClasse().habilidade();
+//                            inimigoDaBola.setVida(inimigoDaBola.getVida() - habilidadeClasse);
+//                            escolhaValida = true;
+                                break;
+                            case 5:
+                                System.out.println("");
+                                batalhaTorre();
+                                escolhaValida = true;
+                                break;
+                            default:
+                                System.out.println("Insira um valor valido!");
+                                break;
+                        }
+                    } while (!escolhaValida);
+//cura do inimigo
+                    if (!habilidadeAdagaDoPagao || !habilidadeRoloDeCerol) {
+                        if (inimigoDaBola.getVida() <= (vidaTotalInimigo / 4)) {
+                            inimigoDaBola.setVida(inimigoDaBola.getVida() + (vidaTotalInimigo / 6));
+                            System.out.println("Seu inimigo se curou");
+                            decisaoUnica = true;
+                        }
+                    } else {
+                        System.out.println("O inimigo não pode se curar");
+                    }
+//dano do inimigo
+                    if (!habilidadeCajado) {
+                        if (!decisaoUnica && inimigoDaBola.getVida() > 0) {
+                            personagemEscolhido.setVida(personagemEscolhido.getVida() - danoInimigo);
+                            System.out.println("Voce foi atacado e recebeu : " + danoInimigo);
+                        }
+                    } else {
+                        System.out.println("O inimigo não pode te atacar!");
+                    }
+
+                    decisaoUnica = false;
+//se o personagem morreu
+                    if (personagemEscolhido.getVida() <= 0) {
+                        morreu = true;
+                        System.out.println("Você foi derrotado!");
+                        System.out.println("Volte ao menu de escolha de level!");
+                        batalhaTorre();
+                    }
+//se o inimigo morreu
+                    if (inimigoDaBola.getVida() <= 0) {
+                        System.out.println("Você derrotou o Inimigo : " + inimigoDaBola.getNome());
+                        ganhouRodada = true;
+                    }
+
+                } while (!morreu || !ganhouRodada);
+            }
+        } while (!rodoJaUm && !rodoJaDois && !rodoJaTres && !rodoJaQuatro && !rodoJaZero || !morreu);
+        ganhouRodada = false;
+        if (rodoJaUm && rodoJaDois && rodoJaTres && rodoJaQuatro && rodoJaZero && !morreu) {
+            int opcao;
+            System.out.println("Parabens!!!");
+            System.out.println("Você concluiu o modo facil");
+            do {
+                System.out.print("""
+                        Deseja ir para o modo médio?
+                        1 - Sim
+                        2 - Não
+                        Codigo : """);
+                opcao = sc.nextInt();
+
+                switch (opcao) {
+                    case 1:
+                        modoMedio();
+                        break;
+                    case 2:
+                        menu();
+                        break;
+                    default:
+                        System.out.println("Insira um valor valido!");
+                        break;
+                }
+            }while(opcao != 1 || opcao != 2);
+        }
+    }
+
+    //endregion
+    //region(
     //region(facil
     public static void modoFacil(){
         Inimigo.criarInimigos();
@@ -698,7 +926,7 @@ do {
                     }
 //
                 }
-            }while(!rodoJaUm || !rodoJaDois || !rodoJaTres || !rodoJaQuatro || !rodoJaZero || morreu);
+            }while(!rodoJaUm && !rodoJaDois && !rodoJaTres && !rodoJaQuatro && !rodoJaZero || !morreu);
         if(rodoJaUm && rodoJaDois && rodoJaTres && rodoJaQuatro && rodoJaZero && !morreu){
             System.out.println("Parabens!!!");
             System.out.println("Você concluiu o modo facil");
