@@ -559,13 +559,15 @@ do {
         //criando uma variavel booleana para cada habillidade;
 
         boolean habilidadeAdagaDoPagao = false;
-        int contHabilidadedoPagao = 0; //usa pra parar a cura do inimigo;
+        int contHabilidadedoPagao = 3; //usa pra parar a cura do inimigo;
         boolean habilidadeArco = false;
         boolean habilidadeCajado = false;
+        int contHabilidadeDoCajado = 3;
         boolean habilidadeEspada = false;
         boolean habilidadeMachado = false;
         boolean habilidadePerryOnFire = false;
         boolean habilidadeRoloDeCerol = false;
+        int contHabillidadeDoCerol = 3;
         boolean habilidadeVacinOfCloroquiha = false;
         boolean habilidadeVarinhaDeCondao = false;
         //criando e setnado como falas, por que algumas das habilidades podem interferir no curamento dos ininimigos
@@ -712,6 +714,50 @@ do {
                                 break;
                         }
                     } while (!escolhaValida);
+//habilidade da adaga do pagao, vai ser um if que trava o cont da habilidade, fazendo chegar até 3, numero de vezes que vai ser usada.
+                //region(habilidade pagao)
+                    if(habilidadeAdagaDoPagao){
+                        if (contHabilidadedoPagao == 3){
+                            System.out.println("Sua habilidade é efetiva por mais :" + contHabilidadedoPagao + " rounds");
+                        }
+                        else if (contHabilidadedoPagao == 2){
+                            System.out.println("Sua habilidade é efetiva por mais :" + contHabilidadedoPagao + " rounds");
+                        }
+                        else if (contHabilidadedoPagao == 1){
+                            System.out.println("Sua habilidade é efetiva por mais :" + contHabilidadedoPagao + " rounds");
+                        }
+                        else if(contHabilidadedoPagao == 0){
+                            System.out.println("Sua habilidade chegou no limite!");
+                            habilidadeAdagaDoPagao = false;
+                        }
+                        contHabilidadedoPagao--;
+                    }else{
+                        contHabilidadedoPagao = 3;
+                    }
+                //endregion
+//habilidade do rolo de cerol, é praticamente a  mesma pegada de travar a cura do inimigo
+                //region(habilidade rolo de cerol)
+                    if(habilidadeRoloDeCerol){
+                        if (contHabillidadeDoCerol == 3){
+                            System.out.println("Sua habilidade é efetiva por mais :" + contHabillidadeDoCerol + " rounds");
+                        }
+                        else if (contHabillidadeDoCerol == 2){
+                            System.out.println("Sua habilidade é efetiva por mais :" + contHabillidadeDoCerol + " rounds");
+                        }
+                        else if (contHabillidadeDoCerol == 1){
+                            System.out.println("Sua habilidade é efetiva por mais :" + contHabillidadeDoCerol + " rounds");
+                        }
+                        else if(contHabillidadeDoCerol == 0){
+                            System.out.println("Sua habilidade chegou no limite!");
+                            habilidadeRoloDeCerol = false;
+
+                        }
+                         contHabillidadeDoCerol--;
+                    }
+                    else{
+                        contHabillidadeDoCerol = 3;
+                    }
+                //endregion
 //cura do inimigo
                     if (!habilidadeAdagaDoPagao || !habilidadeRoloDeCerol) {
                         if (inimigoDaBola.getVida() <= (vidaTotalInimigo / 4)) {
@@ -722,6 +768,26 @@ do {
                     } else {
                         System.out.println("O inimigo não pode se curar");
                     }
+//habilidade do cajado, gera uma barreira que não te deixa receber dano, bloqueando o ataque do inimigo
+                //region(habilidade cajado)
+                    if(habilidadeCajado){
+                        if (contHabilidadeDoCajado == 3){
+                            System.out.println("Sua habilidade é efetiva por mais :" + contHabilidadeDoCajado + " rounds");
+                        }
+                        else if (contHabilidadeDoCajado == 2){
+                            System.out.println("Sua habilidade é efetiva por mais :" + contHabilidadeDoCajado + " rounds");
+                        }
+                        else if (contHabilidadeDoCajado == 1){
+                            System.out.println("Sua habilidade é efetiva por mais :" + contHabilidadeDoCajado + " rounds");
+                        }
+                        else if(contHabilidadeDoCajado == 0){
+                            System.out.println("Sua habilidade chegou no limite!");
+                            habilidadeCajado = false;
+                        }
+                        contHabilidadeDoCajado--;
+                    }else{
+                        contHabilidadeDoCajado = 3;
+                //endregion
 //dano do inimigo
                     if (!habilidadeCajado) {
                         if (!decisaoUnica && inimigoDaBola.getVida() > 0) {
