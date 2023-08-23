@@ -15,13 +15,11 @@ public class Machado extends Arma {
     }
 
     @Override
-    public void habilidade(Personagem personagem) {
-
+    public int habilidade() {
+return 0;
     }
 
-    public void habilidade() {
 
-    }
 
     @Override
     public String toString() {

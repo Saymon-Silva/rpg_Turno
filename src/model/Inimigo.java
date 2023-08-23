@@ -93,8 +93,8 @@ public class Inimigo extends Personagem {
         int danoArmacleitinFacil = cleitinFacil.getDano();
         int danoClassecleitinFacil = cleitinFacil.getClasse().getDano();
 
-        cleitinFacil.setDano((danoInimigocleitinFacil * 0) + danoInimigocleitinFacil + danoArmacleitinFacil + danoClassecleitinFacil);
-        cleitinFacil.setVida((vidaInimigocleitinFacil * 0) + vidaClassecleitinFacil + vidaInimigocleitinFacil);
+        cleitinFacil.setDano(danoInimigocleitinFacil + danoArmacleitinFacil + danoClassecleitinFacil);
+        cleitinFacil.setVida(vidaClassecleitinFacil + vidaInimigocleitinFacil);
         listaDeInimigosFacil.add(cleitinFacil);
         //endregion
 
@@ -110,8 +110,8 @@ public class Inimigo extends Personagem {
         int danoArmaMikeyFacil = cracoMikeyFacil.getDano();
         int danoClasseMikeyFacil = cracoMikeyFacil.getClasse().getDano();
 
-        cracoMikeyFacil.setDano(( danoInimigoMikeyFacil * 0) +  danoInimigoMikeyFacil + danoArmaMikeyFacil + danoClasseMikeyFacil);
-        cracoMikeyFacil.setVida((vidaInimigoMikeyFacil * 0) + vidaInimigoMikeyFacil + vidaClasseMikeyFacil);
+        cracoMikeyFacil.setDano(danoInimigoMikeyFacil + danoArmaMikeyFacil + danoClasseMikeyFacil);
+        cracoMikeyFacil.setVida(vidaInimigoMikeyFacil + vidaClasseMikeyFacil);
         listaDeInimigosFacil.add(cracoMikeyFacil);
         //endregion
 
@@ -127,8 +127,8 @@ public class Inimigo extends Personagem {
         int danoArmapagaoFacil = pagaoFacil.getDano();
         int danoClassepagaoFacil = pagaoFacil.getClasse().getDano();
 
-        pagaoFacil.setDano((danoInimigopagaoFacil * 0) + danoInimigopagaoFacil + danoArmapagaoFacil + danoClassepagaoFacil);
-        pagaoFacil.setVida((vidaInimigopagaoFacil * 0) +  vidaInimigopagaoFacil + vidaClassepagaoFacil);
+        pagaoFacil.setDano(danoInimigopagaoFacil + danoArmapagaoFacil + danoClassepagaoFacil);
+        pagaoFacil.setVida(vidaInimigopagaoFacil + vidaClassepagaoFacil);
         listaDeInimigosFacil.add(pagaoFacil);
         //endregion
 
@@ -144,8 +144,8 @@ public class Inimigo extends Personagem {
         int danoArmaPerryFacil = perryFacil.getDano();
         int danoClassePerryFacil = perryFacil.getClasse().getDano();
 
-        perryFacil.setDano((danoInimigoPerryFacil * 0) + danoInimigoPerryFacil + danoArmaPerryFacil + danoClassePerryFacil);
-        perryFacil.setVida((vidaInimigoPerryFacil * 0) +  vidaInimigoPerryFacil + vidaClassePerryFacil);
+        perryFacil.setDano(danoInimigoPerryFacil + danoArmaPerryFacil + danoClassePerryFacil);
+        perryFacil.setVida(vidaInimigoPerryFacil + vidaClassePerryFacil);
         listaDeInimigosFacil.add(perryFacil);
         //endregion
 
@@ -161,8 +161,8 @@ public class Inimigo extends Personagem {
         int danoArmaVasilinhaFacil = vasilinhaFacil.getDano();
         int danoClasseVasilinhaFacil = vasilinhaFacil.getClasse().getDano();
 
-        vasilinhaFacil.setDano((danoInimigoVasilinhaFacil * 0) + danoInimigoVasilinhaFacil + danoArmaVasilinhaFacil + danoClasseVasilinhaFacil);
-        vasilinhaFacil.setVida((vidaInimigoVasilinhaFacil * 0) +  vidaInimigoVasilinhaFacil + vidaClasseVasilinhaFacil);
+        vasilinhaFacil.setDano(danoInimigoVasilinhaFacil + danoArmaVasilinhaFacil + danoClasseVasilinhaFacil);
+        vasilinhaFacil.setVida(vidaInimigoVasilinhaFacil + vidaClasseVasilinhaFacil);
         listaDeInimigosFacil.add(vasilinhaFacil);
         //endregion
         //endregion
@@ -179,8 +179,8 @@ public class Inimigo extends Personagem {
         int danoArmaCleitin = cleitin.getDano();
         int danoClasseCleitin = cleitin.getClasse().getDano();
 
-        cleitin.setDano((danoInimigoCleitin * 0) + danoInimigoCleitin + danoArmaCleitin + danoClasseCleitin);
-        cleitin.setVida((vidaInimigoCleitin * 0) + vidaClasseCleitin + vidaInimigoCleitin);
+        cleitin.setDano(danoInimigoCleitin + danoArmaCleitin + danoClasseCleitin);
+        cleitin.setVida(vidaClasseCleitin + vidaInimigoCleitin);
         listaDeInimigosMedio.add(cleitin);
         //endregion
 
@@ -196,8 +196,8 @@ public class Inimigo extends Personagem {
         int danoArmaMikey = cracoMikey.getDano();
         int danoClasseMikey = cracoMikey.getClasse().getDano();
 
-        cracoMikey.setDano(( danoInimigoMikey * 0) +  danoInimigoMikey + danoArmaMikey +danoClasseMikey);
-        cracoMikey.setVida((vidaInimigoMikey * 0) + vidaInimigoMikey + vidaClasseMikey);
+        cracoMikey.setDano(danoInimigoMikey + danoArmaMikey +danoClasseMikey);
+        cracoMikey.setVida(vidaInimigoMikey + vidaClasseMikey);
         listaDeInimigosMedio.add(cracoMikey);
         //endregion
 
@@ -213,8 +213,8 @@ public class Inimigo extends Personagem {
         int danoArmaPagao = pagao.getDano();
         int danoClassePagao = pagao.getClasse().getDano();
 
-        pagao.setDano((danoInimigoPagao * 0) + danoInimigoPagao + danoArmaPagao + danoClassePagao);
-        pagao.setVida((vidaInimigoPagao * 0) +  vidaInimigoPagao + vidaClassePagao);
+        pagao.setDano(danoInimigoPagao + danoArmaPagao + danoClassePagao);
+        pagao.setVida(vidaInimigoPagao + vidaClassePagao);
         listaDeInimigosMedio.add(pagao);
         //endregion
 
@@ -230,8 +230,8 @@ public class Inimigo extends Personagem {
         int danoArmaPerry = perry.getDano();
         int danoClassePerry = perry.getClasse().getDano();
 
-        perry.setDano((danoInimigoPerry * 0) + danoInimigoPerry + danoArmaPerry + danoClassePerry);
-        perry.setVida((vidaInimigoPerry * 0) +  vidaInimigoPerry + vidaClassePerry);
+        perry.setDano(danoInimigoPerry + danoArmaPerry + danoClassePerry);
+        perry.setVida(vidaInimigoPerry + vidaClassePerry);
         listaDeInimigosMedio.add(perry);
         //endregion
 
@@ -247,8 +247,8 @@ public class Inimigo extends Personagem {
         int danoArmaVasilinha = vasilinha.getDano();
         int danoClasseVasilinha= vasilinha.getClasse().getDano();
 
-        vasilinha.setDano((danoInimigoVasilinha * 0) + danoInimigoVasilinha + danoArmaVasilinha + danoClasseVasilinha);
-        vasilinha.setVida((vidaInimigoVasilinha * 0) +  vidaInimigoVasilinha + vidaClasseVasilinha);
+        vasilinha.setDano(danoInimigoVasilinha + danoArmaVasilinha + danoClasseVasilinha);
+        vasilinha.setVida(vidaInimigoVasilinha + vidaClasseVasilinha);
         listaDeInimigosMedio.add(vasilinha);
         //endregion
         //endregion
@@ -265,8 +265,8 @@ public class Inimigo extends Personagem {
         int danoArmaCleitinDificil = cleitinDificil.getDano();
         int danoClasseCleitinDificil = cleitinDificil.getClasse().getDano();
 
-        cleitinDificil.setDano((danoInimigoCleitinDificil * 0) + danoInimigoCleitinDificil + danoArmaCleitinDificil + danoClasseCleitinDificil);
-        cleitinDificil.setVida((vidaInimigoCleitinDificil * 0) + vidaClasseCleitinDificil + vidaInimigoCleitinDificil);
+        cleitinDificil.setDano(danoInimigoCleitinDificil + danoArmaCleitinDificil + danoClasseCleitinDificil);
+        cleitinDificil.setVida(vidaClasseCleitinDificil + vidaInimigoCleitinDificil);
         listaDeInimigosDificil.add(cleitinDificil);
         //endregion
 
@@ -282,8 +282,8 @@ public class Inimigo extends Personagem {
         int danoArmaMikeyDificel = cracoMikeyDificel.getDano();
         int danoClasseMikeyDificel = cracoMikeyDificel.getClasse().getDano();
 
-        cracoMikeyDificel.setDano(( danoInimigoMikeyDificel * 0) +  danoInimigoMikeyDificel + danoArmaMikeyDificel +danoClasseMikeyDificel);
-        cracoMikeyDificel.setVida((vidaInimigoMikeyDificel * 0) + vidaInimigoMikeyDificel + vidaClasseMikeyDificel);
+        cracoMikeyDificel.setDano(danoInimigoMikeyDificel + danoArmaMikeyDificel +danoClasseMikeyDificel);
+        cracoMikeyDificel.setVida(vidaInimigoMikeyDificel + vidaClasseMikeyDificel);
         listaDeInimigosDificil.add(cracoMikeyDificel);
         //endregion
 
@@ -299,8 +299,8 @@ public class Inimigo extends Personagem {
         int danoArmaPagaoHard = pagaoHard.getDano();
         int danoClassePagaoHard = pagaoHard.getClasse().getDano();
 
-        pagaoHard.setDano((danoInimigoPagaoHard * 0) + danoInimigoPagaoHard + danoArmaPagaoHard + danoClassePagaoHard);
-        pagaoHard.setVida((vidaInimigoPagaoHard * 0) +  vidaInimigoPagaoHard + vidaClassePagaoHard);
+        pagaoHard.setDano(danoInimigoPagaoHard + danoArmaPagaoHard + danoClassePagaoHard);
+        pagaoHard.setVida(vidaInimigoPagaoHard + vidaClassePagaoHard);
         listaDeInimigosDificil.add(pagaoHard);
         //endregion
 
@@ -316,8 +316,8 @@ public class Inimigo extends Personagem {
         int danoArmaPerryFlamejante = perryFlamejante.getDano();
         int danoClassePerryFlamejante = perryFlamejante.getClasse().getDano();
 
-        perryFlamejante.setDano((danoInimigoPerryFlamejante * 0) + danoInimigoPerryFlamejante + danoArmaPerryFlamejante + danoClassePerryFlamejante);
-        perryFlamejante.setVida((vidaInimigoPerryFlamejante * 0) +  vidaInimigoPerryFlamejante + vidaClassePerryFlamejante);
+        perryFlamejante.setDano(danoInimigoPerryFlamejante + danoArmaPerryFlamejante + danoClassePerryFlamejante);
+        perryFlamejante.setVida(vidaInimigoPerryFlamejante + vidaClassePerryFlamejante);
         listaDeInimigosDificil.add(perryFlamejante);
         //endregion
 
@@ -333,8 +333,8 @@ public class Inimigo extends Personagem {
         int danoArmaVasilinhaDuro = vasilinhaDuro.getDano();
         int danoClasseVasilinhaDuro = vasilinhaDuro.getClasse().getDano();
 
-        vasilinhaDuro.setDano((danoInimigoVasilinhaDuro * 0) + danoInimigoVasilinhaDuro + danoArmaVasilinhaDuro + danoClasseVasilinhaDuro);
-        vasilinhaDuro.setVida((vidaInimigoVasilinhaDuro * 0) + vidaInimigoVasilinhaDuro + vidaClasseVasilinhaDuro);
+        vasilinhaDuro.setDano(danoInimigoVasilinhaDuro + danoArmaVasilinhaDuro + danoClasseVasilinhaDuro);
+        vasilinhaDuro.setVida(vidaInimigoVasilinhaDuro + vidaClasseVasilinhaDuro);
         listaDeInimigosDificil.add(vasilinhaDuro);
         //endregion
         //endregion

@@ -15,13 +15,8 @@ public class Varinha_de_Condao extends Arma {
         return super.getDano();
     }
 
-    @Override
-    public void habilidade(Personagem personagem) {
-
-    }
-
-    public void habilidade() {
-
+    public int habilidade() {
+        return 0;
     }
 
     @Override

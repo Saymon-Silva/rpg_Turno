@@ -13,13 +13,8 @@ public class Perry_on_Fire extends Arma {
         return super.getDano();
     }
 
-    @Override
-    public void habilidade(Personagem personagem) {
-
-    }
-
-    public void habilidade() {
-
+    public int habilidade() {
+        return 0;
     }
 
     @Override

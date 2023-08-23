@@ -15,12 +15,8 @@ public class Cajado extends Arma {
     }
 
     @Override
-    public void habilidade(Personagem personagem) {
-
-    }
-
-    public void habilidade() {
-
+    public int habilidade() {
+        return 0;
     }
 
     @Override

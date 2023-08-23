@@ -21,16 +21,16 @@ public class Main {
     private static Inimigo inimigoDaBola;
     private static Random random = new Random();
     public static boolean loginEfetuado = false;
-
+    public static Personagem personagem3 = new Personagem("Teste",99999,9999);
 
     public static void main(String[] args) {
-
+    personagem3.setArma(new Adaga_do_Pagao(150));
+    personagem3.getArma().habilidade();
         bemVindo();
         do {
             menu();
         } while (optionForDeath != 5);
     }
-
     public static Pessoa cadastro(){
        String nome = "";
        String senha = "";
@@ -137,8 +137,6 @@ public class Main {
                 voltarLogin = false;
                 break;
             case 6:
-                personagemEscolhido.getArma().habilidade(personagemEscolhido);
-                System.out.println(personagemEscolhido);
                 break;
             default:
                 System.out.println("Insira uma opção valida...");
@@ -585,7 +583,7 @@ do {
                 numeroInimigoDaVez = random.nextInt(4);
             }
             if ( numeroInimigoDaVez == 4 && rodoJaQuatro){
-                numeroInimigoDaVez = random.nextInt(4);
+                numeroInimigoDaVez = random.nextInt(3);
             }
             else {
                 int cont = 0;
@@ -628,23 +626,31 @@ do {
                 System.out.println("Nivel masmorra : " + nivelMasmorra);
                 do {
                     System.out.println("""
-                            \nInimigo : """ + inimigoDaBola + """ 
-                            \nPersonagem : """ + personagemEscolhido + """
-                            \n1 - Atacar 
+                        \n  Inimigo : """ + inimigoDaBola + """ 
+                        \n  Personagem : """ + personagemEscolhido + """
+                        \n  1 - Atacar 
                             2 - Recuperar-se
-                            3 - Fugir
+                            4 - Habilidade Arma
+                            5 - Habilidade Passiva
+                            3 - sair
                             """);
                     escolhaNoTurno = sc.nextInt();
                     switch(escolhaNoTurno){
                             case 1:
-                                System.out.println("Você atacou");
+                                System.out.println("Você atacou!");
                                 inimigoDaBola.setVida(inimigoDaBola.getVida() - danoPersonagem);
+                                System.out.println("Você causou :" + danoPersonagem + " de  dano.");
                                 break;
                             case 2:
-                                personagemEscolhido.setVida(personagemEscolhido.getVida() + (vidaTotalPersonagem / 5));
-                                System.out.println("Você se recuperou");
+                                int cura = (vidaTotalPersonagem/7);
+                                personagemEscolhido.setVida(personagemEscolhido.getVida() + cura);
+                                System.out.println("Você se curou!");
+                                System.out.println("Você recuperou : " + cura);
                                 break;
                             case 3:
+
+                                break;
+                            case 4:
                                 System.out.println("cagao");
                                 batalhaTorre();
                                 break;
@@ -652,30 +658,37 @@ do {
                                 System.out.println("Perdeu o turno. Insira apenas valores válidos...");
                                 break;
                         }
+
                         if (vidaInimigo <= (vidaTotalInimigo / 4)) {
                             inimigoDaBola.setVida(inimigoDaBola.getVida() + (vidaTotalInimigo / 6));
                             System.out.println("Seu inimigo se curou");
                             decisaoUnica = true;
                         }
+
                         if (!decisaoUnica && vidaInimigo > 0) {
                            personagemEscolhido.setVida(personagemEscolhido.getVida() - danoInimigo);
                             System.out.println("Voce foi atacado e recebeu : " + danoInimigo);
                         }
+
                         decisaoUnica = false;
+
                     if (personagemEscolhido.getVida() <= 0) {
                         morreu = true;
                         System.out.println("Você foi derrotado!");
                         System.out.println("Volte ao menu de escolha de level!");
                         batalhaTorre();
                     }
+
                     if (inimigoDaBola.getVida() <= 0) {
                         System.out.println("Você derrotou o Inimigo : " + inimigoDaBola.getNome());
                         ganhouRodada = true;
                     }
+
                     } while (inimigoDaBola.getVida() > 0 || personagemEscolhido.getVida() > 0 || escolhaNoTurno != 3 || !morreu || !ganhouRodada);
                     ganhouRodada = false;
 
                     nivelMasmorra++;
+
                     if (personagemEscolhido.getVida() <= 0 || escolhaNoTurno == 3 || morreu) {
                         nivelMasmorra = 0;
                         personagemEscolhido.setVida(vidaTotalPersonagem);
