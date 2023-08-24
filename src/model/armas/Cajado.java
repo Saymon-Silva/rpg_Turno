@@ -16,6 +16,9 @@ public class Cajado extends Arma {
 
     @Override
     public int habilidade() {
+        System.out.println("A habilidade magica do seu cajado foi ativada");
+        System.out.println("Escudo Intangível");
+        System.out.println("Quando ativada você não recebe dano");
         return 0;
     }
 

@@ -35,7 +35,6 @@ public class Adaga_do_Pagao extends Arma {
         System.out.println("Ele aumenta!!");
         System.out.println("...");
         int dano = getDano();
-        int danoAtual = getDano();
         for(int c = 0 ; c <= 2 ; c++ ) {
             if (c == 0) {
                 System.out.println("Você causou : " + dano);
