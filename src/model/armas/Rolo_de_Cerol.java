@@ -14,7 +14,14 @@ public class Rolo_de_Cerol extends Arma{
     }
 
     public int habilidade() {
-        return 0;
+        int danoCerol = this.getDano() / 2;
+        System.out.println("Você ataca seu inimigo");
+        System.out.println("Você causou" + danoCerol);
+        System.out.println("O corpo do seu inimigo foi rasgado");
+        System.out.println("Pelo corpo de seu inimigo só da para ver seu sangue");
+        System.out.println("Seu sangue correndo e esvaziando");
+        System.out.println("Você deixou seu inimigo dilacerado");
+        return danoCerol;
     }
 
     @Override

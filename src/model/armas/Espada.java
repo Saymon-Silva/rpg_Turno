@@ -16,7 +16,7 @@ public class Espada extends Arma {
     }
 
     public int habilidade() {
-        int danoMeteoro = getDano() / 5;
+        int danoMeteoro = getDano() / 3;
         int danoTotal = 0;
         System.out.println("Chuva de Meteoros!!");
         System.out.println("A habilidade da sua " + this.getNome() + " foi ativada!!");
@@ -26,10 +26,10 @@ public class Espada extends Arma {
         for(int c = 0; c < 5; c++) {
             System.out.println("Você causou : " + danoMeteoro);
             danoTotal += danoMeteoro;
-            if (c == 3 ) {
+            if (c == 2 ) {
                 System.out.println("Você recebeu : " + danoMeteoro);
             }
-            if(c == 5){
+            if(c == 4){
                 System.out.println("Você recebeu : " + danoMeteoro);
             }
         }

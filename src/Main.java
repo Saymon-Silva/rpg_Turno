@@ -534,7 +534,7 @@ do {
             switch (escolhaModo) {
 
                 case 1:
-                    modoFacilRefatorizado();
+                    modoTorreRefatorizado();
                     break;
                 case 2:
                     modoMedio();
@@ -555,7 +555,7 @@ do {
 //endregion
 //region(modos torre)
     //region(modo facil refazendo)
-    public static void modoFacilRefatorizado() {
+    public static void modoTorreRefatorizado() {
 
         Inimigo.criarInimigos();
 
@@ -565,21 +565,24 @@ do {
         int contHabilidadeDoPagao = 3; //usa pra parar a cura do inimigo;
         boolean habilidadeArco = false;
         int contHabilidadeDoArco = 3;
-        int danoVenenoHabilidadeArco = (personagemEscolhido.getArma().getDano() / 4);
+        int danoVenenoHabilidadeArco = (personagemEscolhido.getArma().getDano() / 3);
         boolean habilidadeCajado = false;
         int contHabilidadeDoCajado = 3;
         boolean habilidadeEspada = false;
-        int danoHabilidadeEspada = (personagemEscolhido.getArma().getDano() / 5);
+        int danoHabilidadeEspada = (personagemEscolhido.getArma().getDano() / 3);
         boolean habilidadeMachado = false;
         boolean habilidadePerryOnFire = false;
+        int danoHabilidadePerry = (personagemEscolhido.getArma().getDano() / 3);
+        int contHabillidadeDoPerry = 3;
         boolean habilidadeRoloDeCerol = false;
         int contHabillidadeDoCerol = 3;
-        int danoSangramentoHabilidadeCerol = (personagemEscolhido.getArma().getDano() / 5);
+        int danoSangramentoHabilidadeCerol = (personagemEscolhido.getArma().getDano() / 2);
         boolean habilidadeVacinOfCloroquiha = false;
+        int contHabilidadeVacina = 3;
         boolean habilidadeVarinhaDeCondao = false;
 
         boolean habilidadeAtivada = false; //usa para proibir o usuario de spamar habilidade.
-        int contHabilidadeAtivada = 4;
+        int contHabilidadeAtivada = 3;
         //criando e setnado como falas, por que algumas das habilidades podem interferir no curamento dos ininimigos
         //por isso do uso dessas variaveis, por que pode travar a cura, ataque, seja o que for. Somente usando ifs e essas variaveis.
 
@@ -596,6 +599,24 @@ do {
         boolean escolhaValida = false;//usado dentro do "do" como parametro para continuar ou não sendo rodado
 
         int nivelMasmorra = 0;
+        boolean escolhaListaFeita = false;
+
+        do{
+            System.out.print("""
+                    Esolha o tipo de inimigos
+                    1 - Facil
+                    2 - Médio
+                    3 - Dificil
+                    Insira o codigo :""");
+            int escolhaInimigo = sc.nextInt();
+            switch(escolhaInimigo){
+                case 1 -> Inimigo.listaDeInimigosModoBatalha = Inimigo.listaDeInimigosFacil;
+                case 2 -> Inimigo.listaDeInimigosModoBatalha = Inimigo.listaDeInimigosMedio;
+                case 3 -> Inimigo.listaDeInimigosModoBatalha = Inimigo.listaDeInimigosDificil;
+                default -> System.out.println("Insira um valor valido!");
+            }
+
+        }while(!escolhaListaFeita);
 
         do {
             int numeroInimigoDaVez = random.nextInt(4);
@@ -616,7 +637,7 @@ do {
                 numeroInimigoDaVez = random.nextInt(4);
             } else {
                 int cont = 0;
-                for (Inimigo inimigo1 : Inimigo.listaDeInimigosFacil) {
+                for (Inimigo inimigo1 : Inimigo.listaDeInimigosModoBatalha) {
                     if (cont == numeroInimigoDaVez) {
                         inimigoDaBola = inimigo1;
                         if (numeroInimigoDaVez == 0) {
@@ -695,8 +716,7 @@ do {
                                     } else if (personagemEscolhido.getArma() instanceof Cajado) {
                                         habilidadeCajado = true;
                                     } else if (personagemEscolhido.getArma() instanceof Espada) {
-                                        personagemEscolhido.setVida(personagemEscolhido.getVida());
-                                        habilidadeEspada = true;
+                                        personagemEscolhido.setVida(personagemEscolhido.getVida() - (danoHabilidadeEspada * 2));
                                     } else if (personagemEscolhido.getArma() instanceof Machado) {
                                         habilidadeMachado = true;
                                     } else if (personagemEscolhido.getArma() instanceof Perry_on_Fire) {
@@ -708,12 +728,27 @@ do {
                                     } else if (personagemEscolhido.getArma() instanceof Varinha_de_Condao) {
                                         habilidadeVarinhaDeCondao = true;
                                     }
+                                    //a vacina tem duas habilidades, uma causa dano e a outra recupera sua vida
+                                    if(personagemEscolhido.getVida() < (vidaPersonagem/ 2)  && habilidadeVacinOfCloroquiha){//validação pra de cura
+                                       Vacin_of_Cloroquina.habilidadeCura();
+                                    }
+                                    else {//validação pra de dano
+                                        if(habilidadeVacinOfCloroquiha){//se for a habilidade de vacina, so tem pois ele tem um cont de seringadas, e caso chegue ao 0, o inimigo é derrotado automaticamente, só roda qando ativada;
+                                            contHabilidadeVacina--;
+                                            System.out.println("Faltam mais " + contHabilidadeVacina);
+                                            if(contHabilidadeVacina == 0){
+                                                Vacin_of_Cloroquina.meusPesames();
+                                            }
+                                        }
+                                        personagemEscolhido.getArma().habilidade();
+                                        int habilidadeArma = personagemEscolhido.getArma().habilidade();
+                                        inimigoDaBola.setVida(inimigoDaBola.getVida() - habilidadeArma);
+                                        habilidadeAtivada = true;
+                                    }
                                 }
-                                else {
+                                else {//se a habilidade ja foi ativada, precisa esperar três turno, é o que esse if representa
                                     System.out.println("Espere :"+ contHabilidadeAtivada + " turnos.");
                                 }
-                                int habilidadeArma = personagemEscolhido.getArma().habilidade();
-                                inimigoDaBola.setVida(inimigoDaBola.getVida() - habilidadeArma);
                                 break;
                             case 4:
                                 System.out.println("");
@@ -731,23 +766,28 @@ do {
                         contHabilidadeAtivada--;
                     }
                     else {
-                        contHabilidadeAtivada = 4;
+                        contHabilidadeAtivada = 3;
                     }
                     //endregion
+                    int numeroParaCuraOuAtaque = random.nextInt(2);
+//sortando o numero para sempre ser aleatorio, sem seguir um padrão
+                    if(numeroParaCuraOuAtaque == 0) {
 //cura do inimigo
-                    //region(cura inimigo
-                    if (!habilidadeAdagaDoPagao || !habilidadeRoloDeCerol) {
-                        if (inimigoDaBola.getVida() <= (vidaTotalInimigo / 4)) {
-                            inimigoDaBola.setVida(inimigoDaBola.getVida() + (vidaTotalInimigo / 6));
-                            System.out.println("Seu inimigo se curou");
-                            decisaoUnica = true;
+                        //region(cura inimigo
+                        if (!habilidadeAdagaDoPagao || !habilidadeRoloDeCerol) {
+                            if (inimigoDaBola.getVida() <= (vidaTotalInimigo / 4)) {
+                                inimigoDaBola.setVida(inimigoDaBola.getVida() + (vidaTotalInimigo / 6));
+                                System.out.println("Seu inimigo se curou");
+                                decisaoUnica = true;
+                            }
+                        } else {
+                            System.out.println("O inimigo não pode se curar");
                         }
-                    } else {
-                        System.out.println("O inimigo não pode se curar");
+                        //endregion
                     }
-                    //endregion
+                    else if(numeroParaCuraOuAtaque == 1 || !decisaoUnica) {
 //dano do inimigo
-                    //region(ataque do inimigo
+                        //region(ataque do inimigo
                         if (!habilidadeCajado) {
                             if (!decisaoUnica && inimigoDaBola.getVida() > 0) {
                                 personagemEscolhido.setVida(personagemEscolhido.getVida() - danoInimigo);
@@ -757,6 +797,7 @@ do {
                             System.out.println("O inimigo não pode te atacar!");
                         }
                         //endregion
+                    }
                         decisaoUnica = false;//definindo ela como false, para no proximo round servir de parametro tanto pra vida quanto pro ataque
 //se o personagem morreu
                         if (personagemEscolhido.getVida() <= 0) {
@@ -764,6 +805,10 @@ do {
                             System.out.println("Você foi derrotado!");
                             System.out.println("Volte ao menu de escolha de level!");
                             batalhaTorre();
+                            rodoJaZero = false;
+                            rodoJaDois = false;
+                            rodoJaTres = false;
+                            rodoJaQuatro = false;
                             nivelMasmorra = 0;
                         }
 //se o inimigo morreu
@@ -775,11 +820,7 @@ do {
                     //habilidade da adaga do pagao, vai ser um if que trava o cont da habilidade, fazendo chegar até 3, numero de vezes que vai ser usada.
                     //region(habilidade pagao)
                     if (habilidadeAdagaDoPagao) {
-                        if (contHabilidadeDoPagao == 3) {
-                            System.out.println("Sua habilidade é efetiva por mais :" + contHabilidadeDoPagao + " rounds");
-                        } else if (contHabilidadeDoPagao == 2) {
-                            System.out.println("Sua habilidade é efetiva por mais :" + contHabilidadeDoPagao + " rounds");
-                        } else if (contHabilidadeDoPagao == 1) {
+                        if (contHabilidadeDoPagao == 3 || contHabilidadeDoPagao == 2 || contHabilidadeDoPagao == 1) {
                             System.out.println("Sua habilidade é efetiva por mais :" + contHabilidadeDoPagao + " rounds");
                         } else if (contHabilidadeDoPagao == 0) {
                             System.out.println("Sua habilidade chegou no limite!");
@@ -793,15 +834,7 @@ do {
 //habilidade do rolo de cerol, é praticamente a  mesma pegada de travar a cura do inimigo
                     //region(habilidade rolo de cerol)
                     if (habilidadeRoloDeCerol) {
-                        if (contHabillidadeDoCerol == 3) {
-                            System.out.println("Dano sangramento :  " + danoSangramentoHabilidadeCerol);
-                            inimigoDaBola.setVida(inimigoDaBola.getVida() - danoSangramentoHabilidadeCerol);
-                            System.out.println("Sua habilidade é efetiva por mais :" + contHabillidadeDoCerol + " rounds");
-                        } else if (contHabillidadeDoCerol == 2) {
-                            System.out.println("Dano sangramento :  " + danoSangramentoHabilidadeCerol);
-                            inimigoDaBola.setVida(inimigoDaBola.getVida() - danoSangramentoHabilidadeCerol);
-                            System.out.println("Sua habilidade é efetiva por mais :" + contHabillidadeDoCerol + " rounds");
-                        } else if (contHabillidadeDoCerol == 1) {
+                        if (contHabillidadeDoCerol == 3 || contHabillidadeDoCerol == 2 || contHabillidadeDoCerol == 1) {
                             System.out.println("Dano sangramento :  " + danoSangramentoHabilidadeCerol);
                             inimigoDaBola.setVida(inimigoDaBola.getVida() - danoSangramentoHabilidadeCerol);
                             System.out.println("Sua habilidade é efetiva por mais :" + contHabillidadeDoCerol + " rounds");
@@ -817,15 +850,7 @@ do {
 //habilidade do arco, atira um flecha venenosa que da dano durante 3 turno
                     //region(habilidade arco)
                     if (habilidadeArco) {
-                        if (contHabilidadeDoArco == 3) {
-                            System.out.println("Dano de veneno " + danoVenenoHabilidadeArco);
-                            inimigoDaBola.setVida(inimigoDaBola.getVida() - danoVenenoHabilidadeArco);
-                            System.out.println("Sua habilidade é efetiva por mais :" + contHabilidadeDoArco + " rounds");
-                        } else if (contHabilidadeDoArco == 2) {
-                            System.out.println("Dano de veneno " + danoVenenoHabilidadeArco);
-                            inimigoDaBola.setVida(inimigoDaBola.getVida() - danoVenenoHabilidadeArco);
-                            System.out.println("Sua habilidade é efetiva por mais :" + contHabilidadeDoArco + " rounds");
-                        } else if (contHabilidadeDoArco == 1) {
+                        if (contHabilidadeDoArco == 3 || contHabilidadeDoArco == 2 || contHabilidadeDoArco == 1) {
                             System.out.println("Dano de veneno " + danoVenenoHabilidadeArco);
                             inimigoDaBola.setVida(inimigoDaBola.getVida() - danoVenenoHabilidadeArco);
                             System.out.println("Sua habilidade é efetiva por mais :" + contHabilidadeDoArco + " rounds");
@@ -841,11 +866,7 @@ do {
 //habilidade do cajado, gera uma barreira que não te deixa receber dano, bloqueando o ataque do inimigo
                     //region(habilidade cajado)
                     if (habilidadeCajado) {
-                        if (contHabilidadeDoCajado == 3) {
-                            System.out.println("Sua habilidade é efetiva por mais :" + contHabilidadeDoCajado + " rounds");
-                        } else if (contHabilidadeDoCajado == 2) {
-                            System.out.println("Sua habilidade é efetiva por mais :" + contHabilidadeDoCajado + " rounds");
-                        } else if (contHabilidadeDoCajado == 1) {
+                        if (contHabilidadeDoCajado == 3 || contHabilidadeDoCajado == 2 || contHabilidadeDoCajado == 1) {
                             System.out.println("Sua habilidade é efetiva por mais :" + contHabilidadeDoCajado + " rounds");
                         } else if (contHabilidadeDoCajado == 0) {
                             System.out.println("Sua habilidade chegou no limite!");
@@ -856,6 +877,25 @@ do {
                         contHabilidadeDoCajado = 3;
                     }
                     //endregion
+//habilidade do perry on fyre, deixou o inimigo com queimadures, agora ele recebe dano por volta de dois turnos
+                    //region(habilidade Perry)
+                    if (habilidadePerryOnFire) {
+                        if (contHabillidadeDoPerry == 3 || contHabillidadeDoPerry == 2 || contHabillidadeDoPerry == 1) {
+                            System.out.println("Dano de queimadura " + danoVenenoHabilidadeArco);
+                            inimigoDaBola.setVida(inimigoDaBola.getVida() - danoHabilidadePerry);
+                            System.out.println("Sua habilidade é efetiva por mais :" + contHabillidadeDoPerry + " rounds");
+                        } else if (contHabillidadeDoPerry == 0) {
+                            System.out.println("Sua habilidade chegou no limite!");
+                            habilidadePerryOnFire = false;
+                        }
+                        contHabillidadeDoPerry--;
+                    } else {
+                        contHabillidadeDoPerry = 3;
+                    }
+                    //endregion
+//habilidade da ceringa, dano padrão, mas com uma funcionalidade diferente... Se você acertar três especiais no inimigo, ele simplesment morre (isso leva 9 turnos)
+                    //region(habilidade vacina de cloquina)
+
 //endregion
 //acaba aqui
                     }while (!morreu || !ganhouRodada) ;
@@ -869,12 +909,13 @@ do {
             } while (!rodoJaUm && !rodoJaDois && !rodoJaTres && !rodoJaQuatro && !rodoJaZero || !morreu) ;
             ganhouRodada = false;
             if (rodoJaUm && rodoJaDois && rodoJaTres && rodoJaQuatro && rodoJaZero && !morreu) {
+                rodoJaZero = false; rodoJaUm = false; rodoJaDois = false; rodoJaTres = false; rodoJaQuatro = false;
                 int opcao;
                 System.out.println("Parabens!!!");
-                System.out.println("Você concluiu o modo facil");
+                System.out.println("Você concluiu a Torre");
                 do {
                     System.out.print("""
-                            Deseja ir para o modo médio?
+                            Deseja ir para a escolha de modo?
                             1 - Sim
                             2 - Não
                             Codigo : """);
@@ -882,7 +923,7 @@ do {
 
                     switch (opcao) {
                         case 1:
-                            modoMedio();
+                            retornarMenuEscolhaDificuldade();
                             break;
                         case 2:
                             menu();
@@ -896,7 +937,6 @@ do {
 //acaba tudo aqui
         }
 //endregion
-//region
     //region(medio
     public static void modoMedio(){
         Inimigo.criarInimigos();
@@ -1314,7 +1354,7 @@ do {
             }
         }
     //endregion
-//endregio
+//endregion
 
 //endregion
 //função que eu to usando para dar looping no codigo, ele não acaba
@@ -1350,6 +1390,11 @@ do {
         }while(!loginEfetuado);
         menu();
     }
+    public static void retornarMenuEscolhaDificuldade(){
+        System.out.println("Bem vindo Novamente");
+        modoTorreRefatorizado();
+    }
+
 
 
 }

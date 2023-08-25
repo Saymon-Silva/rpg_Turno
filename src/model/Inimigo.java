@@ -10,10 +10,15 @@ import java.util.ArrayList;
 public class Inimigo extends Personagem {
 
     private static Inimigo inimigo;
-    public static ArrayList<Inimigo> listaDeInimigos = new ArrayList<>();
-    public static ArrayList<Inimigo> listaDeInimigosFacil = new ArrayList<>();
-    public static ArrayList<Inimigo> listaDeInimigosMedio = new ArrayList<>();
-    public static ArrayList<Inimigo> listaDeInimigosDificil = new ArrayList<>();
+    public static ArrayList<Inimigo> listaDeInimigos = new ArrayList<>();//aqui estão todos eles, no modo de escolha para batalha, um treinin eles tao ai
+    public static ArrayList<Inimigo> listaDeInimigosFacil = new ArrayList<>();//como o nome diz (facil)
+    public static ArrayList<Inimigo> listaDeInimigosMedio = new ArrayList<>();//como o nome diz (medio)
+    public static ArrayList<Inimigo> listaDeInimigosDificil = new ArrayList<>();//como o nome diz (dificil)
+    public static ArrayList<Inimigo> listaDeInimigosModoBatalha = new ArrayList<>();//vai receber outra lista dentro
+    //essa ta sendo usada pra setar os inimigos que você quer batalhar...
+    // Usada no main (modo escolha de inimigos
+    //vai ser usada para colocar os inimigos das outras listas dentro dessa, o usuario escolhe o inimigo e a lista dele vai pra dentro (facil, medio ou dificel).
+    //understood
     private Arma arma;
     private Classe classe;
     private int dano;
