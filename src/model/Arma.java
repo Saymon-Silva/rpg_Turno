@@ -3,6 +3,7 @@ package model;
 public abstract class Arma {
 
     private int dano;
+    private String nome;
 
     public int getDano() {
         return dano;
@@ -10,6 +11,14 @@ public abstract class Arma {
 
     public void setDano(int dano) {
         this.dano = dano;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public abstract int habilidade();

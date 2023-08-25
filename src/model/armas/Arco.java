@@ -17,7 +17,7 @@ public class Arco extends Arma{
     @Override
     public int habilidade() {
         int dano = getDano();
-        System.out.println("Você desperta o poder obscuro de seu arco");
+        System.out.println("Você desperta o poder obscuro do " + this.getNome());
         System.out.println("Acerte... Flecha del Veneno!");
         System.out.println("Você causou : " + getDano());
         System.out.println("No sangue do seu inimigo está correndo seu veneno");

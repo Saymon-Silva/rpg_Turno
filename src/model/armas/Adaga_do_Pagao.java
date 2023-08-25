@@ -25,7 +25,7 @@ public class Adaga_do_Pagao extends Arma {
 
     public int habilidade() {
         int danoTotal = 0;
-        System.out.println("Desperte PARASITA!!!");
+        System.out.println("Levante " + this.getNome());
         System.out.println("Sua lamina acorda dos sonhos");
         System.out.println("Sedenda pelo sangue de seus inimigos");
         //conforme seu dano causado, use ele para aumentar temporariamente o dano da sua arma, e ,

@@ -19,7 +19,7 @@ public class Espada extends Arma {
         int danoMeteoro = getDano() / 5;
         int danoTotal = 0;
         System.out.println("Chuva de Meteoros!!");
-        System.out.println("A habilidade de sua arma foi ativada!!");
+        System.out.println("A habilidade da sua " + this.getNome() + " foi ativada!!");
         System.out.println("A cada ataque que você dá caem milhoes de meteoritos");
         System.out.println("Mas esse meteoritos não tem rota");
         System.out.println("Você ataca seu inimigo");

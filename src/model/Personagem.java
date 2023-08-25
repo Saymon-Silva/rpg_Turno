@@ -121,6 +121,7 @@ public class Personagem {
                 " : " + codigo + " : " +
                 " Classe = " + classe +
                 "; Arma = " + arma +
+                "; Nome = " + arma.getNome() +
                 "; Dano = " + dano +
                 "; Vida = " + vida +
                 ".";

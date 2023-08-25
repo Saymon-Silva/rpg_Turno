@@ -16,7 +16,8 @@ public class Machado extends Arma {
 
     @Override
     public int habilidade() {
-return 0;
+        System.out.println("Retorne " + this.getNome());
+    return 0;
     }
 
 
