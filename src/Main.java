@@ -24,8 +24,9 @@ public class Main {
     public static Personagem personagem3 = new Personagem("Teste",99999,9999);
 
     public static void main(String[] args) {
-    personagem3.setArma(new Adaga_do_Pagao(150));
-    personagem3.getArma().habilidade();
+        criarPersonagem();
+        escolherPersonagem();
+        System.out.println(personagemEscolhido);
         bemVindo();
         do {
             menu();
@@ -164,10 +165,8 @@ public class Main {
                 personagemEscolhido = personagem;
                 return personagemEscolhido;
             }
-                System.out.println("Não há nenhum personagem com o codigo: " + codigo);
-                return null;
-
         }
+        System.out.println("Não há nenhum personagem com o codigo: " + codigo);
 
         return null;
     }
@@ -480,8 +479,6 @@ do {
 
 //region( codigo combate mortal - 2 )
     public static void combateMortal() {//fazer um combate de torre, tp mk
-
-        escolherPersonagem();
         int escMdBtl;
         do {
             System.out.println("""
@@ -557,6 +554,8 @@ do {
     //region(modo facil refazendo)
     public static void modoTorreRefatorizado() {
 
+        escolherPersonagem();
+        System.out.println(personagemEscolhido);
         Inimigo.criarInimigos();
 
         //criando uma variavel booleana para cada habillidade;
@@ -1394,7 +1393,5 @@ do {
         System.out.println("Bem vindo Novamente");
         modoTorreRefatorizado();
     }
-
-
 
 }
