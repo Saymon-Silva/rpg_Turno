@@ -24,9 +24,11 @@ public class Main {
     public static Personagem personagem3 = new Personagem("Teste",99999,9999);
 
     public static void main(String[] args) {
+
         criarPersonagem();
         escolherPersonagem();
         System.out.println(personagemEscolhido);
+
         bemVindo();
         do {
             menu();
@@ -894,7 +896,13 @@ do {
                     //endregion
 //habilidade da ceringa, dano padrão, mas com uma funcionalidade diferente... Se você acertar três especiais no inimigo, ele simplesment morre (isso leva 9 turnos)
                     //region(habilidade vacina de cloquina)
-
+                    //endregion
+//habilidade machado, só precisa ser cetado como falso dnv... Não sei u lugar expecifico pra isso ainda, ent dxr ai melhor opcao kk
+                    //region(habilidade machado)
+                    if(habilidadeMachado){
+                        habilidadeMachado = false;
+                    }
+                    //endregion
 //endregion
 //acaba aqui
                     }while (!morreu || !ganhouRodada) ;
@@ -941,10 +949,10 @@ do {
         Inimigo.criarInimigos();
 
         boolean rodoJaZero = false;
+        boolean rodoJaUm = false;
         boolean rodoJaDois = false;
         boolean rodoJaTres = false;
         boolean rodoJaQuatro = false;
-        boolean rodoJaUm = false;
         boolean decisaoUnica = false; //faz com que o monstro só efetue um dos ifs.
         boolean morreu = false;
         boolean ganhouRodada = false;
@@ -1078,7 +1086,7 @@ do {
                     }
                     else if(inimigoDaBola.getNome().equals("Pagão da vilinha") && chancePoderUm == chancePoderDois){
                         System.out.println("Pagão lhe acerta de raspão...");
-                        System.out.println("Jante o sangue dele ò " + inimigoDaBola.getArma().toString());
+                        System.out.println("Jante o sangue dele ò " + inimigoDaBola.getArma().getNome());
                         System.out.println("");
                         String k = scfs.nextLine();
                     }
@@ -1357,7 +1365,7 @@ do {
 
 //endregion
 //função que eu to usando para dar looping no codigo, ele não acaba
-//é finalizado somente após o usuario concluir o percurso para dar dalo fim.
+//é finalizado somente se o usuario quiser que seja. Seguindo o caminho para isso
     public static void bemVindo(){
 
         pessoaLogada = null;

@@ -20,7 +20,7 @@ public class Rolo_de_Cerol extends Arma{
         System.out.println("O corpo do seu inimigo foi rasgado");
         System.out.println("Pelo corpo de seu inimigo só da para ver seu sangue");
         System.out.println("Seu sangue correndo e esvaziando");
-        System.out.println("Você deixou seu inimigo dilacerado");
+        System.out.println("Dilacerado");
         return danoCerol;
     }
 

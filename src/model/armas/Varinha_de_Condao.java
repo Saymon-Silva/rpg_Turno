@@ -16,8 +16,7 @@ public class Varinha_de_Condao extends Arma {
     }
 
     public int habilidade() {
-
-
+        System.out.println();
         return 0;
     }
 

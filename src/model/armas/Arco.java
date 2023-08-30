@@ -21,7 +21,7 @@ public class Arco extends Arma{
         System.out.println("Acerte... Flecha del Veneno!");
         System.out.println("Você causou : " + getDano());
         System.out.println("No sangue do seu inimigo está correndo seu veneno");
-        System.out.println("A cada turno seu inimigo recebe dano do veneno!");
+        //inimigo recebe dano de veneno a cada turno
         return dano;
     }
 
