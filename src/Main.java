@@ -13,7 +13,6 @@ public class Main {
 
     private static Scanner sc = new Scanner(System.in);
     private static Scanner scfs = new Scanner(System.in);//scanner pra strings
-    private static Personagem personagem;
     private static int optionForDeath;
     public static Pessoa pessoaLogada = Pessoa.pessoa;//usuario que esta logado no sistema.
     public static Personagem personagemEscolhido;//personagem que a pessoa logada estara usando.
@@ -21,7 +20,7 @@ public class Main {
     private static Inimigo inimigoDaBola;
     private static Random random = new Random();
     public static boolean loginEfetuado = false;
-    public static Personagem personagem3 = new Personagem("Teste",99999,9999);
+    public static Personagem personagem3 = new Personagem("Teste",99999,9999);//usando pra teste
 
     public static void main(String[] args) {
 
@@ -35,8 +34,8 @@ public class Main {
         } while (optionForDeath != 5);
     }
     public static Pessoa cadastro(){
-       String nome = "";
-       String senha = "";
+       String nome;
+       String senha;
 
         System.out.print("Insira seu nome : ");
         nome = scfs.nextLine();
@@ -611,13 +610,13 @@ do {
                     Insira o codigo :""");
             int escolhaInimigo = sc.nextInt();
             switch(escolhaInimigo){
-                case 1 -> Inimigo.listaDeInimigosModoBatalha = Inimigo.listaDeInimigosFacil;
-                case 2 -> Inimigo.listaDeInimigosModoBatalha = Inimigo.listaDeInimigosMedio;
-                case 3 -> Inimigo.listaDeInimigosModoBatalha = Inimigo.listaDeInimigosDificil;
+                case 1 -> { Inimigo.listaDeInimigosModoBatalha = Inimigo.listaDeInimigosFacil; escolhaListaFeita = true; }
+                case 2 -> { Inimigo.listaDeInimigosModoBatalha = Inimigo.listaDeInimigosMedio; escolhaListaFeita = true; }
+                case 3 -> { Inimigo.listaDeInimigosModoBatalha = Inimigo.listaDeInimigosDificil; escolhaListaFeita = true; }
                 default -> System.out.println("Insira um valor valido!");
             }
 
-        }while(!escolhaListaFeita);
+        }while(!escolhaListaFeita); escolhaListaFeita = false;//ja setada como false, pra se o usuario for burro... Não der erro.
 
         do {
             int numeroInimigoDaVez = random.nextInt(4);
