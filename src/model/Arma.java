@@ -4,6 +4,7 @@ public abstract class Arma {
 
     private int dano;
     private String nome;
+    public boolean habilidade = false;
 
     public int getDano() {
         return dano;

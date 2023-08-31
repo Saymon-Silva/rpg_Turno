@@ -16,11 +16,16 @@ public class Main {
     private static int optionForDeath;
     public static Pessoa pessoaLogada = Pessoa.pessoa;//usuario que esta logado no sistema.
     public static Personagem personagemEscolhido;//personagem que a pessoa logada estara usando.
-//    private static Personagem personagem1 = new Personagem("Principal Unico", 1000, 9999);
-    private static Inimigo inimigoDaBola;
-    private static Random random = new Random();
+//.   private static Personagem personagem1 = new Personagem("Principal Unico", 1000, 9999);
+    public static Inimigo inimigoDaBola;
+    public static Random random = new Random();
     public static boolean loginEfetuado = false;
     public static Personagem personagem3 = new Personagem("Teste",99999,9999);//usando pra teste
+    public static Pessoa pessoaJogadorUm;//logar primeira pessoa, pessoa para cada um ter sua lista de personagens...
+    public static Pessoa getPessoaJogadorDois;//mesma coisa
+    public static Personagem jogadorUm;
+    public static Personagem jogadorDois;
+
 
     public static void main(String[] args) {
 
@@ -33,6 +38,7 @@ public class Main {
             menu();
         } while (optionForDeath != 5);
     }
+
     public static Pessoa cadastro(){
        String nome;
        String senha;
@@ -44,7 +50,6 @@ public class Main {
 
         return new Pessoa(nome, senha);
     }
-
 
     public static Pessoa login(){
 
@@ -81,7 +86,6 @@ public class Main {
 
         return null;
     }
-
 
 //region(menu)
     public static void menu() {
@@ -476,7 +480,6 @@ do {
 //endregion
 
 //endregion
-
 
 //region( codigo combate mortal - 2 )
     public static void combateMortal() {//fazer um combate de torre, tp mk
@@ -930,6 +933,8 @@ do {
                     switch (opcao) {
                         case 1:
                             retornarMenuEscolhaDificuldade();
+//                          modoTorreRefatorizado();
+                            //po tanto faz lsksksksk
                             break;
                         case 2:
                             menu();
@@ -1400,5 +1405,24 @@ do {
         System.out.println("Bem vindo Novamente");
         modoTorreRefatorizado();
     }
+
+    //region(player vs player)//cmc n pode parar kkkkkkk ok
+    public static void pVsP(){
+
+
+    }
+
+    static boolean habilidadep;
+    //endregion
+    //region(logica jogador 1)
+    public static void turnoJogadorUm() {
+        //precisa criar a aiavel aq, pra poder setar commo vefadeira/null, pra poder usar na hora de travar a cura ou dano inimigo, mas cm caralhos fazer isso?????
+
+    }
+
+    //endregion
+    public static void turnoJogadoDois(){
+    }
+
 
 }

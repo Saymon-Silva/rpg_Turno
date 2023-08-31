@@ -18,6 +18,8 @@ public class Personagem {
     private String nome;
 //    private int idade;
     private int codigo;
+
+    //criar as variaveiaS AQUI!!!
 //region(get/set)
 
 
