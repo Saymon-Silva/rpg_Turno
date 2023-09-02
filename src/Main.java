@@ -16,7 +16,7 @@ public class Main {
     private static int optionForDeath;
     public static Pessoa pessoaLogada = Pessoa.pessoa;//usuario que esta logado no sistema.
     public static Personagem personagemEscolhido;//personagem que a pessoa logada estara usando.
-//.   private static Personagem personagem1 = new Personagem("Principal Unico", 1000, 9999);
+    private static Personagem personagem1 = new Personagem("Principal Unico", 1000, 9999);
     public static Inimigo inimigoDaBola;
     public static Random random = new Random();
     public static boolean loginEfetuado = false;
@@ -563,27 +563,7 @@ do {
         Inimigo.criarInimigos();
 
         //criando uma variavel booleana para cada habillidade;
-
-        boolean habilidadeAdagaDoPagao = false;
-        int contHabilidadeDoPagao = 3; //usa pra parar a cura do inimigo;
-        boolean habilidadeArco = false;
-        int contHabilidadeDoArco = 3;
-        int danoVenenoHabilidadeArco = (personagemEscolhido.getArma().getDano() / 3);
-        boolean habilidadeCajado = false;
-        int contHabilidadeDoCajado = 3;
-        boolean habilidadeEspada = false;
-        int danoHabilidadeEspada = (personagemEscolhido.getArma().getDano() / 3);
-        boolean habilidadeMachado = false;
-        boolean habilidadePerryOnFire = false;
-        int danoHabilidadePerry = (personagemEscolhido.getArma().getDano() / 3);
-        int contHabillidadeDoPerry = 3;
-        boolean habilidadeRoloDeCerol = false;
-        int contHabillidadeDoCerol = 3;
-        int danoSangramentoHabilidadeCerol = (personagemEscolhido.getArma().getDano() / 2);
-        boolean habilidadeVacinOfCloroquiha = false;
-        int contHabilidadeVacina = 3;
-        boolean habilidadeVarinhaDeCondao = false;
-
+        Arma arma = personagemEscolhido.getArma();//usado pra instanciar o personagem atual com sua arma, pra nao ficar mtb grande as instancias
         boolean habilidadeAtivada = false; //usa para proibir o usuario de spamar habilidade.
         int contHabilidadeAtivada = 3;
         //criando e setnado como falas, por que algumas das habilidades podem interferir no curamento dos ininimigos
@@ -712,39 +692,39 @@ do {
                             case 3:
                                 if(!habilidadeAtivada) {
                                     if (personagemEscolhido.getArma() instanceof Adaga_do_Pagao) {
-                                        habilidadeAdagaDoPagao = true;
+                                       arma.habilidadeAdagaDoPagao = true;
                                         //ativa a habilidade dele que, enquanto o cont da habilidade for maior q 0, o inimigo n pode curar
                                     } else if (personagemEscolhido.getArma() instanceof Arco) {
-                                        habilidadeArco = true;
+                                        arma.habilidadeArco = true;
                                     } else if (personagemEscolhido.getArma() instanceof Cajado) {
-                                        habilidadeCajado = true;
+                                        arma.habilidadeCajado = true;
                                     } else if (personagemEscolhido.getArma() instanceof Espada) {
-                                        personagemEscolhido.setVida(personagemEscolhido.getVida() - (danoHabilidadeEspada * 2));
+                                        personagemEscolhido.setVida(personagemEscolhido.getVida() - ( arma.danoHabilidadeEspada * 2));
                                     } else if (personagemEscolhido.getArma() instanceof Machado) {
-                                        habilidadeMachado = true;
+                                        arma.habilidadeMachado = true;
                                     } else if (personagemEscolhido.getArma() instanceof Perry_on_Fire) {
-                                        habilidadePerryOnFire = true;
+                                        arma.habilidadePerryOnFire = true;
                                     } else if (personagemEscolhido.getArma() instanceof Rolo_de_Cerol) {
-                                        habilidadeRoloDeCerol = true;
+                                        arma.habilidadeRoloDeCerol = true;
                                     } else if (personagemEscolhido.getArma() instanceof Vacin_of_Cloroquina) {
-                                        habilidadeVacinOfCloroquiha = true;
+                                        arma.habilidadeVacinOfCloroquiha = true;
                                     } else if (personagemEscolhido.getArma() instanceof Varinha_de_Condao) {
-                                        habilidadeVarinhaDeCondao = true;
+                                        arma.habilidadeVarinhaDeCondao = true;
                                     }
                                     //a vacina tem duas habilidades, uma causa dano e a outra recupera sua vida
-                                    if(personagemEscolhido.getVida() < (vidaPersonagem/ 2)  && habilidadeVacinOfCloroquiha){//validação pra de cura
+                                    if(personagemEscolhido.getVida() < (vidaPersonagem/ 2)  &&  arma.habilidadeVacinOfCloroquiha){//validação pra de cura
                                        Vacin_of_Cloroquina.habilidadeCura();
                                     }
                                     else {//validação pra de dano
-                                        if(habilidadeVacinOfCloroquiha){//se for a habilidade de vacina, so tem pois ele tem um cont de seringadas, e caso chegue ao 0, o inimigo é derrotado automaticamente, só roda qando ativada;
-                                            contHabilidadeVacina--;
-                                            System.out.println("Faltam mais " + contHabilidadeVacina);
-                                            if(contHabilidadeVacina == 0){
+                                        if( arma.habilidadeVacinOfCloroquiha){//se for a habilidade de vacina, so tem pois ele tem um cont de seringadas, e caso chegue ao 0, o inimigo é derrotado automaticamente, só roda qando ativada;
+                                            arma.contHabilidadeVacina--;
+                                            System.out.println("Faltam mais " +  arma.contHabilidadeVacina);
+                                            if( arma.contHabilidadeVacina == 0){
                                                 Vacin_of_Cloroquina.meusPesames();
                                             }
                                         }
-                                        personagemEscolhido.getArma().habilidade();
-                                        int habilidadeArma = personagemEscolhido.getArma().habilidade();
+                                        arma.habilidade();
+                                        int habilidadeArma = arma.habilidade();
                                         inimigoDaBola.setVida(inimigoDaBola.getVida() - habilidadeArma);
                                         habilidadeAtivada = true;
                                     }
@@ -777,7 +757,7 @@ do {
                     if(numeroParaCuraOuAtaque == 0) {
 //cura do inimigo
                         //region(cura inimigo
-                        if (!habilidadeAdagaDoPagao || !habilidadeRoloDeCerol) {
+                        if (!arma.habilidadeAdagaDoPagao || !arma.habilidadeRoloDeCerol) {
                             if (inimigoDaBola.getVida() <= (vidaTotalInimigo / 4)) {
                                 inimigoDaBola.setVida(inimigoDaBola.getVida() + (vidaTotalInimigo / 6));
                                 System.out.println("Seu inimigo se curou");
@@ -791,7 +771,7 @@ do {
                     else if(numeroParaCuraOuAtaque == 1 || !decisaoUnica) {
 //dano do inimigo
                         //region(ataque do inimigo
-                        if (!habilidadeCajado) {
+                        if (!arma.habilidadeCajado) {
                             if (!decisaoUnica && inimigoDaBola.getVida() > 0) {
                                 personagemEscolhido.setVida(personagemEscolhido.getVida() - danoInimigo);
                                 System.out.println("Voce foi atacado e recebeu : " + danoInimigo);
@@ -822,78 +802,78 @@ do {
 //region(habilidades de armas
                     //habilidade da adaga do pagao, vai ser um if que trava o cont da habilidade, fazendo chegar até 3, numero de vezes que vai ser usada.
                     //region(habilidade pagao)
-                    if (habilidadeAdagaDoPagao) {
-                        if (contHabilidadeDoPagao == 3 || contHabilidadeDoPagao == 2 || contHabilidadeDoPagao == 1) {
-                            System.out.println("Sua habilidade é efetiva por mais :" + contHabilidadeDoPagao + " rounds");
-                        } else if (contHabilidadeDoPagao == 0) {
+                    if (arma.habilidadeAdagaDoPagao) {
+                        if (arma.contHabilidadeDoPagao == 3 || arma.contHabilidadeDoPagao == 2 || arma.contHabilidadeDoPagao == 1) {
+                            System.out.println("Sua habilidade é efetiva por mais :" + arma.contHabilidadeDoPagao + " rounds");
+                        } else if (arma.contHabilidadeDoPagao == 0) {
                             System.out.println("Sua habilidade chegou no limite!");
-                            habilidadeAdagaDoPagao = false;
+                            arma.habilidadeAdagaDoPagao = false;
                         }
-                        contHabilidadeDoPagao--;
+                        arma.contHabilidadeDoPagao--;
                     } else {
-                        contHabilidadeDoPagao = 3;
+                        arma.contHabilidadeDoPagao = 3;
                     }
                     //endregion
 //habilidade do rolo de cerol, é praticamente a  mesma pegada de travar a cura do inimigo
                     //region(habilidade rolo de cerol)
-                    if (habilidadeRoloDeCerol) {
-                        if (contHabillidadeDoCerol == 3 || contHabillidadeDoCerol == 2 || contHabillidadeDoCerol == 1) {
-                            System.out.println("Dano sangramento :  " + danoSangramentoHabilidadeCerol);
-                            inimigoDaBola.setVida(inimigoDaBola.getVida() - danoSangramentoHabilidadeCerol);
-                            System.out.println("Sua habilidade é efetiva por mais :" + contHabillidadeDoCerol + " rounds");
-                        } else if (contHabillidadeDoCerol == 0) {
+                    if (arma.habilidadeRoloDeCerol) {
+                        if (arma.contHabillidadeDoCerol == 3 || arma.contHabillidadeDoCerol == 2 || arma.contHabillidadeDoCerol == 1) {
+                            System.out.println("Dano sangramento :  " + arma.danoSangramentoHabilidadeCerol);
+                            inimigoDaBola.setVida(inimigoDaBola.getVida() - arma.danoSangramentoHabilidadeCerol);
+                            System.out.println("Sua habilidade é efetiva por mais :" + arma.contHabillidadeDoCerol + " rounds");
+                        } else if (arma.contHabillidadeDoCerol == 0) {
                             System.out.println("Sua habilidade chegou no limite!");
-                            habilidadeRoloDeCerol = false;
+                            arma.habilidadeRoloDeCerol = false;
                         }
-                        contHabillidadeDoCerol--;
+                        arma.contHabillidadeDoCerol--;
                     } else {
-                        contHabillidadeDoCerol = 3;
+                        arma.contHabillidadeDoCerol = 3;
                     }
                     //endregion
 //habilidade do arco, atira um flecha venenosa que da dano durante 3 turno
                     //region(habilidade arco)
-                    if (habilidadeArco) {
-                        if (contHabilidadeDoArco == 3 || contHabilidadeDoArco == 2 || contHabilidadeDoArco == 1) {
-                            System.out.println("Dano de veneno " + danoVenenoHabilidadeArco);
-                            inimigoDaBola.setVida(inimigoDaBola.getVida() - danoVenenoHabilidadeArco);
-                            System.out.println("Sua habilidade é efetiva por mais :" + contHabilidadeDoArco + " rounds");
-                        } else if (contHabilidadeDoArco == 0) {
+                    if (arma.habilidadeArco) {
+                        if (arma.contHabilidadeDoArco == 3 || arma.contHabilidadeDoArco == 2 || arma.contHabilidadeDoArco == 1) {
+                            System.out.println("Dano de veneno " + arma.danoVenenoHabilidadeArco);
+                            inimigoDaBola.setVida(inimigoDaBola.getVida() - arma.danoVenenoHabilidadeArco);
+                            System.out.println("Sua habilidade é efetiva por mais :" + arma.contHabilidadeDoArco + " rounds");
+                        } else if (arma.contHabilidadeDoArco == 0) {
                             System.out.println("Sua habilidade chegou no limite!");
-                            habilidadeArco = false;
+                            arma.habilidadeArco = false;
                         }
-                        contHabilidadeDoArco--;
+                        arma.contHabilidadeDoArco--;
                     } else {
-                        contHabilidadeDoArco = 3;
+                        arma.contHabilidadeDoArco = 3;
                     }
                     //endregion
 //habilidade do cajado, gera uma barreira que não te deixa receber dano, bloqueando o ataque do inimigo
                     //region(habilidade cajado)
-                    if (habilidadeCajado) {
-                        if (contHabilidadeDoCajado == 3 || contHabilidadeDoCajado == 2 || contHabilidadeDoCajado == 1) {
-                            System.out.println("Sua habilidade é efetiva por mais :" + contHabilidadeDoCajado + " rounds");
-                        } else if (contHabilidadeDoCajado == 0) {
+                    if (arma.habilidadeCajado) {
+                        if (arma.contHabilidadeDoCajado == 3 || arma.contHabilidadeDoCajado == 2 || arma.contHabilidadeDoCajado == 1) {
+                            System.out.println("Sua habilidade é efetiva por mais :" + arma.contHabilidadeDoCajado + " rounds");
+                        } else if (arma.contHabilidadeDoCajado == 0) {
                             System.out.println("Sua habilidade chegou no limite!");
-                            habilidadeCajado = false;
+                            arma.habilidadeCajado = false;
                         }
-                        contHabilidadeDoCajado--;
+                        arma.contHabilidadeDoCajado--;
                     } else {
-                        contHabilidadeDoCajado = 3;
+                        arma.contHabilidadeDoCajado = 3;
                     }
                     //endregion
 //habilidade do perry on fyre, deixou o inimigo com queimadures, agora ele recebe dano por volta de dois turnos
                     //region(habilidade Perry)
-                    if (habilidadePerryOnFire) {
-                        if (contHabillidadeDoPerry == 3 || contHabillidadeDoPerry == 2 || contHabillidadeDoPerry == 1) {
-                            System.out.println("Dano de queimadura " + danoVenenoHabilidadeArco);
-                            inimigoDaBola.setVida(inimigoDaBola.getVida() - danoHabilidadePerry);
-                            System.out.println("Sua habilidade é efetiva por mais :" + contHabillidadeDoPerry + " rounds");
-                        } else if (contHabillidadeDoPerry == 0) {
+                    if (arma.habilidadePerryOnFire) {
+                        if (arma.contHabillidadeDoPerry == 3 || arma.contHabillidadeDoPerry == 2 || arma.contHabillidadeDoPerry == 1) {
+                            System.out.println("Dano de queimadura " + arma.danoVenenoHabilidadeArco);
+                            inimigoDaBola.setVida(inimigoDaBola.getVida() - arma.danoHabilidadePerry);
+                            System.out.println("Sua habilidade é efetiva por mais :" + arma.contHabillidadeDoPerry + " rounds");
+                        } else if (arma.contHabillidadeDoPerry == 0) {
                             System.out.println("Sua habilidade chegou no limite!");
-                            habilidadePerryOnFire = false;
+                            arma.habilidadePerryOnFire = false;
                         }
-                        contHabillidadeDoPerry--;
+                        arma.contHabillidadeDoPerry--;
                     } else {
-                        contHabillidadeDoPerry = 3;
+                        arma.contHabillidadeDoPerry = 3;
                     }
                     //endregion
 //habilidade da ceringa, dano padrão, mas com uma funcionalidade diferente... Se você acertar três especiais no inimigo, ele simplesment morre (isso leva 9 turnos)
@@ -901,8 +881,8 @@ do {
                     //endregion
 //habilidade machado, só precisa ser cetado como falso dnv... Não sei u lugar expecifico pra isso ainda, ent dxr ai melhor opcao kk
                     //region(habilidade machado)
-                    if(habilidadeMachado){
-                        habilidadeMachado = false;
+                    if(arma.habilidadeMachado){
+                        arma.habilidadeMachado = false;
                     }
                     //endregion
 //endregion

@@ -42,7 +42,7 @@ public class Cleitin extends Inimigo {
 
     public static void criacaoCleitin(){
         //facil
-        Inimigo cleitinFacil = new Cleitin("Cleitin del Callejón Soleado", 980,100);
+        Inimigo cleitinFacil = new Cleitin("Cleitin del Callejón Soleado", 980, 100);
         cleitinFacil.setClasse(new Pipeiro(140,150));
         cleitinFacil.setArma(new Rolo_de_Cerol(40));
         cleitinFacil.getArma().setNome("Cerolzin");
